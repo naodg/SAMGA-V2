@@ -1,0 +1,70 @@
+.header {
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .header-inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo {
+    width: 150px;
+    height: 50px;
+    /* background-color: #ddd; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  .nav {
+    /* flex: 1; */
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-list li {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem 0;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid black;
+    border-radius: 1rem 1rem 1rem 1rem;
+    padding: 0.5rem 1rem;
+    list-style: none;
+    z-index: 100;
+    width: 120px;
+  }
+  
+  .dropdown-menu li {
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+  
+  .user-menu {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  
