@@ -264,7 +264,7 @@ export default function MapGallery() {
         <div
           style={{
             position: 'fixed',
-            top: isMobile ? 'calc(100% - 320px)' : '160px',
+            top: isMobile ? 'calc(100% - 28px)' : '160px',
             left: isMobile ? '50%' : '280px',
             transform: isMobile ? 'translateX(-50%)' : undefined,
             width: '300px',
@@ -272,7 +272,7 @@ export default function MapGallery() {
             padding: '10px',
             borderRadius: '8px',
             boxShadow: '0 5px 10px rgba(0,0,0,0.7)',
-            zIndex: 1000
+            zIndex: 10000
           }}
         >
           <div
