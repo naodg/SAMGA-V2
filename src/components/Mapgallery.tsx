@@ -272,7 +272,7 @@ export default function MapGallery() {
             padding: '10px',
             borderRadius: '8px',
             boxShadow: '0 5px 10px rgba(0,0,0,0.7)',
-            zIndex: 10000
+            zIndex: 9999
           }}
         >
           <div
@@ -363,7 +363,7 @@ export default function MapGallery() {
             height: '320px',
             background: '#fff',
             borderRadius: '15px',
-            zIndex: 1000,
+            zIndex: 9000,
             boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
             overflow: 'hidden'
           }}
