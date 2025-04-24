@@ -264,7 +264,7 @@ export default function MapGallery() {
         <div
           style={{
             position: 'absolute',
-            top: isMobile ? 'calc(100% - 280px)' : '160px',
+            top: isMobile ? 'calc(100% - 260px)' : '160px',
             left: isMobile ? '50%' : '280px',
             transform: isMobile ? 'translateX(-50%)' : undefined,
             width: '300px',
