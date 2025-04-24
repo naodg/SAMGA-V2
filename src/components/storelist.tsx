@@ -13,7 +13,7 @@ export default function StoreList() {
 
 
   return (
-    <div style={{ marginTop: '20px', fontFamily: 'sans-serif' }}>
+    <div style={{ margin: '100px 0', fontFamily: 'sans-serif' }}>
       {/* 홍보 영상 영역 */}
       <div style={{ background: '#637472', width: '100%' }}>
         <div
@@ -26,7 +26,7 @@ export default function StoreList() {
             margin: '100px auto',
             padding: isMobile ? '40px 20px' : '40px 100px', // ✅ PC일 때 padding 좌우 증가시켜 내부를 가운데로 밀어줌
             textAlign: isMobile ? 'center' : 'left', // 👉 모바일일 때만 중앙 정렬
-            alignItems: isMobile ? 'center' : 'flex-start' // 👉 글씨 전체 가운데 배치
+            alignItems: isMobile ? 'center' : 'center' // 👉 글씨 전체 가운데 배치
           }}
         >
           {/* 설명 텍스트 */}
@@ -105,7 +105,7 @@ export default function StoreList() {
         }}
       >
         {/* ✅ 워터마크: position absolute로 격리 */}
-        {!isMobile && (
+        {/* {!isMobile && (
           <img
             src="/img/logo/logo2.jpg"
             alt="워터마크"
@@ -121,32 +121,34 @@ export default function StoreList() {
               objectFit: 'contain',
             }}
           />
-        )}
+        )} */}
 
         {/* ✅ 카드 리스트는 별도 wrapper로 묶고 zIndex 줌 */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-            gap: '32px',
+            gap: '48px',
             position: 'relative',
             zIndex: 1,
           }}
         >
           {storeData.map((store, index) => {
-            const offsetY = [0, -40, 10][index % 3]
+            const offsetY = [0, -60, 10][index % 3]
             return (
               <div
                 key={index}
                 style={{
-                  background: '#fff',
+                  background: 'transparent',
                   height: '500px',
                   position: 'relative',
                   cursor: 'pointer',
-                  transform: `translateY(${offsetY}px)`,
+                  transform: isMobile? '': `translateY(${offsetY}px)`,
                   zIndex: 1,
                   borderRadius: '0px',
                   overflow: 'visible',
+                  // border: '1px solid #333',
+                  boxShadow: '0 5px 10px rgba(0,0,0,0.7)',
                 }}
                 onClick={() => handleStoreClick(store.name)}
               >
@@ -164,7 +166,7 @@ export default function StoreList() {
                 />
 
                 {/* 이미지 위 텍스트 (store.name + description) */}
-                <div
+                {/* <div
                   style={{
                     position: 'absolute',
                     bottom: '60px', // ✅ 흰색 바 위로 살짝 띄워줌
@@ -172,13 +174,13 @@ export default function StoreList() {
                     width: '100%',
                     padding: '0 16px',
                     color: '#fff',
-                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)', // ✅ 가독성 살리는 그림자
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.9)', // ✅ 가독성 살리는 그림자
                     boxSizing: 'border-box',
                   }}
                 >
-                  <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>{store.name}</h3>
+                  <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', }}>{store.name}</h3>
                   <p style={{ margin: '6px 0 0', fontSize: '25px', whiteSpace: 'pre-line',lineHeight: '1.1'}}>{store.description}</p>
-                </div>
+                </div> */}
 
                 {/* 하단 흰색 배경 위 텍스트 (추가 설명) */}
                 <div
@@ -187,15 +189,52 @@ export default function StoreList() {
                     bottom: 0,
                     left: 0,
                     width: '100%',
-                    background: 'rgba(255, 255, 255, 0.9)',
-                    padding: '8px 16px',
-                    fontSize: '12px',
-                    color: '#666',
-                    textAlign: 'center',
+                    height: '35%',
+                    background: 'rgba(0, 0, 0, 0.55)',
+                    padding: '12px 16px',
+                    color: '#fff',
+                    boxSizing: 'border-box',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
                   }}
                 >
-                  한 줄 추가 설명이 여기에 들어갑니다.
+                  {/* 가운데 영역 */}
+                  <div
+                    style={{
+                      flexGrow: 1,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '100' }}>{store.name}</h3>
+                    <p
+                      style={{
+                        margin: '6px 0 0',
+                        fontSize: '28px',
+                        whiteSpace: 'pre-line',
+                        lineHeight: '1.1',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {store.description}
+                    </p>
+                  </div>
+
+                  {/* 아래 고정 설명 */}
+                  <p
+                    style={{
+                      fontSize: '13px',
+                      marginTop: '12px',
+                      marginBottom: '10px',
+                      opacity: 0.85,
+                    }}
+                  >
+                    한 줄 추가 설명이 여기에 들어갑니다.
+                  </p>
                 </div>
+
               </div>
             )
           })}

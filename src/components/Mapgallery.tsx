@@ -86,34 +86,41 @@ export default function MapGallery() {
           const marker = new window.kakao.maps.Marker({ position, map, title: store.name })
 
           window.kakao.maps.event.addListener(marker, 'click', () => {
-            handleMarkerClick(store)
+            setSelectedStore(store)
+            const latlng = new window.kakao.maps.LatLng(store.lat, store.lng)
+            mapRef.current.setLevel(1) // 👈 확대 레벨
+            mapRef.current.panTo(latlng) // 👈 해당 위치로 이동
           })
+
 
           const overlayId = `store-label-${store.name}`
 
-          const nameOverlay = new window.kakao.maps.CustomOverlay({
+          const overlayContent = document.createElement('div')
+          overlayContent.innerText = store.name
+          overlayContent.style.cssText = `
+  cursor: pointer;
+  padding: 6px 14px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  border: 1px solid #ddd;
+`
+          overlayContent.onclick = () => {
+            setSelectedStore(store)
+            setShowStoreInfo(true)
+          }
+
+          const overlay = new window.kakao.maps.CustomOverlay({
             position,
-            content: `
-              <div id="${overlayId}"
-                style="
-                  cursor: pointer;
-                  padding: 4px 10px;
-                  background: white;
-                  border: 1px solid #ddd;
-                  border-radius: 6px;
-                  font-size: 12px;
-                  color: #333;
-                  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-                  white-space: nowrap;
-                  font-weight: 500;
-                ">
-                ${store.name}
-              </div>
-            `,
+            content: overlayContent,
             yAnchor: 1.5
           })
+          overlay.setMap(map)
 
-          nameOverlay.setMap(map)
 
           setTimeout(() => {
             const label = document.getElementById(overlayId)
@@ -127,7 +134,7 @@ export default function MapGallery() {
       })
     }
     document.head.appendChild(script)
-  }, [isMobile, showMapPopup, selectedStore]) // ← selectedStore 추가
+  }, [isMobile, showMapPopup]) // ← selectedStore 추가
 
   if (typeof window !== 'undefined') {
     window.handleStoreClick = (name: string) => {
@@ -241,7 +248,7 @@ export default function MapGallery() {
             height: '350px',
             position: 'absolute',
             bottom: '0px',
-            left: '200px',
+            left: '210px',
             zIndex: 100,
             borderRadius: '15px',
             overflow: 'hidden',
@@ -256,52 +263,91 @@ export default function MapGallery() {
         <div
           style={{
             position: 'absolute',
-            top: isMobile ? '100px' : '50%',
-            left: '50%',
-            transform: 'translate(-700px, -70%)',
-            width: isMobile ? '90%' : '300px',
-            background: 'rgba(255,255,255,0.9)',
-            borderRadius: '20px',
-            padding: '24px',
-            zIndex: 999,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.25)'
+            top: isMobile ? 'calc(100% - 240px)' : '160px',
+            left: isMobile ? '50%' : '280px',
+            transform: isMobile ? 'translateX(-50%)' : undefined,
+            width: '300px',
+            background: 'rgba(255,255,255,0.95)',
+            padding: '10px',
+            borderRadius: '8px',
+            boxShadow: '0 5px 10px rgba(0,0,0,0.7)',
+            zIndex: 1000
           }}
         >
-          <button
-            onClick={handleCloseInfo}
+          <div
             style={{
-              position: 'absolute',
-              top: '12px',
-              right: '16px',
-              background: 'transparent',
-              border: 'none',
-              fontSize: '20px',
-              fontWeight: 'bold',
-              color: '#666',
-              cursor: 'pointer'
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '8px'
             }}
           >
-            ×
-          </button>
+            <h3 style={{ margin: 0 }}>{selectedStore.name}</h3>
 
-          <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', color: '#222' }}>
-            {selectedStore.name}
-          </h2>
-
-          <p style={{ fontSize: '14px', lineHeight: 1.5, color: '#444' }}>
-            {selectedStore.description || '경남 합천군 삼가면 일부3길 8'}
-          </p>
-
-          <div style={{ width: '100%', height: '200px', borderRadius: '12px', overflow: 'hidden' }}>
-            <img
-              src={`/img/samga/store/${selectedStore.name}_디테일_1.png`}
-              alt={selectedStore.name}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.9)' }}
-            />
+            <button
+              onClick={handleCloseInfo}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontSize: '18px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                color: '#c8102e',
+                lineHeight: 1
+              }}
+            >
+              ×
+            </button>
           </div>
+
+          <p style={{ fontSize: '13px', whiteSpace: 'pre-line' }}>
+            {selectedStore.description}
+          </p>
+          <p style={{ fontSize: '13px', }}>
+            주소: {selectedStore.address}
+          </p>
+          <p style={{ fontSize: '13px',  }}>
+            번호: {selectedStore.phone}
+          </p>
+          <p style={{ fontSize: '13px',  }}>
+            영업시간: {selectedStore.hours}
+          </p>
+          <p style={{ fontSize: '13px',  }}>
+            {selectedStore.point}
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
+            <a
+              href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: '13px',
+                color: '#0077cc',
+                textDecoration: 'underline',
+              }}
+            >
+              📍 길찾기
+            </a>
+
+            <button
+              onClick={() => navigate(`/store/${encodeURIComponent(selectedStore.name)}`)}
+              style={{
+                padding: '6px 12px',
+                fontSize: '13px',
+                backgroundColor: '#C8102E',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                width: 'fit-content'
+              }}
+            >
+              상세페이지 보기
+            </button>
+          </div>
+
+
+
         </div>
       )}
 
