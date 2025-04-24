@@ -1,9 +1,5 @@
-// src/App.tsx
-// import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
-// import MapGallery from './components/Mapgallery'
-// import StoreList from './components/storelist'
 import Footer from './components/Footer'
 import StoreDetail from './components/store/store_detail'
 import Mainthing from './components/mainthing'
