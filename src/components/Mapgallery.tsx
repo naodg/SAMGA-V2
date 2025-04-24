@@ -6,6 +6,7 @@ import '/node_modules/swiper/modules/navigation.min.css'
 import '/node_modules/swiper/modules/pagination.min.css'
 import { storeData } from '../data/storeData'
 import { useNavigate } from 'react-router-dom'
+import React from 'react' 
 
 declare global {
   interface Window {
@@ -23,7 +24,7 @@ export default function MapGallery() {
   const [showStoreInfo, setShowStoreInfo] = useState(false)
 
   const mapRef = useRef<any>(null)
-  const activeOverlayRef = useRef<any>(null)
+  // const activeOverlayRef = useRef<any>(null)
   const navigate = useNavigate()
 
   const handleMarkerClick = (store: typeof storeData[0]) => {
