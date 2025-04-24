@@ -136,13 +136,13 @@ export default function StoreFilterPage() {
 
           <div style={{ padding: '10px' }}>
             {filteredStores.map(store => (
-              <div key={store.name} style={{ display: 'flex', gap: '12px', background: '#fff', borderRadius: '12px', boxShadow: '0 1px 4px rgba(0,0,0,0.1)', padding: '12px', marginBottom: '12px', alignItems: 'center' }}>
+              <div key={store.name} onClick={() => navigate(`/store/${encodeURIComponent(store.name)}`)} style={{ display: 'flex', gap: '12px', background: '#fff', borderRadius: '12px', boxShadow: '0 1px 4px rgba(0,0,0,0.1)', padding: '12px', marginBottom: '12px', alignItems: 'center' }}>
                 <img
                   src={store.image || '/img/default.jpg'}
                   alt={store.name}
                   style={{ width: '90px', height: '90px', borderRadius: '8px', objectFit: 'cover', flexShrink: 0 }}
                 />
-                <div>
+                <div >
                   <h3 style={{ margin: 0 }}>{store.name}</h3>
                   <p style={{ margin: '4px 0' }}>{store.address}</p>
                   <p style={{ margin: '4px 0' }}>{store.phone}</p>

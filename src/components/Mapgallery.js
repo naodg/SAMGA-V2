@@ -15,7 +15,7 @@ export default function MapGallery() {
     const [showMapPopup, setShowMapPopup] = useState(false);
     const [showStoreInfo, setShowStoreInfo] = useState(false);
     const mapRef = useRef(null);
-    const activeOverlayRef = useRef(null);
+    // const activeOverlayRef = useRef<any>(null)
     const navigate = useNavigate();
     const handleMarkerClick = (store) => {
         setSelectedStore(store);
