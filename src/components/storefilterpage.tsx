@@ -55,11 +55,11 @@ export default function StoreFilterPage() {
           level: 4
         });
         mapRef.current = map;
-        updateMarkers(storeData);
+        updateMarkers(activeFilters.length === 0 ? storeData : filteredStores);
       });
     };
     document.head.appendChild(script);
-  }, [showMap]);
+  }, [showMap, filteredStores]);
 
   const updateMarkers = (stores: Store[]) => {
     const map = mapRef.current;
@@ -169,12 +169,48 @@ export default function StoreFilterPage() {
                 </div>
               </div>
             ))}
+
+
+            {selectedStore && (
+              <div style={{
+                position: 'absolute',
+                right: '50px',
+                bottom: '120px',
+                width: '260px',
+                background: '#fff',
+                borderRadius: '12px',
+                padding: '16px',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
+                zIndex: 1000
+              }}>
+                <button onClick={() => { setShowMap(false); setSelectedStore(null); }}  style={{ background: 'transparent', border: 'none', fontSize: '18px', cursor: 'pointer' }}>✖</button>
+                <h3 style={{ margin: 0 }}>{selectedStore.name}</h3>
+                <p style={{ fontSize: '13px', margin: '4px 0' }}>{selectedStore.address}</p>
+                <p style={{ fontSize: '13px', margin: '4px 0' }}>{selectedStore.phone}</p>
+                <a
+                  href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: '13px',
+                    color: '#0077cc',
+                    textDecoration: 'underline',
+                    display: 'inline-block',
+                    marginTop: '10px'
+                  }}
+                >
+                  📍 길찾기
+                </a>
+              </div>
+            )}
+
+
           </div>
         </>
       ) : (
         <div style={{ margin: '0 200px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', fontFamily: 'sans-serif', height: '100vh', }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', padding: '10px 0', justifyContent: 'center' , margin: '10px'}}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', padding: '10px 0', justifyContent: 'center', margin: '10px' }}>
               {filters.map(({ label, key }) => (
                 <button
                   key={key}
@@ -210,8 +246,8 @@ export default function StoreFilterPage() {
                       src={store.image || '/img/default.jpg'}
                       alt={store.name}
                       style={{
-                        width: '120px',
-                        height: '120px',
+                        width: '230px',
+                        height: '180px',
                         borderRadius: '8px',
                         objectFit: 'cover',
                         flexShrink: 0

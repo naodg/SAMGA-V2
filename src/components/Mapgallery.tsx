@@ -170,9 +170,9 @@ export default function MapGallery() {
           style={{
             position: 'relative',
             width: '100%',
-            height: '95%',
+            height: isMobile ? '97%':'95%',
             boxShadow: '0 20px 40px rgba(0,0,0,0.7)',
-            borderRadius: '70px',
+            borderRadius: isMobile ? '48px':'70px',
             overflow: 'hidden'
           }}
         >
@@ -306,13 +306,13 @@ export default function MapGallery() {
           <p style={{ fontSize: '13px', }}>
             주소: {selectedStore.address}
           </p>
-          <p style={{ fontSize: '13px',  }}>
+          <p style={{ fontSize: '13px', }}>
             번호: {selectedStore.phone}
           </p>
-          <p style={{ fontSize: '13px',  }}>
+          <p style={{ fontSize: '13px', }}>
             영업시간: {selectedStore.hours}
           </p>
-          <p style={{ fontSize: '13px',  }}>
+          <p style={{ fontSize: '13px', }}>
             {selectedStore.point}
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
