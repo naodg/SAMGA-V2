@@ -134,7 +134,7 @@ export default function MapGallery() {
       })
     }
     document.head.appendChild(script)
-  }, [isMobile, showMapPopup]) // ← selectedStore 추가
+  }, [isMobile, showMapPopup])
 
   if (typeof window !== 'undefined') {
     window.handleStoreClick = (name: string) => {

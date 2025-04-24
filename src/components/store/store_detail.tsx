@@ -8,6 +8,9 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { storeData, Store } from '../../data/storeData'
 
+const tabs = ['가게 메뉴', '상차림', '편의시설'] as const
+type Tab = typeof tabs[number]
+
 export default function StoreDetail() {
   const { name } = useParams()
   const storeName = decodeURIComponent(name || '')
@@ -25,6 +28,21 @@ export default function StoreDetail() {
 
   const initialGridColumns = !isMobile ? 6 : isTablet ? 4 : 2
 
+
+
+  // 사진들 코드
+  const [activeTab, setActiveTab] = useState<Tab>('가게 메뉴')
+
+  const tabToFolderMap: Record<Tab, string> = {
+    '가게 메뉴': 'menu',
+    '상차림': 'side',
+    '편의시설': 'amenities',
+  }
+
+  // ✅ 시도할 최대 이미지 개수 (10장까지)
+  const MAX_IMAGES = 10
+  const folder = tabToFolderMap[activeTab]
+  const imageCandidates = Array.from({ length: MAX_IMAGES }, (_, i) => `${storeName}_${i + 1}`)
 
   const amenityIcons = [
     'pay시스템.jpg',
@@ -92,11 +110,14 @@ export default function StoreDetail() {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'flex-start',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         flexWrap: 'wrap',
-        gap: '40px',
+        gap: '100px',
         marginBottom: '60px',
-        marginLeft: isMobile ? '0' : '155px',
+        width: '100%',
+        maxWidth: '1080px',
+        margin: '0 auto',
+        // marginLeft: isMobile ? '0' : '155px',
       }}>
         {/* 왼쪽 영역 */}
         <div style={{ minWidth: '300px', flex: '0 0 auto' }}>
@@ -116,12 +137,12 @@ export default function StoreDetail() {
           {/* 가게정보 카드 (로고 포함) */}
           <div
             style={{
-              border: '1px solid #e0e0e0',
-              borderRadius: '12px',
+              // border: '1px solid #e0e0e0',
+              // borderRadius: '12px',
               padding: '10px',
               maxWidth: '360px',
               backgroundColor: '#fff',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              // boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
               lineHeight: 1.4
             }}
           >
@@ -167,7 +188,7 @@ export default function StoreDetail() {
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: isMobile ? 'center' : 'flex-start',
+            justifyContent: isMobile ? 'center' : 'center',
             gap: '16px',
             marginBottom: '10px',
           }}>
@@ -194,11 +215,11 @@ export default function StoreDetail() {
           {/* 편의시설 아이콘 - border 포함, 반응형 2줄 */}
           <div
             style={{
-              border: '1px solid #e0e0e0',
+              // border: '1px solid #e0e0e0',
               borderRadius: '12px',
               padding: '16px',
               backgroundColor: '#fff',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              // boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
               display: 'grid',
               gridTemplateColumns: isMobile
                 ? 'repeat(auto-fit, minmax(80px, 1fr))'
@@ -209,7 +230,7 @@ export default function StoreDetail() {
               justifyItems: 'center',
               textAlign: 'center',
               boxSizing: 'border-box',
-              maxWidth:'700px'
+              maxWidth: '700px'
             }}
           >
             {amenityIcons.map((file, i) => {
@@ -256,6 +277,10 @@ export default function StoreDetail() {
 
       </div>
 
+      {/* 구분선 */}
+
+      <hr style={{ border: 'none', borderTop: '1px solid #ccc', margin: '60px 0 0' }} />
+
 
 
       {/* 고기 + 대표 이미지 + 스토리 */}
@@ -264,7 +289,7 @@ export default function StoreDetail() {
         justifyContent: 'center',
         alignItems: 'flex-start',
         gap: '80px', // 이미지와 스토리 사이 여백
-        margin: '200px auto 500px',
+        margin: '150px auto 500px',
         maxWidth: '1400px',
         position: 'relative'
       }}>
@@ -330,29 +355,82 @@ export default function StoreDetail() {
 
 
       {/* 상세 이미지들 */}
-      <h3 style={{ marginBottom: '16px' }}>📸 가게 상세 이미지</h3>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '20px',
-        marginBottom: '60px'
-      }}>
-        {images.map((src, idx) => (
-          <img key={idx} src={src} alt={`${storeName} 상세 ${idx + 1}`} style={{ width: '100%', borderRadius: '8px' }} />
-        ))}
+
+      <div style={{ margin: ' 0 150px 00px' }}>
+        <h3 style={{ marginBottom: '20px' }}>📸 가게 상세 이미지</h3>
+        {/* 탭 버튼 */}
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '30px' }}>
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '20px',
+                backgroundColor: activeTab === tab ? '#C8102E' : '#f5f5f5',
+                color: activeTab === tab ? '#fff' : '#333',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 500
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* 이미지 출력 (자동으로 여러 장 시도) */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? 'repeat(1, 1fr)' : 'repeat(4, 1fr)',
+            gap: '10px'
+          }}
+        >
+          {imageCandidates.map((name) => (
+            ['.jpg', '.JPG'].map((ext) => {
+              const src = `/samga/store/${folder}/${name}${ext}`
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`${storeName} ${activeTab}`}
+                  style={{
+                    width: '400px',
+                    height: '300px',
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                    display: 'block'
+                  }}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none'
+                  }}
+                />
+              )
+            })
+          ))}
+        </div>
+
       </div>
 
+
       {/* 리뷰 영역 */}
-      <h3>📝 리뷰</h3>
-      <div style={{
-        background: '#f2f2f2',
-        padding: '30px',
-        borderRadius: '12px',
-        textAlign: 'center',
-        color: '#999'
-      }}>
-        <p>아직 등록된 리뷰가 없습니다. 첫 리뷰를 남겨보세요!</p>
+      <div style={{ margin: ' 150px 150px 00px' }}>
+
+        <h3>📝 리뷰</h3>
+        <div style={{
+          background: '#f2f2f2',
+          padding: '30px',
+          borderRadius: '12px',
+          textAlign: 'center',
+          color: '#999'
+        }}>
+          <p>아직 등록된 리뷰가 없습니다. 첫 리뷰를 남겨보세요!</p>
+        </div>
+
+
       </div>
+
     </div>
   )
 }

@@ -229,9 +229,11 @@ export default function StoreList() {
                       marginTop: '12px',
                       marginBottom: '10px',
                       opacity: 0.85,
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    한 줄 추가 설명이 여기에 들어갑니다.
+                     {(store.story.length > 40 ? store.story.slice(0, 40) + '...' : store.story)}
                   </p>
                 </div>
 
