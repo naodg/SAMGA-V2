@@ -263,8 +263,8 @@ export default function MapGallery() {
       {showStoreInfo && selectedStore && (
         <div
           style={{
-            position: 'fixed',
-            top: isMobile ? 'calc(100% - 28px)' : '160px',
+            position: 'absolute',
+            top: isMobile ? 'calc(100% - 280px)' : '160px',
             left: isMobile ? '50%' : '280px',
             transform: isMobile ? 'translateX(-50%)' : undefined,
             width: '300px',
@@ -272,7 +272,7 @@ export default function MapGallery() {
             padding: '10px',
             borderRadius: '8px',
             boxShadow: '0 5px 10px rgba(0,0,0,0.7)',
-            zIndex: 9999
+            zIndex: 1000
           }}
         >
           <div
@@ -304,7 +304,7 @@ export default function MapGallery() {
           <p style={{ fontSize: '13px', whiteSpace: 'pre-line' }}>
             {selectedStore.description}
           </p>
-          <p style={{ fontSize: '13px',margin: '2px 0', }}>
+          <p style={{ fontSize: '13px', margin: '2px 0',}}>
             주소: {selectedStore.address}
           </p>
           <p style={{ fontSize: '13px',margin: '2px 0', }}>
@@ -313,7 +313,7 @@ export default function MapGallery() {
           <p style={{ fontSize: '13px', margin: '2px 0',}}>
             영업시간: {selectedStore.hours}
           </p>
-          <p style={{ fontSize: '13px',margin: '2px 0', }}>
+          <p style={{ fontSize: '13px', margin: '2px 0',}}>
             {selectedStore.point}
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
@@ -363,7 +363,7 @@ export default function MapGallery() {
             height: '320px',
             background: '#fff',
             borderRadius: '15px',
-            zIndex: 9000,
+            zIndex: 1000,
             boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
             overflow: 'hidden'
           }}
