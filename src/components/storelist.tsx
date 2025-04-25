@@ -1,7 +1,40 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { storeData, Store } from '../data/storeData'
+import './storelist.css'
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
+const bannerImages = [
+  {
+    src: '/img/banner/banner1.png',
+    caption: '좋은사람과 같이 걷기 좋은 \n 삼가특화거리-소화잘되는 길',
+    link: 'https://blog.naver.com/hc-urc/222571944010',
+  },
+  {
+    src: '/img/banner/banner2.png',
+    caption: '4계절 각기다른 멋! 황매산 군립공원 \n 공식사이트 바로가기',
+    link: 'https://www.hc.go.kr/09418/09425/09833.web'
+  },
+  {
+    src: '/img/banner/banner3.png',
+    caption: '생명의 아름다운 멋으로 가득한 정양늪 \n 공식사이트 바로가기',
+    link: 'https://www.youtube.com/watch?v=DjprccTSapc'
+  },
+  {
+    src: '/img/banner/banner4.png',
+    caption: '삼가의 멋-삼가시장 \n합천 공식유튜브 바로가기',
+    link: 'https://www.youtube.com/watch?v=ZLch32VzUb0'
+  },
+  {
+    src: '/img/banner/banner5.png',
+    caption: '영화같은일상 합천영상테마파크 \n 공식사이트 바로가기',
+    link: 'https://hcmoviethemepark.com/'
+  },
+]
 
 
 export default function StoreList() {
@@ -13,237 +46,126 @@ export default function StoreList() {
 
 
   return (
-    <div style={{ margin: '100px 0', fontFamily: 'sans-serif' }}>
-      {/* 홍보 영상 영역 */}
-      <div style={{ background: '#637472', width: '100%' }}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: isMobile ? 'column' : 'row',
-            justifyContent: 'space-between',
-            gap: isMobile ? '30px' : '80px', // ✅ gap 조절
-            maxWidth: '1490px',
-            margin: '100px auto',
-            padding: isMobile ? '40px 20px' : '40px 100px', // ✅ PC일 때 padding 좌우 증가시켜 내부를 가운데로 밀어줌
-            textAlign: isMobile ? 'center' : 'left', // 👉 모바일일 때만 중앙 정렬
-            alignItems: isMobile ? 'center' : 'center' // 👉 글씨 전체 가운데 배치
-          }}
-        >
-          {/* 설명 텍스트 */}
-          <div style={{ width: isMobile ? '100%' : '45%' }}>
-            <h2 style={{ fontSize: '24px', marginBottom: '12px', color: '#fff' }}>
-              삼가한우 프로모션
-            </h2>
-            <p style={{ fontSize: '26px', lineHeight: '1.6', color: '#ccc' }}>
-              삼가에선 한우가 일상,<br />
-              매일이 특별한 고기 한 끼
-            </p>
-          </div>
+    <div className="storelist-landing">
 
-          {/* 동영상 */}
-          <div style={{ width: isMobile ? '100%' : '45%' }}>
-            <video
-              src="/video/합천영상.mp4"
-              width="100%"
-              height="400px"
-              muted
-              loop
-              playsInline
-              controls
-              style={{ borderRadius: '12px' }}
-            />
-          </div>
-        </div>
+      <div className="landing-video-wrapper">
+        <img src="/img/logo/videologo.svg" alt="삼가한우로고" className="landing-logo" />
+
+        <video muted loop className="landing-video">
+          <source src="/video/합천영상.mp4" type="video/mp4" />
+          브라우저가 비디오를 지원하지 않습니다.
+        </video>
+
+      </div>
+
+      <div className="landing-text">
+        <img src="/img/logo/tasty.svg" alt="tasty" className="tasty" />
+        <h2 className="landing-title">
+          삼가에선 한우가 일상,<br />
+          매일 특별한 고기 한 끼
+        </h2>
+        <hr className="landing-divider" />
+        <p className="landing-tagline">KOREAN BEEF VILLAGE SAMGA</p>
       </div>
 
 
 
-      {/* 매거진 스타일 가게 리스트 */}
-      {/* <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-          gap: '24px',
-          margin: isMobile ? '0' : '100px 200px',
-        }}
-      >
-        {storeData.map((store: typeof storeData[0], index: number) => (
-          <div
-            key={index}
-            style={{
-              background: '#fff',
-              borderRadius: '12px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-              overflow: 'hidden',
-              transition: 'transform 0.3s',
-              cursor: 'pointer'
-            }}
-            onClick={() => handleStoreClick(store.name)}
-          >
-            <img
-              src={store.image}
-              alt={store.name}
-              style={{ width: '100%', height: '340px', objectFit: 'cover' }}
-            />
-            <div style={{ padding: '16px' }}>
-              <h3 style={{ margin: '0 0 8px 0' }}>{store.name}</h3>
-              <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>{store.description}</p>
-            </div>
-          </div>
-        ))}
-      </div> */}
 
 
-
-      {/* 매거진 스타일 가게 리스트 */}
-      <div
-        style={{
-          position: 'relative',
-          maxWidth: '1485px',
-          margin: '200px auto',
-          padding: '0 20px',
-        }}
-      >
-        {/* ✅ 워터마크: position absolute로 격리 */}
-        {/* {!isMobile && (
-          <img
-            src="/img/logo/logo2.jpg"
-            alt="워터마크"
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '100%',
-              opacity: 0.6,
-              zIndex: 0,
-              pointerEvents: 'none',
-              objectFit: 'contain',
-            }}
-          />
-        )} */}
-
-        {/* ✅ 카드 리스트는 별도 wrapper로 묶고 zIndex 줌 */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-            gap: '48px',
-            position: 'relative',
-            zIndex: 1,
-          }}
-        >
-          {storeData.map((store, index) => {
-            const offsetY = [0, -60, 10][index % 3]
-            return (
-              <div
-                key={index}
+      <div className="store-card-grid">
+        {storeData.map((store, index) => {
+          const offsetY = [0, 50, 10][index % 3]
+          return (
+            <div className="store-card-wrapper">
+              <h3
+                className="store-title"
                 style={{
-                  background: 'transparent',
-                  height: '500px',
-                  position: 'relative',
-                  cursor: 'pointer',
-                  transform: isMobile? '': `translateY(${offsetY}px)`,
-                  zIndex: 1,
-                  borderRadius: '0px',
-                  overflow: 'visible',
-                  // border: '1px solid #333',
-                  boxShadow: '0 5px 10px rgba(0,0,0,0.7)',
+                  transform: isMobile ? '' : `translateY(${offsetY}px)`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px' // 텍스트랑 아이콘 사이 여백
+                }}
+              >
+                <img
+                  src="/img/logo/제목옆아이콘.svg"
+                  alt="아이콘"
+                  style={{
+                    width: '18px',
+                    height: '18px',
+                    objectFit: 'contain'
+                  }}
+                />
+                {store.name}
+              </h3>
+
+              <div
+                className="store-card"
+                style={{
+                  transform: isMobile ? '' : `translateY(${offsetY}px)`
                 }}
                 onClick={() => handleStoreClick(store.name)}
               >
-                {/* 이미지 */}
-                <img
-                  src={store.image}
-                  alt={store.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    borderRadius: 0,
-                  }}
-                />
+                <img src={store.image} alt={store.name} className="store-card-image" />
 
-                {/* 이미지 위 텍스트 (store.name + description) */}
-                {/* <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '60px', // ✅ 흰색 바 위로 살짝 띄워줌
-                    left: 0,
-                    width: '100%',
-                    padding: '0 16px',
-                    color: '#fff',
-                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.9)', // ✅ 가독성 살리는 그림자
-                    boxSizing: 'border-box',
-                  }}
-                >
-                  <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', }}>{store.name}</h3>
-                  <p style={{ margin: '6px 0 0', fontSize: '25px', whiteSpace: 'pre-line',lineHeight: '1.1'}}>{store.description}</p>
-                </div> */}
-
-                {/* 하단 흰색 배경 위 텍스트 (추가 설명) */}
                 <div
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '35%',
-                    background: 'rgba(0, 0, 0, 0.55)',
-                    padding: '12px 16px',
-                    color: '#fff',
-                    boxSizing: 'border-box',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                  }}
+                  className={`store-card-textbox ${store.name === '대가식육식당' ? 'center-text' : ''
+                    }`}
                 >
-                  {/* 가운데 영역 */}
-                  <div
-                    style={{
-                      flexGrow: 1,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '100' }}>{store.name}</h3>
-                    <p
-                      style={{
-                        margin: '6px 0 0',
-                        fontSize: '28px',
-                        whiteSpace: 'pre-line',
-                        lineHeight: '1.1',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      {store.description}
+                  <h3 className="store-desc">{store.slogan}</h3>
+                  {store.slogan2 && (
+                    <p className="store-subdesc">
+                      {store.slogan2}
                     </p>
-                  </div>
-
-                  {/* 아래 고정 설명 */}
-                  <p
-                    style={{
-                      fontSize: '13px',
-                      marginTop: '12px',
-                      marginBottom: '10px',
-                      opacity: 0.85,
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                     {(store.story.length > 40 ? store.story.slice(0, 40) + '...' : store.story)}
-                  </p>
+                  )}
+                  <button className="store-button">자세히 보기</button>
                 </div>
-
               </div>
-            )
-          })}
-        </div>
+            </div>
+
+          )
+        })}
       </div>
 
 
+      <div className="banner-wrapper">
+        <div className="banner-title-area">
+          <img src="/img/logo/bannerlogo.svg" alt="타이틀로고" className="slogan-img" />
+          <div className="banner-subtitle">
+            <span className="bolder">맛!</span>있는
+            <span className="bolder">멋!</span>있는 좋은
+            <span className="bolder">사람</span>과
+          </div>
+          <div className="banner-title">
+            가볼만한 곳?
+          </div>
+        </div>
+
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          pagination={{ clickable: false }} // ← 똥글뱅이 없애는 거!
+          autoplay={{ delay: 2000 }}
+          loop
+          spaceBetween={20}
+          slidesPerView={2}
+          breakpoints={{
+            768: {
+              slidesPerView: 4,
+            },
+          }}
+          className="banner-swiper"
+        >
+          {bannerImages.map((item, index) => (
+            <SwiperSlide key={index} className="banner-slide">
+              <a href={item.link} target="_blank" rel="noopener noreferrer" className="banner-link">
+                <img src={item.src} alt={`배너${index + 1}`} className="banner-img" />
+                <div className="banner-hover-caption">
+                  <p>{item.caption}</p>
+                </div>
+              </a>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
 
     </div >

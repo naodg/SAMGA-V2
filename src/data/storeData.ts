@@ -15,6 +15,8 @@ export interface Store {
     story:string
     logo: string
     hashtag:string[]
+    slogan:string
+    slogan2?:string
   }
 
 
@@ -38,7 +40,9 @@ export interface Store {
       description :'분위기 맛집이라 부르지만,\n 고기의 풍미는 분위기를 넘어선다.',
       story:'대가 식육식당 창업주인 장남이 운영하는 식당으로 \n 카페 플로리안도 같이 운영하고 있다. \n 한우 식당들이 모여있는 삼가시장이나 삼가1로에서 뚝 떨어져있지만 넓은 주차장과 \n 눈에 띄는 독특한 조경들이 있어 많은 손님들이 다시 찾는 가게이다. \n "아버지랑은 다르지요. 아버지는 손님이 왔으면 뭐라도 드려야한다 생각하고, \n 나는 원하는 것을 드릴 수 없으면 안 드리는게 그 분을 위한 것이라 생각합니다. \n 1세대 경영과 2세대 경영의 차이랄까요?" \n 이렇게 말하는 이 대표의 차이는 세대와 페러다임의 변화 때문일 것이다. \n 그 변화 속에서 현재 이곳에 맞는 최적화가 이루어지고 있는 것이다.',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
+      slogan2 :'"가장 최고로 준비해 드릴 수 없을 때는 문을 닫습니다."',
     },
     {
       name: '대가식육식당',
@@ -53,7 +57,8 @@ export interface Store {
       description:'좋은 고기를 다루는 건 \n기술이 아니라 신념이다.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'좋은 고기를\n 다루는건\n 기술이 아니라,\n  신념이다.',
     },
     {
       name: '대가한우',
@@ -68,7 +73,9 @@ export interface Store {
       description: '맛있는 고기에는 늘 이유가 있다.\n그 이유를 고집한다.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'맛있는 고기는\n 늘 이유가 있다\n 그 이유를 고집한다',
+      slogan2 :'"가장 최고로 준비해 드릴 수 없을 때는 문을 닫습니다."',
     },
     {
       name: '대산식육식당',
@@ -83,7 +90,8 @@ export interface Store {
       description:'엄마 손맛에\n 고기의 자부심을 더하다.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
       name: '대웅식육식당',
@@ -99,7 +107,8 @@ export interface Store {
       description:'땅에서 키운 정성\n 접시에 담긴 진심',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
       name: '도원식육식당',
@@ -114,7 +123,8 @@ export interface Store {
       description:'손님평점보다 더 정확한 건,\n 다시 찾는 발걸음. ',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
       name: '미로식육식당',
@@ -129,7 +139,8 @@ export interface Store {
       description:'미로 속,\n 오직 맛으로 찾는 곳.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
       name: '불난가 한우',
@@ -144,7 +155,8 @@ export interface Store {
       description:'소개해 준 친구에게 고마운 집,\n 불이 붙을 만한 이유가 있다.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
       name: '삼가명품한우',
@@ -160,7 +172,8 @@ export interface Store {
       description:'최고가 아니면\n 판매하지 않습니다.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
       name: '상구한우',
@@ -175,7 +188,8 @@ export interface Store {
       description:'일상 속 고깃집,\n 그러나 결코 평범하지 않은 맛.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
       name: '태영상차림식당',
@@ -190,6 +204,7 @@ export interface Store {
       description:'깔끔한 공간, 신선한 고기,\n젊은 입맛 사로잡다.\n 취향이 깃든 한점.',
       story:'',
       logo:'/samga/logo/대가1호점_logo.png',
-      hashtag: ['#한우맛집','#가족과 함께','#단체손님',]
+      hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
+      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     }
   ]

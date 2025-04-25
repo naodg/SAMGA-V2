@@ -1,393 +1,311 @@
-import { useEffect, useRef, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-import '/node_modules/swiper/swiper.min.css'
-import '/node_modules/swiper/modules/navigation.min.css'
-import '/node_modules/swiper/modules/pagination.min.css'
-import { storeData } from '../data/storeData'
-import { useNavigate } from 'react-router-dom'
-import React from 'react' 
-
-declare global {
-  interface Window {
-    handleStoreClick: (name: string) => void
-  }
-}
+import React, { useEffect, useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { storeData } from '../data/storeData';
+import './MapGallery.css'
 
 
 export default function MapGallery() {
   const [selectedStore, setSelectedStore] = useState<typeof storeData[0] | null>(null)
-  const [selectedImages, setSelectedImages] = useState<string[]>([])
-  const [swiperIndex, setSwiperIndex] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
-  const [showMapPopup, setShowMapPopup] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredStores, setFilteredStores] = useState(storeData);
+  const [showMap, setShowMap] = useState(false)
   const [showStoreInfo, setShowStoreInfo] = useState(false)
+  const mapRef = useRef(null);
 
-  const mapRef = useRef<any>(null)
-  // const activeOverlayRef = useRef<any>(null)
-  const navigate = useNavigate()
 
   const handleMarkerClick = (store: typeof storeData[0]) => {
     setSelectedStore(store)
     setShowStoreInfo(true)
-    if (isMobile) setShowMapPopup(true)
+
+
   }
 
-  const handleCloseInfo = () => {
-    setSelectedStore(null)
-    setShowStoreInfo(false)
-    if (mapRef.current) {
-      mapRef.current.setLevel(4)
-      mapRef.current.panTo(new window.kakao.maps.LatLng(35.413, 128.123))
-    }
-  }
 
   useEffect(() => {
-    if (selectedStore && mapRef.current) {
-      mapRef.current.setLevel(2)
-      mapRef.current.panTo(new window.kakao.maps.LatLng(selectedStore.lat, selectedStore.lng))
-    }
-  }, [selectedStore])
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768)
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  useEffect(() => {
-    if (selectedStore) {
-      const images = isMobile
-        ? [`/img/samga/store/${selectedStore.name}_디테일_1.png`]
-        : Array.from({ length: 4 }, (_, i) => `/samga/store/${selectedStore.name}_${i + 1}.jpg`)
-      setSelectedImages(images)
-    } else {
-      setSelectedImages([])
-    }
-  }, [selectedStore, isMobile])
-
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d65716a4db9e8a93aaff1dfc09ee36b8`
+    // Kakao Map SDK 로딩
+    const script = document.createElement('script');
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d65716a4db9e8a93aaff1dfc09ee36b8`;
     script.onload = () => {
       window.kakao.maps.load(() => {
-        const mapId = isMobile && showMapPopup ? 'mapPopup' : 'map'
-        const container = document.getElementById(mapId)
-        if (!container) return
+        const container = document.getElementById('map');
+        if (!container) return;
 
+        // 맵 생성
         const map = new window.kakao.maps.Map(container, {
           center: new window.kakao.maps.LatLng(35.413, 128.123),
           level: 4
-        })
-        mapRef.current = map
+        });
+        mapRef.current = map;
 
-        storeData.forEach((store) => {
-          const position = new window.kakao.maps.LatLng(store.lat, store.lng)
-          const marker = new window.kakao.maps.Marker({ position, map, title: store.name })
+        // 마커 & 오버레이 생성
+        filteredStores.forEach((store) => {
+          const position = new window.kakao.maps.LatLng(store.lat, store.lng);
 
+          // 마커
+          const marker = new window.kakao.maps.Marker({
+            position,
+            map,
+            title: store.name
+          });
+
+          // 마커 클릭 시 이벤트
           window.kakao.maps.event.addListener(marker, 'click', () => {
-            setSelectedStore(store)
-            const latlng = new window.kakao.maps.LatLng(store.lat, store.lng)
-            mapRef.current.setLevel(1) // 👈 확대 레벨
-            mapRef.current.panTo(latlng) // 👈 해당 위치로 이동
-          })
+            setSelectedStore(store);
+            map.setLevel(1);
+            map.panTo(position);
+          });
 
-
-          const overlayId = `store-label-${store.name}`
-
-          const overlayContent = document.createElement('div')
-          overlayContent.innerText = store.name
+          // 오버레이
+          const overlayContent = document.createElement('div');
+          overlayContent.id = `store-label-${store.name}`;
+          overlayContent.innerText = store.name;
           overlayContent.style.cssText = `
-  cursor: pointer;
-  padding: 6px 14px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  font-size: 13px;
-  font-weight: 500;
-  color: #333;
-  white-space: nowrap;
-  border: 1px solid #ddd;
-`
+            cursor: pointer;
+            padding: 6px 14px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            white-space: nowrap;
+            border: 1px solid #ddd;
+          `;
+
           overlayContent.onclick = () => {
-            setSelectedStore(store)
-            setShowStoreInfo(true)
-          }
+            setSelectedStore(store);
+          };
 
           const overlay = new window.kakao.maps.CustomOverlay({
             position,
             content: overlayContent,
             yAnchor: 1.5
-          })
-          overlay.setMap(map)
+          });
+
+          requestAnimationFrame(() => {
+            overlay.setMap(map);
+          });
+        });
+
+        // 가게가 하나일 경우 포커스
+        if (filteredStores.length === 1) {
+          const target = filteredStores[0];
+          map.setCenter(new window.kakao.maps.LatLng(target.lat, target.lng));
+          map.setLevel(3);
+        }
+      });
+    };
+    document.head.appendChild(script);
+  }, [showMap, filteredStores]);
 
 
-          setTimeout(() => {
-            const label = document.getElementById(overlayId)
-            if (label) {
-              label.addEventListener('click', () => {
-                handleMarkerClick(store)
-              })
-            }
-          }, 0)
-        })
+
+  useEffect(() => {
+    if (!showMap) return
+
+    const container = document.getElementById('map')
+    if (!container) return
+    console.log('map container:', container); // ✅ 확인
+
+    const map = new window.kakao.maps.Map(container, {
+      center: new window.kakao.maps.LatLng(35.413, 128.123),
+      level: 4
+    })
+    mapRef.current = map
+
+    filteredStores.forEach(store => {
+      const marker = new window.kakao.maps.Marker({
+        map,
+        position: new window.kakao.maps.LatLng(store.lat, store.lng),
+        title: store.name
       })
-    }
-    document.head.appendChild(script)
-  }, [isMobile, showMapPopup])
 
-  if (typeof window !== 'undefined') {
-    window.handleStoreClick = (name: string) => {
-      const target = storeData.find((s) => s.name === name)
-      if (target) handleMarkerClick(target)
+      window.kakao.maps.event.addListener(marker, 'click', () => {
+        setSelectedStore(store)
+      })
+    })
+
+    // 첫 가게 자동 focus
+    if (filteredStores.length > 0) {
+      const target = filteredStores[0]
+      map.setCenter(new window.kakao.maps.LatLng(target.lat, target.lng))
+      map.setLevel(3)
     }
-  }
+  }, [showMap, filteredStores])
+
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const searchBar = document.querySelector('.map-gallery-searchbar');
+      const mapArea = document.getElementById('map');
+      const mapContainer = document.querySelector('.map-gallery-map-container'); // ✅ 추가!
+
+      const clickedTarget = e.target as Node;
+
+      if (
+        searchBar &&
+        !searchBar.contains(clickedTarget) &&
+        mapArea &&
+        !mapArea.contains(clickedTarget) &&
+        mapContainer &&
+        !mapContainer.contains(clickedTarget) // ✅ 여기도 포함시켜!
+      ) {
+        setShowMap(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+
+
+
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        display: isMobile ? 'block' : 'flex',
-        width: '100%',
-        height: isMobile ? 'auto' : '80vh',
-        overflow: 'hidden',
-        paddingBottom: isMobile ? '40px' : '0'
-      }}
-    >
-      <div
-        style={{
-          flex: 1,
-          width: '100%',
-          height: isMobile ? '360px' : '600px',
-          backgroundColor: '#000',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative'
-        }}
-      >
-        <div
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: isMobile ? '97%':'95%',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.7)',
-            borderRadius: isMobile ? '48px':'70px',
-            overflow: 'hidden'
-          }}
-        >
+    <div className="map-gallery-wrapper">
+      <div className="map-gallery-inner">
+        <div className="map-gallery-swiper-container">
           <Swiper
+            className="map-gallery-swiper"
             modules={[Navigation, Pagination, Autoplay]}
             pagination={{ clickable: true }}
             autoplay={{ delay: 2000 }}
             loop
-            onSlideChange={(swiper) => setSwiperIndex(swiper.realIndex)}
-            style={{ width: '100%', height: '100%' }}
           >
-            {(isMobile
-              ? [
-                '/samga/store/대가1호점_디테일_1.png',
-                '/samga/store/대가식육식당_디테일_1.png',
-                '/samga/store/대가한우_디테일_1.png',
-                '/samga/store/대산식육식당_디테일_1.png'
-              ]
-              : selectedImages.length > 0
-                ? selectedImages
-                : [
-                  '/img/landing/대가1호점_1.png',
-                  '/img/landing/대가식육식당_1.png',
-                  '/img/landing/대가한우_1.png',
-                  '/img/landing/대산식육식당_1.png'
-                ]
-            ).map((src, i) => (
-              <SwiperSlide key={i} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <img src={src} alt={`slide-${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            {['대가1호점', '미로식육식당', '태영식육식당'].map((name, i) => (
+              <SwiperSlide key={i}>
+                <img
+                  src={`/img/landing/${name}_1.jpg`}
+                  alt={name}
+                  className="map-gallery-slide-img"
+                />
               </SwiperSlide>
             ))}
           </Swiper>
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              backgroundColor: '#7d644e',
-              opacity: 0.32,
-              pointerEvents: 'none',
-              zIndex: 5
-            }}
-          />
+
+          <div className="map-gallery-searchbar">
+            <button
+              className="search-icon-button"
+              onClick={() => {
+                if (searchQuery.trim() === '') {
+                  setFilteredStores(storeData)
+                  setSelectedStore(null)
+                } else {
+                  const results = storeData.filter(store =>
+                    store.name.includes(searchQuery)
+                  )
+                  setFilteredStores(results)
+                  setSelectedStore(results[0] ?? null)
+                }
+              }}
+            >
+              <img src="/img/logo/search.svg" alt="검색 아이콘" className="search-icon-img" />
+            </button>
+            <input
+              type="text"
+              value={searchQuery}
+              placeholder="내가 찾는 식당을 검색해보세요."
+              onFocus={() => setShowMap(true)}
+              onChange={(e) => {
+                const keyword = e.target.value
+                setSearchQuery(keyword)
+
+                if (keyword.trim() === '') {
+                  setFilteredStores(storeData)
+                  setSelectedStore(null)
+                } else {
+                  const results = storeData.filter(store =>
+                    store.name.includes(keyword)
+                  )
+                  setFilteredStores(results)
+                  setSelectedStore(results[0] ?? null)
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  const results = storeData.filter(store =>
+                    store.name.includes(searchQuery)
+                  )
+                  setFilteredStores(results)
+                  setSelectedStore(results[0] ?? null)
+                }
+              }}
+            />
+          </div>
+
+
         </div>
 
-        {isMobile && (
-          <button
-            onClick={() => setShowMapPopup(true)}
-            style={{
-              position: 'absolute',
-              bottom: '10px',
-              right: '10px',
-              zIndex: 50,
-              padding: '6px 12px',
-              fontSize: '14px',
-              backgroundColor: '#fff',
-              border: '1px solid #333',
-              borderRadius: '8px',
-              cursor: 'pointer'
-            }}
-          >
-            지도 열기
-          </button>
+        {/* 지도 */}
+        {showMap && (
+          <div className="map-gallery-map-container">
+
+            {/* ✅ 지도 위에 겹쳐진 정보 카드 */}
+            {selectedStore && (
+              <div className="map-gallery-info-card">
+
+                {/* ⬇️ 가게명 + 별점 + 메뉴링크 한 줄 정렬 */}
+                <div className="info-header">
+                  <h3 className="store-name">
+                    {selectedStore.name}
+                    <span className="rating">★★★★★</span>
+                  </h3>
+
+                  <div className="menu-links">
+                    <a href="#" className="link">Review</a>
+                    <span className="divider">|</span>
+                    <a href="#" className="link">메뉴보기</a>
+                  </div>
+                </div>
+
+                <p className="store-detail">
+                  <span className="label">주소 :</span> {selectedStore.address} T. <b>{selectedStore.phone}</b>
+                </p>
+
+                <p className="store-detail">
+                  <span className="label">영업시간 :</span> {selectedStore.hours.split('/')[0]}
+                  {selectedStore.point && (
+                    <span className="point"> ※ {selectedStore.point}</span>
+                  )}
+                </p>
+
+                <p className="store-detail">
+                  <span className="label">휴무 :</span> {selectedStore.hours.split('/')[1].replace('휴무', '')}
+                </p>
+
+                <a
+                  href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="map-link"
+                >
+                  📍 길찾기
+                </a>
+              </div>
+            )}
+
+            {/* ✅ 실제 지도 div */}
+            <div id="map" />
+
+
+
+          </div>
         )}
+
+
+        {/* 배경 패턴 */}
       </div>
+      <div className="map-gallery-pattern" />
 
-      {!isMobile && (
-        <div
-          style={{
-            width: '450px',
-            height: '350px',
-            position: 'absolute',
-            bottom: '0px',
-            left: '210px',
-            zIndex: 100,
-            borderRadius: '15px',
-            overflow: 'hidden',
-            border: '1px solid #333'
-          }}
-        >
-          <div id="map" style={{ width: '100%', height: '100%' }} />
-        </div>
-      )}
-
-      {showStoreInfo && selectedStore && (
-        <div
-          style={{
-            position: 'absolute',
-            top: isMobile ? 'calc(100% - 260px)' : '160px',
-            left: isMobile ? '50%' : '280px',
-            transform: isMobile ? 'translateX(-50%)' : undefined,
-            width: '300px',
-            background: 'rgba(255,255,255,0.95)',
-            padding: '10px',
-            borderRadius: '8px',
-            boxShadow: '0 5px 10px rgba(0,0,0,0.7)',
-            zIndex: 1000
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '8px'
-            }}
-          >
-            <h3 style={{ margin: 0 }}>{selectedStore.name}</h3>
-
-            <button
-              onClick={handleCloseInfo}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                color: '#c8102e',
-                lineHeight: 1
-              }}
-            >
-              ×
-            </button>
-          </div>
-
-          <p style={{ fontSize: '13px', whiteSpace: 'pre-line' }}>
-            {selectedStore.description}
-          </p>
-          <p style={{ fontSize: '13px', margin: '2px 0',}}>
-            주소: {selectedStore.address}
-          </p>
-          <p style={{ fontSize: '13px',margin: '2px 0', }}>
-            번호: {selectedStore.phone}
-          </p>
-          <p style={{ fontSize: '13px', margin: '2px 0',}}>
-            영업시간: {selectedStore.hours}
-          </p>
-          <p style={{ fontSize: '13px', margin: '2px 0',}}>
-            {selectedStore.point}
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
-            <a
-              href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontSize: '13px',
-                color: '#0077cc',
-                textDecoration: 'underline',
-              }}
-            >
-              📍 길찾기
-            </a>
-
-            <button
-              onClick={() => navigate(`/store/${encodeURIComponent(selectedStore.name)}`)}
-              style={{
-                padding: '6px 12px',
-                fontSize: '13px',
-                backgroundColor: '#C8102E',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                width: 'fit-content'
-              }}
-            >
-              상세페이지 보기
-            </button>
-          </div>
+      <div className="map-gallery-bottom" />
 
 
-
-        </div>
-      )}
-
-      {isMobile && showMapPopup && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: '100px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '90%',
-            height: '320px',
-            background: '#fff',
-            borderRadius: '15px',
-            zIndex: 1000,
-            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-            overflow: 'hidden'
-          }}
-        >
-          <div id="mapPopup" style={{ width: '100%', height: '100%' }} />
-          <button
-            onClick={() => setShowMapPopup(false)}
-            style={{
-              position: 'absolute',
-              top: '6px',
-              right: '10px',
-              background: 'transparent',
-              border: 'none',
-              fontSize: '18px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              color: '#c8102e',
-              zIndex: 1000
-            }}
-          >
-            ×
-          </button>
-        </div>
-      )}
     </div>
-  )
+
+  );
 }

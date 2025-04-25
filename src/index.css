@@ -2,14 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* ✅ 이게 핵심 */
+  font-family: 'Noto Sans', sans-serif;
 }
 
-/* 기본 bullet 색상 */
-.swiper-pagination-bullet {
-  background: #ccc !important; /* 회색처럼 흐리게 */
-}
 
-/* 선택된 bullet 색상 */
-.swiper-pagination-bullet-active {
-  background: #AD5457 !important; /* 예: 삼가한우 컬러 */
-}
