@@ -57,9 +57,8 @@
 
 .landing-tagline {
   color: #AD5457;
-  font-weight: bold;
-  font-size: 20px;
-  font-family: 'NotoSansKR-Thin', sans-serif;
+  font-size: 27px;
+  /* font-family: 'NotoSansKR-Thin', sans-serif; */
 }
 
 
@@ -141,7 +140,7 @@
 }
 
 .store-desc {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   margin: 0 0 15px 0;
   white-space: pre-line;
@@ -149,7 +148,7 @@
 }
 
 .store-subdesc {
-  font-size: 12px;
+  font-size: 14px;
   opacity: 0.9;
   margin: 0 0 12px 0;
 }
