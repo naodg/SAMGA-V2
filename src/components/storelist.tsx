@@ -51,10 +51,16 @@ export default function StoreList() {
       <div className="landing-video-wrapper">
         <img src="/img/logo/videologo.svg" alt="삼가한우로고" className="landing-logo" />
 
-        <video muted loop className="landing-video">
-          <source src="/video/합천영상.mp4" type="video/mp4" />
-          브라우저가 비디오를 지원하지 않습니다.
-        </video>
+        <video
+              src="/video/합천영상.mp4"
+              width="85%"
+              // height="400px"
+              muted
+              loop
+              playsInline
+              controls
+              style={{ borderRadius: '12px',  padding: '110px 0 0' }}
+            />
 
       </div>
 

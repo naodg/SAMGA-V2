@@ -9,26 +9,26 @@
 
 .landing-video-wrapper {
   position: relative;
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 
 .landing-logo {
   position: absolute;
-  top: -70px;
+  top: -55px;
   left: 50%;
   transform: translateX(-50%);
-  width: 150px;
+  width: 170px;
   z-index: 10;
 }
 
 .landing-video {
-  width: 600px;
+  width: 100%;
   border-radius: 12px;
   display: block;
   margin: auto;
-  padding: 100px 0 0;
+  padding: 110px 0 0;
 }
 
 .tasty {
@@ -36,20 +36,20 @@
   /* top: -70px; */
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
+  width: 150px;
   z-index: 10;
 }
 
 .landing-title {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: bold;
   line-height: 1.4;
   padding-top: 100px;
 }
 
 .landing-divider {
-  width: 80%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 900px;
   border: none;
   border-top: 1px solid #AD5457;
   margin: 24px auto 12px;
@@ -58,7 +58,8 @@
 .landing-tagline {
   color: #AD5457;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 20px;
+  font-family: 'NotoSansKR-Thin', sans-serif;
 }
 
 
@@ -99,7 +100,7 @@
 }
 
 .store-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   margin: 0 0 8px 4px;
   text-align: start;
@@ -246,4 +247,51 @@
 
 .banner-link:hover .banner-hover-caption {
   opacity: 1;
+}
+
+
+
+@media (max-width: 768px) {
+  /* .store-card-grid {
+    grid-template-columns: 1fr;
+    margin: 40px 16px;
+  } */
+
+  .landing-title {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1.4;
+    padding-top: 100px;
+  }
+  
+
+  .store-card {
+    height: 480px;
+  }
+
+  .store-title {
+    font-size: 18px;
+    margin-left: 8px;
+  }
+
+  .store-card-textbox {
+    padding: 12px;
+  }
+
+  .store-desc {
+    font-size: 22px;
+  }
+
+  .store-subdesc {
+    font-size: 13px;
+  }
+
+  .landing-video {
+    width: 300px;
+    border-radius: 12px;
+    display: block;
+    margin: auto;
+    padding: 100px 0 0;
+  }
+
 }

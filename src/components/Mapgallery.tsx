@@ -17,6 +17,7 @@ export default function MapGallery() {
   const mapRef = useRef(null);
 
 
+
   const handleMarkerClick = (store: typeof storeData[0]) => {
     setSelectedStore(store)
     setShowStoreInfo(true)
@@ -173,6 +174,7 @@ export default function MapGallery() {
           <Swiper
             className="map-gallery-swiper"
             modules={[Navigation, Pagination, Autoplay]}
+            navigation = {true}
             pagination={{ clickable: true }}
             autoplay={{ delay: 2000 }}
             loop

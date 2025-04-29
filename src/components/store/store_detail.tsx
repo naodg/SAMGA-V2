@@ -1,436 +1,198 @@
 import { useParams } from 'react-router-dom'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-import '/node_modules/swiper/swiper.min.css'
-import '/node_modules/swiper/modules/navigation.min.css'
-import '/node_modules/swiper/modules/pagination.min.css'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { storeData, Store } from '../../data/storeData'
+import { useState } from 'react'
+import { storeData } from '../../data/storeData'
+import './StoreDetail.css'
 
-const tabs = ['가게 메뉴', '상차림', '편의시설'] as const
+const tabs = ['가게메뉴', '상차림', '편의시설'] as const
 type Tab = typeof tabs[number]
 
 export default function StoreDetail() {
-  const { name } = useParams()
-  const storeName = decodeURIComponent(name || '')
-  const selectedStore: Store | undefined = storeData.find((store) => store.name === storeName)
+    const { name } = useParams()
+    const storeName = decodeURIComponent(name || '')
+    const selectedStore = storeData.find((s) => s.name === storeName)
+    const [activeTab, setActiveTab] = useState<Tab>('가게메뉴')
+    const [showAllFacilities, setShowAllFacilities] = useState(false)
 
-  const imageCount = 4
-  const images = Array.from({ length: imageCount }, (_, i) =>
-    `/samga/store/${storeName}_${i + 1}.jpg`
-  )
-
-  const [storeInfo, setStoreInfo] = useState<any>(null)
-
-  const isMobile = window.innerWidth <= 768
-  const isTablet = window.innerWidth <= 1024
-
-  const initialGridColumns = !isMobile ? 6 : isTablet ? 4 : 2
-
-
-
-  // 사진들 코드
-  const [activeTab, setActiveTab] = useState<Tab>('가게 메뉴')
-
-  const tabToFolderMap: Record<Tab, string> = {
-    '가게 메뉴': 'menu',
-    '상차림': 'side',
-    '편의시설': 'amenities',
-  }
-
-  // ✅ 시도할 최대 이미지 개수 (10장까지)
-  const MAX_IMAGES = 10
-  const folder = tabToFolderMap[activeTab]
-  const imageCandidates = Array.from({ length: MAX_IMAGES }, (_, i) => `${storeName}_${i + 1}`)
-
-  const amenityIcons = [
-    'pay시스템.jpg',
-    '남녀화장실구분.jpg',
-    '단체예약가능.jpg',
-    '단체이용가능.jpg',
-    '무료와이파이.jpg',
-    '식육점&식당분리형.jpg',
-    '야외좌석.jpg',
-    '예약가능.jpg',
-    '유아전용자리.jpg',
-    '일반식사가능.jpg',
-    '주문배송가능.jpg',
-    '주차장구비.jpg'
-  ]
-
-
-
-  useEffect(() => {
-    const fetchStoreData = async () => {
-      try {
-        const response = await axios.get('https://naveropenapi.apigw.ntruss.com/map-place/v1/search', {
-          params: { query: storeName },
-          headers: {
-            'X-NCP-APIGW-API-KEY-ID': 'b9391ksmhk',
-            'X-NCP-APIGW-API-KEY': 'QowSM3dPxevzKk0vfm5hoqXqnOoXIOFmYJKontRM'
-          }
-        })
-        const firstResult = response.data.places?.[0]
-        setStoreInfo(firstResult)
-      } catch (error) {
-        console.error('가게 정보를 가져오는 중 오류 발생:', error)
-      }
+    const facilityIcons: Record<string, string> = {
+        '주문배송': '/img/amenities/주문배송.svg',
+        '무료wifi': '/img/amenities/무료wifi.svg',
+        '남여화장실구분': '/img/amenities/남여화장실구분.svg',
+        '단체이용예약가능': '/img/amenities/단체이용예약가능.svg',
+        '주차장': '/img/amenities/주차장.svg',
+        '제로페이': '/img/amenities/제로페이.svg',
+        '유아의자': '/img/amenities/유아의자.svg',
     }
 
-    if (storeName) fetchStoreData()
-  }, [storeName])
 
-  return (
-    <div style={{ maxWidth: '1920px', margin: '0 auto', padding: '60px 20px', fontFamily: 'sans-serif' }}>
-      {/* 대표 이미지 - Swiper */}
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        slidesPerView={1.2}
-        centeredSlides={true}
-        spaceBetween={30}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 2000 }}
-        loop={true}
-        style={{ width: '100%', height: '600px', borderRadius: '12px', marginBottom: '40px' }}
-      >
-        {images.map((src, idx) => (
-          <SwiperSlide key={idx} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <img
-              src={src}
-              alt={`${storeName} 대표 이미지 ${idx + 1}`}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
+
+    const tabToFolderMap: Record<Tab, string> = {
+        '가게메뉴': 'menu',
+        '상차림': 'side',
+        '편의시설': 'amenities',
+    }
+
+    const currentFolder = tabToFolderMap[activeTab]
+    const MAX_IMAGES = 10
+    const imageCandidates = Array.from({ length: MAX_IMAGES }, (_, i) => `${storeName}_${i + 1}`)
+
+    if (!selectedStore) return <div>가게 정보를 찾을 수 없습니다.</div>
+
+    return (
+        <div className="store-detail-wrapper">
+            {/* 👇 대표 이미지 */}
+            <div
+                className="store-hero-image"
+                style={{ backgroundImage: `url(${selectedStore.detailimage})` }}
             />
-          </SwiperSlide>
-        ))}
-      </Swiper>
 
+            {/* 👇 가게 정보 카드 */}
+            <div className="store-info-card">
+                <img src={selectedStore.logo} alt="로고" className="store-logo" />
+                <div className="store-name-stars">
+                    <h2 className="store-name">{selectedStore.name}</h2>
+                    <div className="store-stars">★★★★★</div>
+                </div>
+                <div className="store-detail">
+                    <span className="label">영업시간 :</span> {selectedStore.hours.split('/')[0]}
+                    {selectedStore.point && (
+                        <span className="point"> ※ {selectedStore.point}</span>
+                    )}
+                </div>
+                <div className="store-detail">
+                    <span className="label">휴무 :</span> {selectedStore.hours.split('/')[1].replace('휴무', '')}
+                </div>
 
-      <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        gap: '100px',
-        marginBottom: '60px',
-        width: '100%',
-        maxWidth: '1080px',
-        margin: '0 auto',
-        // marginLeft: isMobile ? '0' : '155px',
-      }}>
-        {/* 왼쪽 영역 */}
-        <div style={{ minWidth: '300px', flex: '0 0 auto' }}>
-          {/* 해시태그 */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
-            {selectedStore?.hashtag.map((tag, i) => (
-              <span key={i} style={{
-                background: '#f5f5f5',
-                padding: '6px 12px',
-                borderRadius: '20px',
-                fontSize: '14px',
-                color: '#333'
-              }}>{tag}</span>
-            ))}
-          </div>
+                <div className="store-actions">
+                    <div className="action-item">
+                        <img src="/img/icon/길찾기.svg" alt="길찾기" />
+                        <span>길찾기</span>
+                    </div>
+                    <div className="action-item">
+                        <img src="/img/icon/공유하기.svg" alt="공유하기" />
+                        <span>공유하기</span>
+                    </div>
+                    <div className="action-item">
+                        <img src="/img/icon/단골등록.svg" alt="단골등록" />
+                        <span>단골등록</span>
+                    </div>
+                    <div className="action-item">
+                        <img src="/img/icon/리뷰쓰기.svg" alt="리뷰쓰기" />
+                        <span>리뷰쓰기</span>
+                    </div>
+                </div>
 
-          {/* 가게정보 카드 (로고 포함) */}
-          <div
-            style={{
-              // border: '1px solid #e0e0e0',
-              // borderRadius: '12px',
-              padding: '10px',
-              maxWidth: '360px',
-              backgroundColor: '#fff',
-              // boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-              lineHeight: 1.4
-            }}
-          >
-            {/* 로고 */}
-            <div style={{ marginBottom: '4px' }}>
-              <img src={selectedStore?.logo} alt="로고" style={{ height: '70px', display: 'block', margin: '0 auto' }} />
+                <div className="facility-section">
+                    <div className="facility-title">편의시설</div>
+                    <div className="facility-icons">
+                        {(showAllFacilities ? selectedStore.options : selectedStore.options.slice(0, 4)).map(option => (
+                            facilityIcons[option] && (
+                                <div className="facility-icon" key={option}>
+                                    <img src={facilityIcons[option]} alt={option} />
+                                    <p>{option}</p>
+                                </div>
+                            )
+                        ))}
+                    </div>
+                    <div className="button-location">
+                        {selectedStore.options.length > 4 && (
+                            <button
+                                className="more-button"
+                                onClick={() => setShowAllFacilities(prev => !prev)}
+                            >
+                                {showAllFacilities
+                                    ? '간략히 보기 ▲'
+                                    : `+${selectedStore.options.length - 4}개 더보기 ▼`}
+                            </button>
+                        )}
+                    </div>
+                </div>
             </div>
 
-            <h2
-              style={{
-                fontSize: '18px',
-                fontWeight: 'bold',
-                color: '#222',
-                margin: '0 0 10px 0',
-                // textAlign: 'center'
-              }}
-            >
-              {selectedStore?.name}
-            </h2>
+            {/* 👇 가게 소개 스토리 */}
+            <div className="store-story-wrapper">
 
-            <p style={{ margin: '2px 0', fontSize: '14px' }}>
-              <strong>📍 주소:</strong> {selectedStore?.address}
-            </p>
-            <p style={{ margin: '2px 0', fontSize: '14px' }}>
-              <strong>📞 전화번호:</strong> {selectedStore?.phone}
-            </p>
-            <p style={{ margin: '2px 0', fontSize: '14px' }}>
-              <strong>⏰ 영업시간:</strong> {selectedStore?.hours}
-            </p>
-            {selectedStore?.point && (
-              <p style={{ margin: '6px 0 0', color: '#C8102E', fontStyle: 'italic', fontSize: '13px' }}>
-                ⚠️ {selectedStore.point}
-              </p>
-            )}
-          </div>
-
-
-        </div>
-
-        {/* 오른쪽 영역 전체 */}
-        <div style={{ flex: 1 }}>
-          {/* 상단 버튼들 */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: isMobile ? 'center' : 'center',
-            gap: '16px',
-            marginBottom: '10px',
-          }}>
-            {['📝리뷰 작성', '💖즐겨찾기', '📌단골 등록'].map((label, i) => (
-              <button
-                key={i}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: '20px',
-                  border: '1px solid #ccc',
-                  backgroundColor: '#f8f8f8',
-                  fontSize: '14px',
-                  color: '#333',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-                onClick={() => alert(`${label} 눌렀다!`)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-
-          {/* 편의시설 아이콘 - border 포함, 반응형 2줄 */}
-          <div
-            style={{
-              // border: '1px solid #e0e0e0',
-              borderRadius: '12px',
-              padding: '16px',
-              backgroundColor: '#fff',
-              // boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-              display: 'grid',
-              gridTemplateColumns: isMobile
-                ? 'repeat(auto-fit, minmax(80px, 1fr))'
-                : 'repeat(6, 1fr)', // ✅ PC에서는 무조건 2줄
-              gridTemplateRows: isMobile ? 'auto' : 'repeat(2, auto)',
-              rowGap: '12px',
-              columnGap: '12px',
-              justifyItems: 'center',
-              textAlign: 'center',
-              boxSizing: 'border-box',
-              maxWidth: '700px'
-            }}
-          >
-            {amenityIcons.map((file, i) => {
-              const key = file.replace('.jpg', '')
-              const isActive = selectedStore?.options.includes(key)
-              return (
-                <div
-                  key={i}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    wordBreak: 'keep-all',
-                    whiteSpace: 'normal',
-                    maxWidth: '80px',
-                    opacity: isActive ? 1 : 0.3,
-                    transition: 'opacity 0.3s ease',
-                  }}
-                >
-                  <img
-                    src={`/img/amenities/${file}`}
-                    alt={key}
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      objectFit: 'contain',
-                      marginBottom: '4px'
-                    }}
-                  />
-                  <p style={{
-                    fontSize: '13px',
-                    color: '#444',
-                    lineHeight: '1.3',
-                    textAlign: 'center',
-                    margin: 0
-                  }}>{key}</p>
+                <div className="store-slogan">
+                    {selectedStore.description.split('\n').map((line, i) => (
+                        <div key={i}>{line}</div>
+                    ))}
                 </div>
-              )
-            })}
-          </div>
+            </div>
+
+            <div className="brand-inner">
+
+                {/* 👇 브랜드 로고 + 서브로고 */}
+                <div className="store-brand-wrapper">
+                    <img src="/img/logo/videologo.svg" alt="videologo" className="video-logo" />
+                    <div className="brand-text">KOREAN BEEF VILLAGE SAMGA</div>
+                    <hr className="brand-divider" />
+                    <img src={selectedStore.logo} alt="logo" className="store-sub-logo" />
+                </div>
+
+            </div>
+
+            {/* 👇 상세 이미지 탭 */}
+            <div className="store-detail-top-wrapper">
+                <h2 className="section-title">가게 상세 이미지</h2>
+
+                {/* 탭 버튼들 */}
+                <div className="tab-buttons">
+                    {tabs.map(tab => (
+                        <button
+                            key={tab}
+                            className={`tab-button ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+
+                {/* 탭별 이미지 리스트 */}
+                <div className="store-images">
+                    {imageCandidates.map((name, idx) => (
+                        ['.jpg', '.JPG', '.png'].map((ext) => {
+                            const src = `/samga/store/${currentFolder}/${name}${ext}`
+                            return (
+                                <img
+                                    key={src}
+                                    src={src}
+                                    alt={`${storeName} ${activeTab} 이미지 ${idx + 1}`}
+                                    className="store-image"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).style.display = 'none'
+                                    }}
+                                />
+                            )
+                        })
+                    ))}
+                </div>
+            </div>
+
+
+
+            <div className="store-review-wrapper">
+
+                <div className='review-item'>
+                    <img src='/img/icon/리뷰쓰기.svg' alt="리뷰제목" />
+                    <span>리뷰쓰기</span>
+                </div>
+
+                {/* 등록된 리뷰가 아직 없을 때 기본 안내 */}
+                <div className="review-placeholder">
+                    <p>아직 등록된 리뷰가 없습니다. 첫 리뷰를 남겨보세요!</p>
+                    {/* 네이버 리뷰 보러가기 버튼 */}
+                    <a
+                        href={`https://search.naver.com/search.naver?query=${encodeURIComponent(storeName)} 리뷰`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="naver-review-link"
+                    >
+                        네이버 리뷰 보러가기 →
+                    </a>
+                </div>
+            </div>
+
+
         </div>
-
-
-
-      </div>
-
-      {/* 구분선 */}
-
-      <hr style={{ border: 'none', borderTop: '1px solid #ccc', margin: '60px 0 0' }} />
-
-
-
-      {/* 고기 + 대표 이미지 + 스토리 */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        gap: '80px', // 이미지와 스토리 사이 여백
-        margin: '150px auto 500px',
-        maxWidth: '1400px',
-        position: 'relative'
-      }}>
-        {/* 이미지 묶음 */}
-        <div style={{ position: 'relative', width: '500px', height: '420px', flex: 1, }}>
-          {/* 고기 이미지 (조금 아래로 내려줌) */}
-          <div style={{
-            position: 'absolute',
-            bottom: '-300px', // 👈 여기서 살짝 내려줌
-            left: '-100px',
-            width: '600px',
-            height: '400px',
-            borderRadius: '8px',
-            overflow: 'hidden',
-            zIndex: 1,
-            boxShadow: '0 6px 20px rgba(0,0,0,0.1)'
-          }}>
-            <img
-              src={selectedStore?.meatimage}
-              alt="고기"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
-
-          {/* 대표 이미지 */}
-          <div style={{
-            position: 'absolute',
-            top: '30px',
-            left: '150px',
-            width: '500px',
-            height: '500px',
-            borderRadius: '8px',
-            overflow: 'hidden',
-            zIndex: 2,
-            boxShadow: '0 6px 20px rgba(0,0,0,0.3)'
-          }}>
-            <img
-              src={images[0]}
-              alt="대표 이미지"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
-        </div>
-
-        {/* 스토리 */}
-        <div style={{
-          flex: 1,
-          minWidth: '0', // flex item이 너무 넓어지지 않게
-          maxWidth: '600px',
-          textAlign: 'left',
-          fontSize: '16px',
-          lineHeight: '1.8',
-          color: '#333'
-        }}>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold', marginBottom: '16px' }}>
-            {selectedStore?.name}의 스토리
-          </h3>
-          <p style={{ whiteSpace: 'pre-line' }}>
-            {selectedStore?.story}
-          </p>
-        </div>
-      </div>
-
-
-      {/* 상세 이미지들 */}
-
-      <div style={{ margin: ' 0 150px 00px' }}>
-        <h3 style={{ marginBottom: '20px' }}>📸 가게 상세 이미지</h3>
-        {/* 탭 버튼 */}
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '30px' }}>
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '20px',
-                backgroundColor: activeTab === tab ? '#C8102E' : '#f5f5f5',
-                color: activeTab === tab ? '#fff' : '#333',
-                border: 'none',
-                cursor: 'pointer',
-                fontWeight: 500
-              }}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        {/* 이미지 출력 (자동으로 여러 장 시도) */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? 'repeat(1, 1fr)' : 'repeat(4, 1fr)',
-            gap: '10px'
-          }}
-        >
-          {imageCandidates.map((name) => (
-            ['.jpg', '.JPG'].map((ext) => {
-              const src = `/samga/store/${folder}/${name}${ext}`
-              return (
-                <img
-                  key={src}
-                  src={src}
-                  alt={`${storeName} ${activeTab}`}
-                  style={{
-                    width: '400px',
-                    height: '300px',
-                    objectFit: 'cover',
-                    borderRadius: '8px',
-                    display: 'block'
-                  }}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none'
-                  }}
-                />
-              )
-            })
-          ))}
-        </div>
-
-      </div>
-
-
-      {/* 리뷰 영역 */}
-      <div style={{ margin: ' 150px 150px 00px' }}>
-
-        <h3>📝 리뷰</h3>
-        <div style={{
-          background: '#f2f2f2',
-          padding: '30px',
-          borderRadius: '12px',
-          textAlign: 'center',
-          color: '#999'
-        }}>
-          <p>아직 등록된 리뷰가 없습니다. 첫 리뷰를 남겨보세요!</p>
-        </div>
-
-
-      </div>
-
-    </div>
-  )
+    )
 }
