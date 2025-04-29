@@ -50,7 +50,7 @@ export default function StoreDetail() {
                 <img src={selectedStore.logo} alt="로고" className="store-logo" />
                 <div className="store-name-stars">
                     <h2 className="store-name">{selectedStore.name}</h2>
-                    <div className="store-stars">★★★★★</div>
+                    <div className="star-icons">★★★★★</div>
                 </div>
                 <div className="store-detail">
                     <span className="label">영업시간 :</span> {selectedStore.hours.split('/')[0]}

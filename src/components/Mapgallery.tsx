@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { storeData } from '../data/storeData';
 import './MapGallery.css'
-
+import { useNavigate } from 'react-router-dom';
 
 export default function MapGallery() {
   const [selectedStore, setSelectedStore] = useState<typeof storeData[0] | null>(null)
@@ -16,6 +16,7 @@ export default function MapGallery() {
   const [showStoreInfo, setShowStoreInfo] = useState(false)
   const mapRef = useRef(null);
 
+  const navigate = useNavigate();
 
 
   const handleMarkerClick = (store: typeof storeData[0]) => {
@@ -174,7 +175,7 @@ export default function MapGallery() {
           <Swiper
             className="map-gallery-swiper"
             modules={[Navigation, Pagination, Autoplay]}
-            navigation = {true}
+            navigation={true}
             pagination={{ clickable: true }}
             autoplay={{ delay: 2000 }}
             loop
@@ -280,14 +281,24 @@ export default function MapGallery() {
                   <span className="label">휴무 :</span> {selectedStore.hours.split('/')[1].replace('휴무', '')}
                 </p>
 
-                <a
-                  href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="map-link"
-                >
-                  📍 길찾기
-                </a>
+                <div className="map-footer-links">
+                  <a
+                    href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="map-link"
+                  >
+                    길찾기
+                  </a>
+                  <span className="divider">/</span>
+                  <button
+                    className="map-link"
+                    onClick={() => navigate(`/store/${encodeURIComponent(selectedStore.name)}`)}
+                  >
+                    상세페이지로 가기
+                  </button>
+                </div>
+
               </div>
             )}
 
