@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { storeData } from '../../data/storeData'
 import './StoreDetail.css'
+import { storeDetailAssets } from '../../data/storeDetailAssets'
 
 const tabs = ['가게메뉴', '상차림', '편의시설'] as const
 type Tab = typeof tabs[number]
@@ -12,6 +13,8 @@ export default function StoreDetail() {
     const selectedStore = storeData.find((s) => s.name === storeName)
     const [activeTab, setActiveTab] = useState<Tab>('가게메뉴')
     const [showAllFacilities, setShowAllFacilities] = useState(false)
+    const titles = storeDetailAssets[selectedStore.name] || []
+
 
     const facilityIcons: Record<string, string> = {
         '주문배송': '/img/amenities/주문배송.svg',
@@ -47,7 +50,7 @@ export default function StoreDetail() {
 
             {/* 👇 가게 정보 카드 */}
             <div className="store-info-card">
-                <img src={selectedStore.logo} alt="로고" className="store-logo" />
+                <img src={selectedStore.logo} alt="로고" className="store-main-logo" />
                 <div className="store-name-stars">
                     <h2 className="store-name">{selectedStore.name}</h2>
                     <div className="star-icons">★★★★★</div>
@@ -129,6 +132,47 @@ export default function StoreDetail() {
                 </div>
 
             </div>
+
+            {/* 👇 PC / M 상세 이미지 분리 출력 */}
+            <div className="store-detail-images-separated">
+                {/* PC 환경일 때만 보여짐 */}
+                <div className="detail-images-pc only-pc">
+                    {selectedStore.detailImagelist
+                        .filter((src) => src.includes('PC'))
+                        .map((src, idx) => (
+                            <div className="pc-image-wrapper" key={`pc-${idx}`}>
+                                <img
+                                    src={src}
+                                    alt={`PC 상세 이미지 ${idx + 1}`}
+                                    className="store-image"
+                                />
+                                {titles[idx] && (
+                                    <div className={`pc-image-text-overlay ${titles[idx].className}`}>
+                                        {titles[idx].text.split('\n').map((line, i) => (
+                                            <div key={i}>{line}</div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                </div>
+
+                {/* 모바일 환경일 때만 보여짐 */}
+                <div className="detail-images-mobile only-mobile">
+                    {selectedStore.detailImagelist
+                        .filter((src) => src.includes('M'))
+                        .map((src, idx) => (
+                            <img
+                                key={`m-${idx}`}
+                                src={src}
+                                alt={`모바일 상세 이미지 ${idx + 1}`}
+                                className="store-image"
+                            />
+                        ))}
+                </div>
+            </div>
+
+
 
             {/* 👇 상세 이미지 탭 */}
             <div className="store-detail-top-wrapper">

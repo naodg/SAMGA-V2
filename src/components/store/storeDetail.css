@@ -15,7 +15,7 @@
 
 .store-info-card {
   position: absolute;
-  top: 280px;
+  top: 390px;
   /* ✅ 위에서 조금 내린 위치 */
   right: 19%;
   /* ✅ 왼쪽에서 80px 정도 띄우기 */
@@ -47,8 +47,11 @@
 }
 
 .store-main-logo {
-  height: 100px;
-  margin-bottom: 10px;
+  width: 150px;
+  height: auto;
+  margin-bottom: 0px;
+  object-fit: contain;
+  display: block;
 }
 
 /* 가게명 + 별점 가로정렬 */
@@ -64,6 +67,7 @@
   font-size: 23px !important;
   font-weight: bold;
   color: #222;
+  margin: 0px;
 }
 
 /* 별 아이콘 (텍스트 별 5개) */
@@ -161,7 +165,7 @@
   /* 아이콘-텍스트 가로 배치 */
   align-items: center;
   /* 아이콘, 텍스트 수직 정렬 */
-  gap: 8px;
+  gap: 10px;
   /* 아이콘과 텍스트 사이 */
   font-size: 14px;
   color: #333;
@@ -172,8 +176,8 @@
 }
 
 .facility-icon img {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
 }
 
@@ -192,7 +196,7 @@
 }
 
 .more-button {
-  font-size: 12px;
+  font-size: 13px;
   width: 100%;
   color: #AD5457;
   cursor: pointer;
@@ -217,13 +221,13 @@
 }
 
 .store-slogan {
-  font-size: 44px;
-  line-height: 1.1;
-  color: #333;
+  font-size: 33px;
+  line-height: 1.3;
+  color: #4d4d4d;
   white-space: pre-line;
   /* ⭐️ \n 줄바꿈 적용 */
-  font-weight: 500;
-  padding: 30px 320px;
+  font-weight: 700;
+  padding: 30px 340px;
   font-family: 'PurunMyungjo', serif;
 }
 
@@ -236,7 +240,7 @@
   align-items: center;
   padding: 60px 20px 80px;
   box-sizing: border-box;
-  align-items: center; 
+  align-items: center;
   /* ✅ 이거도 추가 추천 */
 }
 
@@ -289,6 +293,101 @@
 .store-sub-logo {
   width: 250px;
 }
+
+
+
+.store-detail-images-separated {
+  display: flex;
+}
+
+
+.detail-images-pc img,
+.detail-images-mobile img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0 !important;
+}
+
+/* PC 전용 스타일 */
+.pc-image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.pc-image-wrapper img {
+  width: 100%;
+  display: block;
+}
+
+.pc-image-text-overlay {
+  position: absolute;
+  color: #222;
+  font-family: 'NotoSansKR-Medium', sans-serif;
+  white-space: pre-line;
+}
+
+/* ✅ 각 텍스트 위치 및 스타일 개별 설정 */
+.deaga1-1 {
+  top: 5%;
+  right: 36%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+
+}
+
+.deaga1-2 {
+  top: 10%;
+  left: 16.5%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+}
+
+/* .deaga1-2 div:last-child {
+  padding-left: 4em;
+} */
+
+.deaga1-3 {
+  top: 6.5%;
+  right: 29.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+}
+
+.only-pc {
+  display: block;
+}
+
+.only-mobile {
+  display: none;
+}
+
+@media (max-width: 1600px) {
+  .only-pc {
+    display: none;
+  }
+
+  .only-mobile {
+    display: block;
+  }
+
+  .detail-images-mobile .store-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .detail-images-mobile {
+    width: 100%;
+  }
+}
+
 
 
 
@@ -395,4 +494,74 @@
 
 .naver-review-link:hover {
   background-color: #029b46;
+}
+
+
+
+/* 모바일  */
+@media (max-width: 1000px) {
+  .store-info-card {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    z-index: 10;
+  }
+
+  .store-main-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 0px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .store-slogan {
+    padding: 550px 20px 30px;
+    font-size: 24px;
+    line-height: 1.4;
+    text-align: start;
+  }
+
+  .store-hero-image {
+    height: auto;
+    min-height: 350px;
+  }
+
+  .brand-divider {
+    width: 300px;
+    border: none;
+    border-top: 1px solid #AD5457;
+    margin: 0 auto 30px;
+  }
+
+  .store-sub-logo {
+    width: 150px;
+  }
+
+  .store-detail-top-wrapper {
+    padding: 40px 20px;
+    min-height: 200px;
+    /* ✅ 공간 확보 */
+  }
+
+  .store-images img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+
+  .store-review-wrapper {
+    padding: 40px 20px;
+    display: block;
+  }
+
+  .review-placeholder,
+  .review-item {
+    text-align: center;
+  }
+
 }

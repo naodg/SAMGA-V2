@@ -135,6 +135,7 @@ export default function StoreFilterPage() {
     <div>
       {isMobile ? (
         <>
+          {/* 모바일 코드 */}
           {/* ✅ 1. 검색바 (최상단) */}
           <div style={{
             width: '100%',
@@ -294,344 +295,69 @@ export default function StoreFilterPage() {
                     }}
                   />
                   <div style={{ flex: 1 }}>
-                    <h3 style={{ margin: '0 0 4px 0', fontSize: '16px' }}>{store.name}</h3>
-                    <p style={{ margin: '4px 0', fontSize: '13px' }}>{store.address}</p>
-                    <p style={{ margin: '4px 0', fontSize: '13px' }}>{store.phone}</p>
-                  </div>
-                </div>
-
-                {/* 옵션 */}
-                {store.options?.length > 0 && (
-                  <div style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '6px',
-                    marginTop: '10px',
-                    paddingLeft: '0px',
-                  }}>
-                    {(openOptions[store.name] ? store.options : store.options.slice(0, 3)).map(opt => (
-                      <span
-                        key={opt}
-                        style={{
-                          background: '#f5f5f5',
-                          borderRadius: '20px',
-                          padding: '4px 10px',
-                          fontSize: '12px',
-                          color: '#555',
-                        }}
-                      >
-                        #{opt}
-                      </span>
-                    ))}
-
-                    {/* 더보기/간략히 버튼 */}
-                    {store.options.length > 3 && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setOpenOptions(prev => ({
-                            ...prev,
-                            [store.name]: !prev[store.name],
-                          }));
-                        }}
-                        style={{
-                          background: 'transparent',
-                          border: 'none',
-                          color: '#0077cc',
-                          fontSize: '12px',
-                          cursor: 'pointer',
-                          marginTop: '6px',
-                        }}
-                      >
-                        {openOptions[store.name] ? '간략히 ▲' : '더보기 ▼'}
-                      </button>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-
-            {/* 팝업 카드 */}
-            {selectedStore && (
-              <div style={{
-                position: 'absolute',
-                right: '50px',
-                bottom: '120px',
-                width: '260px',
-                background: '#fff',
-                borderRadius: '12px',
-                padding: '16px',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
-                zIndex: 1000
-              }}>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '8px'
-                }}>
-                  <h3 style={{ margin: 0 }}>{selectedStore.name}</h3>
-                  <button
-                    onClick={() => setSelectedStore(null)}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      fontSize: '18px',
-                      cursor: 'pointer',
-                      lineHeight: '1',
-                    }}
-                  >
-                    ✖
-                  </button>
-                </div>
-                <p style={{ fontSize: '13px', margin: '4px 0' }}>{selectedStore.address}</p>
-                <p style={{ fontSize: '13px', margin: '4px 0' }}>{selectedStore.phone}</p>
-                <a
-                  href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontSize: '13px',
-                    color: '#0077cc',
-                    textDecoration: 'underline',
-                    display: 'inline-block',
-                    marginTop: '10px'
-                  }}
-                >
-                  📍 길찾기
-                </a>
-              </div>
-            )}
-          </div>
-        </>
-      ) : (
-        <div style={{ margin: '0 200px' }}>
-
-          <div style={{
-            width: '100%',
-            padding: '20px 0',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              // margin: '20px 0',
-              border: '1px solid #AD5457',
-              background: '#fff',
-              width: '100%',
-              maxWidth: '650px',
-              boxSizing: 'border-box',
-              marginTop: '140px',
-              height: '40px'
-            }}>
-              {/* 검색 아이콘 버튼 */}
-              <button
-                onClick={() => {
-                  if (searchQuery.trim() === '') {
-                    setFilteredStores(storeData);
-                    setSelectedStore(null);
-                  } else {
-                    const results = storeData.filter(store =>
-                      store.name.includes(searchQuery)
-                    );
-                    setFilteredStores(results);
-                    setSelectedStore(results[0] ?? null);
-                  }
-                }}
-                style={{
-                  background: '#AD5457',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '0',
-                  height: '40px',
-                  width: '40px'
-                }}
-              >
-                <img
-                  src="/img/logo/search.svg"
-                  alt="검색 아이콘"
-                  style={{ width: '20px', height: '20px' }}
-                />
-              </button>
-
-              {/* 검색 입력창 */}
-              <input
-                type="text"
-                value={searchQuery}
-                placeholder="내가 찾는 식당을 검색해보세요."
-                onFocus={() => setShowMap(true)}
-                onChange={(e) => {
-                  const keyword = e.target.value;
-                  setSearchQuery(keyword);
-
-                  if (keyword.trim() === '') {
-                    setFilteredStores(storeData);
-                    setSelectedStore(null);
-                  } else {
-                    const results = storeData.filter(store =>
-                      store.name.includes(keyword)
-                    );
-                    setFilteredStores(results);
-                    setSelectedStore(results[0] ?? null);
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    const results = storeData.filter(store =>
-                      store.name.includes(searchQuery)
-                    );
-                    setFilteredStores(results);
-                    setSelectedStore(results[0] ?? null);
-                  }
-                }}
-                style={{
-                  flex: 1,
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: '14px',
-                  background: 'transparent',
-                }}
-              />
-            </div>
-
-          </div>
-
-          <hr style={{borderTop: '1px solid #AD5457', maxWidth:'1250px', marginTop:'20px'}} />
-
-          <div style={{ display: 'flex', flexDirection: 'column', fontFamily: 'sans-serif', height: '100vh', }}>
-
-            <div style={{
-              display: 'flex',
-              overflowX: 'auto',    // ✅ 가로 스크롤 가능
-              whiteSpace: 'nowrap', // ✅ 줄바꿈 없이 한줄
-              gap: '8px',
-              padding: '15px 96px 15px',
-              justifyContent:'center'
-            }}>
-              {filters.map(({ label, key }) => (
-                <button
-                  key={key}
-                  onClick={() => toggleFilter(key)}
-                  style={{
-                    flexShrink: 0, // ✅ 버튼이 줄어들지 않고 유지
-                    padding: '8px 16px',
-                    backgroundColor: activeFilters.includes(key) ? '#C8102E' : '#eee',
-                    color: activeFilters.includes(key) ? '#fff' : '#333',
-                    border: 'none',
-                    borderRadius: '20px',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    fontSize: '14px'
-                  }}
-                >
-                  {label} {activeFilters.includes(key) && <span style={{ fontWeight: 'bold', fontSize: '14px' }}>×</span>}
-                </button>
-              ))}
-            </div>
-
-
-
-            <div style={{ display: 'flex', flex: 1, overflow: 'hidden', height: '100%', padding: `0 ${paddingSize}`, }}>
-              <div style={{ flex: 1, maxWidth: '80%', overflowY: 'auto', padding: '20px', boxSizing: 'border-box' }}>
-                {filteredStores.map(store => (
-                  <div key={store.name} style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    background: '#fff',
-                    borderRadius: '12px',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                    padding: '16px',
-                    marginBottom: '16px',
-                  }}>
-
-                    {/* ✅ 상단: 이미지 + 텍스트 한 줄로 */}
-                    <div
-                      onClick={() => navigate(`/store/${encodeURIComponent(store.name)}`)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        cursor: 'pointer',
-                        gap: '16px',
-                      }}
-                    >
-                      <img
-                        src={store.image || '/img/default.jpg'}
-                        alt={store.name}
-                        style={{
-                          width: '230px',
-                          height: '180px',
-                          borderRadius: '8px',
-                          objectFit: 'cover',
-                          flexShrink: 0,
-                        }}
-                      />
-                      <div style={{ flex: 1 }}>
-                        <h3 style={{ fontSize: '18px', marginBottom: '4px' }}>{store.name}</h3>
-                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                          <span style={{ color: '#ffc107', fontSize: '16px', marginRight: '6px' }}>★ ★ ★ ★ ☆</span>
-                          <span style={{ fontSize: '14px', color: '#666' }}>(123 리뷰)</span>
-                        </div>
-                        <p style={{ fontSize: '14px', margin: '2px 0' }}><strong>📍</strong> {store.address}</p>
-                        <p style={{ fontSize: '14px', margin: '2px 0' }}><strong>📞</strong> {store.phone}</p>
+                    <div style={{ flex: 1, margin: '0 0 4px 0' }}>
+                      <h3 style={{ fontSize: '16px', marginBottom: '2px' }}>{store.name}</h3>
+                        <span style={{ color: '#AD5457', fontSize: '16px', marginRight: '6px' }}>★ ★ ★ ★ ☆</span>
+                        <span style={{ fontSize: '14px', color: '#666' }}>(123 리뷰)</span>
                       </div>
-                    </div>
 
-                    {/* ✅ 하단: 옵션들 */}
-                    {store.options?.length > 0 && (
-                      <div style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        gap: '6px',
-                        marginTop: '12px'
-                      }}>
-                        {(openOptions[store.name] ? store.options : store.options.slice(0, 5)).map(opt => (
-                          <span key={opt} style={{
+                      <p style={{ margin: '4px 0', fontSize: '13px' }}>{store.address}</p>
+                      <p style={{ margin: '4px 0', fontSize: '13px' }}>{store.phone}</p>
+                    </div>
+                  </div>
+
+                  {/* 옵션 */}
+                  {store.options?.length > 0 && (
+                    <div style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '6px',
+                      marginTop: '10px',
+                      paddingLeft: '0px',
+                    }}>
+                      {(openOptions[store.name] ? store.options : store.options.slice(0, 3)).map(opt => (
+                        <span
+                          key={opt}
+                          style={{
                             background: '#f5f5f5',
                             borderRadius: '20px',
                             padding: '4px 10px',
                             fontSize: '12px',
-                            color: '#555'
-                          }}>
-                            #{opt}
-                          </span>
-                        ))}
+                            color: '#555',
+                          }}
+                        >
+                          #{opt}
+                        </span>
+                      ))}
 
-                        {/* 더보기/접기 버튼 */}
-                        {store.options.length > 5 && (
-                          <button
-                            style={{
-                              background: 'transparent',
-                              border: 'none',
-                              color: '#0077cc',
-                              fontSize: '12px',
-                              cursor: 'pointer',
-                              marginTop: '6px'
-                            }}
-                            onClick={(e) => {
-                              e.stopPropagation(); // 상세페이지 이동 방지
-                              setOpenOptions(prev => ({
-                                ...prev,
-                                [store.name]: !prev[store.name] // 이 가게만 토글
-                              }));
-                            }}
-                          >
-                            {openOptions[store.name] ? '간략히 ▲' : '더보기 ▼'}
-                          </button>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+                      {/* 더보기/간략히 버튼 */}
+                      {store.options.length > 3 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOpenOptions(prev => ({
+                              ...prev,
+                              [store.name]: !prev[store.name],
+                            }));
+                          }}
+                          style={{
+                            background: 'transparent',
+                            border: 'none',
+                            color: '#0077cc',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            marginTop: '6px',
+                          }}
+                        >
+                          {openOptions[store.name] ? '간략히 ▲' : '더보기 ▼'}
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+            ))}
 
-              <div style={{ width: '40%', height: '100%', position: 'sticky', top: 0, flex: 0.9 }}>
-                <div id="filterMap" style={{ width: '100%', height: '100%', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.15)' }} />
+                {/* 팝업 카드 */}
                 {selectedStore && (
                   <div style={{
                     position: 'absolute',
@@ -644,7 +370,6 @@ export default function StoreFilterPage() {
                     boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
                     zIndex: 1000
                   }}>
-                    {/* ✅ 여기 추가 */}
                     <div style={{
                       display: 'flex',
                       justifyContent: 'space-between',
@@ -679,16 +404,300 @@ export default function StoreFilterPage() {
                         marginTop: '10px'
                       }}
                     >
-                      📍 길찾기
+                      길찾기
                     </a>
                   </div>
                 )}
               </div>
-            </div>
-          </div>
+        </>
+          ) : (
 
-        </div>
+
+          // PC코드 시작
+          <div style={{ margin: '0 200px' }}>
+
+            <div style={{
+              width: '100%',
+              padding: '20px 0',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                // margin: '20px 0',
+                border: '1px solid #AD5457',
+                background: '#fff',
+                width: '100%',
+                maxWidth: '650px',
+                boxSizing: 'border-box',
+                marginTop: '140px',
+                height: '40px'
+              }}>
+                {/* 검색 아이콘 버튼 */}
+                <button
+                  onClick={() => {
+                    if (searchQuery.trim() === '') {
+                      setFilteredStores(storeData);
+                      setSelectedStore(null);
+                    } else {
+                      const results = storeData.filter(store =>
+                        store.name.includes(searchQuery)
+                      );
+                      setFilteredStores(results);
+                      setSelectedStore(results[0] ?? null);
+                    }
+                  }}
+                  style={{
+                    background: '#AD5457',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0',
+                    height: '40px',
+                    width: '40px'
+                  }}
+                >
+                  <img
+                    src="/img/logo/search.svg"
+                    alt="검색 아이콘"
+                    style={{ width: '20px', height: '20px' }}
+                  />
+                </button>
+
+                {/* 검색 입력창 */}
+                <input
+                  type="text"
+                  value={searchQuery}
+                  placeholder="내가 찾는 식당을 검색해보세요."
+                  onFocus={() => setShowMap(true)}
+                  onChange={(e) => {
+                    const keyword = e.target.value;
+                    setSearchQuery(keyword);
+
+                    if (keyword.trim() === '') {
+                      setFilteredStores(storeData);
+                      setSelectedStore(null);
+                    } else {
+                      const results = storeData.filter(store =>
+                        store.name.includes(keyword)
+                      );
+                      setFilteredStores(results);
+                      setSelectedStore(results[0] ?? null);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const results = storeData.filter(store =>
+                        store.name.includes(searchQuery)
+                      );
+                      setFilteredStores(results);
+                      setSelectedStore(results[0] ?? null);
+                    }
+                  }}
+                  style={{
+                    flex: 1,
+                    border: 'none',
+                    outline: 'none',
+                    fontSize: '14px',
+                    background: 'transparent',
+                  }}
+                />
+              </div>
+
+            </div>
+
+            <hr style={{ borderTop: '1px solid #AD5457', maxWidth: '1230px', margin: '20px auto 10px' }} />
+
+            <div style={{ display: 'flex', flexDirection: 'column', fontFamily: 'sans-serif', height: '100vh', }}>
+
+              <div style={{
+                display: 'flex',
+                overflowX: 'auto',    // ✅ 가로 스크롤 가능
+                whiteSpace: 'nowrap', // ✅ 줄바꿈 없이 한줄
+                gap: '8px',
+                padding: '15px 96px 15px',
+                justifyContent: 'center'
+              }}>
+                {filters.map(({ label, key }) => (
+                  <button
+                    key={key}
+                    onClick={() => toggleFilter(key)}
+                    style={{
+                      flexShrink: 0, // ✅ 버튼이 줄어들지 않고 유지
+                      padding: '8px 20px',
+                      backgroundColor: activeFilters.includes(key) ? '#AD5457' : '#eee',
+                      color: activeFilters.includes(key) ? '#fff' : '#333',
+                      border: 'none',
+                      borderRadius: '20px',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontSize: '14px'
+                    }}
+                  >
+                    {label} {activeFilters.includes(key) && <span style={{ fontWeight: 'bold', fontSize: '14px' }}>×</span>}
+                  </button>
+                ))}
+              </div>
+
+
+
+              <div style={{ display: 'flex', flex: 1, overflow: 'hidden', height: '100%', padding: `0 ${paddingSize}`, }}>
+                <div style={{ flex: 1, maxWidth: '80%', overflowY: 'auto', padding: '20px', boxSizing: 'border-box' }}>
+                  {filteredStores.map(store => (
+                    <div key={store.name} style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      background: '#fff',
+                      borderRadius: '12px',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                      padding: '16px',
+                      marginBottom: '16px',
+                    }}>
+
+                      {/* ✅ 상단: 이미지 + 텍스트 한 줄로 */}
+                      <div
+                        onClick={() => navigate(`/store/${encodeURIComponent(store.name)}`)}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          cursor: 'pointer',
+                          gap: '16px',
+                        }}
+                      >
+                        <img
+                          src={store.image || '/img/default.jpg'}
+                          alt={store.name}
+                          style={{
+                            width: '230px',
+                            height: '180px',
+                            borderRadius: '8px',
+                            objectFit: 'cover',
+                            flexShrink: 0,
+                          }}
+                        />
+                        <div style={{ flex: 1 }}>
+                          <h3 style={{ fontSize: '18px', marginBottom: '4px' }}>{store.name}</h3>
+                          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                            <span style={{ color: '#AD5754', fontSize: '16px', marginRight: '6px' }}>★ ★ ★ ★ ☆</span>
+                            <span style={{ fontSize: '14px', color: '#666' }}>(123 리뷰)</span>
+                          </div>
+                          <p style={{ fontSize: '14px', margin: '2px 0' }}><strong>주소:</strong> {store.address}</p>
+                          <p style={{ fontSize: '14px', margin: '2px 0' }}><strong>T.</strong> {store.phone}</p>
+                        </div>
+                      </div>
+
+                      {/* ✅ 하단: 옵션들 */}
+                      {store.options?.length > 0 && (
+                        <div style={{
+                          display: 'flex',
+                          flexWrap: 'wrap',
+                          gap: '6px',
+                          marginTop: '12px'
+                        }}>
+                          {(openOptions[store.name] ? store.options : store.options.slice(0, 5)).map(opt => (
+                            <span key={opt} style={{
+                              background: '#f5f5f5',
+                              borderRadius: '20px',
+                              padding: '4px 10px',
+                              fontSize: '12px',
+                              color: '#555'
+                            }}>
+                              #{opt}
+                            </span>
+                          ))}
+
+                          {/* 더보기/접기 버튼 */}
+                          {store.options.length > 5 && (
+                            <button
+                              style={{
+                                background: 'transparent',
+                                border: 'none',
+                                color: '#0077cc',
+                                fontSize: '12px',
+                                cursor: 'pointer',
+                                marginTop: '6px'
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation(); // 상세페이지 이동 방지
+                                setOpenOptions(prev => ({
+                                  ...prev,
+                                  [store.name]: !prev[store.name] // 이 가게만 토글
+                                }));
+                              }}
+                            >
+                              {openOptions[store.name] ? '간략히 ▲' : '더보기 ▼'}
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ width: '40%', height: '100%', position: 'sticky', top: 0, flex: 0.9 }}>
+                  <div id="filterMap" style={{ width: '100%', height: '100%', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.15)' }} />
+                  {selectedStore && (
+                    <div style={{
+                      position: 'absolute',
+                      right: '50px',
+                      bottom: '120px',
+                      width: '260px',
+                      background: '#fff',
+                      borderRadius: '12px',
+                      padding: '16px',
+                      boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
+                      zIndex: 1000
+                    }}>
+                      {/* ✅ 여기 추가 */}
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginBottom: '8px'
+                      }}>
+                        <h3 style={{ margin: 0 }}>{selectedStore.name}</h3>
+                        <button
+                          onClick={() => setSelectedStore(null)}
+                          style={{
+                            background: 'transparent',
+                            border: 'none',
+                            fontSize: '18px',
+                            cursor: 'pointer',
+                            lineHeight: '1',
+                          }}
+                        >
+                          ✖
+                        </button>
+                      </div>
+                      <p style={{ fontSize: '13px', margin: '4px 0' }}>{selectedStore.address}</p>
+                      <p style={{ fontSize: '13px', margin: '4px 0' }}>{selectedStore.phone}</p>
+                      <a
+                        href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: '13px',
+                          color: '#0077cc',
+                          textDecoration: 'underline',
+                          display: 'inline-block',
+                          marginTop: '10px'
+                        }}
+                      >
+                        길찾기
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+          </div>
       )}
-    </div>
-  );
+        </div>
+      );
 }

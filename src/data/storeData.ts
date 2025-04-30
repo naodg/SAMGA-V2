@@ -17,6 +17,7 @@ export interface Store {
     hashtag:string[]
     slogan:string
     slogan2?:string
+    detailImagelist?:string[]
   }
 
 
@@ -43,6 +44,14 @@ export interface Store {
       hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
       slogan :'이름이 주는 전통\n 대를 이어 맛을 \n 지켜가겠습니다.',
       slogan2 :'"가장 최고로 준비해 드릴 수 없을 때는 문을 닫습니다."',
+      detailImagelist : [
+        '/samga/store/deaga1/대가1호점상세페이지_M_1.jpg',
+        '/samga/store/deaga1/대가1호점상세페이지_M_2.jpg',
+        '/samga/store/deaga1/대가1호점상세페이지_M_3.jpg',
+        '/samga/store/deaga1/대가1호점상세페이지_PC_1.jpg',
+        '/samga/store/deaga1/대가1호점상세페이지_PC_2.jpg',
+        '/samga/store/deaga1/대가1호점상세페이지_PC_3.jpg',
+      ]
     },
     {
       name: '대가식육식당',
