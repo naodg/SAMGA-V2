@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { storeData } from '../../data/storeData'
-import './StoreDetail.css'
+import './storeDetail.css'
 import { storeDetailAssets } from '../../data/storeDetailAssets'
 
 const tabs = ['가게메뉴', '상차림', '편의시설'] as const
