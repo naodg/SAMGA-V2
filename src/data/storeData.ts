@@ -201,7 +201,7 @@ export interface Store {
       slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
     },
     {
-      name: '태영상차림식당',
+      name: '태영한우',
       lat: 35.413468,
       lng: 128.123151,
       address: '경남 합천군 삼가면 일부5길 11',

@@ -32,12 +32,12 @@ export default function Footer() {
             <li>대가한우</li>
             <li>대산식육식당</li>
             <li>대웅식육식당</li>
-            <li>도원식육식당당</li>
-            <li>미로식육식당당</li>
-            <li>불난가한우우</li>
-            <li>삼가명품한우우</li>
+            <li>도원식육식당</li>
+            <li>미로식육식당</li>
+            <li>불난가한우</li>
+            <li>삼가명품한우</li>
             <li>상구한우</li>
-            <li>태영상차림식당</li>
+            <li>태영한우</li>
           </ul>
         </div>
 
@@ -58,15 +58,15 @@ export default function Footer() {
         <div className="footer-column right">
           <h4>이용 안내</h4>
           <ul className="footer-links">
-            <li><a href="#">회사소개</a></li>
-            <li><a href="#">이용약관</a></li>
-            <li><a href="#">개인정보처리방침</a></li>
-            <li><a href="#">이용안내</a></li>
+            <li><a >회사소개</a></li>
+            <li><a >이용약관</a></li>
+            <li><a >개인정보처리방침</a></li>
+            <li><a >이용안내</a></li>
           </ul>
           <div className="footer-sns">
-            <a href="#">f</a>
-            <a href="#">i</a>
-            <a href="#">k</a>
+            <a >f</a>
+            <a >i</a>
+            <a >k</a>
           </div>
         </div>
 

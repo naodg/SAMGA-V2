@@ -26,17 +26,22 @@ export default function Header() {
         {/* 네비게이션 */}
         <nav className="nav">
           <ul className="nav-list">
-            <li onClick={() => navigate('/about')}>牛리마을 소개</li>
+            {/* <li onClick={() => navigate('/about')}>牛리마을 소개</li> */}
+            <li >牛리마을 소개</li>
             <li onClick={() => navigate('/storefilterpage')}>식육식당</li>
-            <li onClick={() => navigate('/review')}>리뷰 쓰기</li>
+            {/* <li onClick={() => navigate('/review')}>리뷰 쓰기</li> */}
+            <li>리뷰 쓰기</li>
           </ul>
         </nav>
 
         {/* 유저 메뉴 */}
         <div className="user-menu">
-          <span onClick={() => navigate('/login')}>로그인</span>
+          {/* <span onClick={() => navigate('/login')}>로그인</span>
           <span onClick={() => navigate('/signup')}>회원가입</span>
-          <span onClick={() => navigate('/mypage')}>마이페이지</span>
+          <span onClick={() => navigate('/mypage')}>마이페이지</span> */}
+          <span>로그인</span>
+          <span>회원가입</span>
+          <span>마이페이지</span>
         </div>
 
 
