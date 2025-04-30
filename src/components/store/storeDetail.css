@@ -15,7 +15,7 @@
 
 .store-info-card {
   position: absolute;
-  top: 390px;
+  top: 440px;
   /* ✅ 위에서 조금 내린 위치 */
   right: 19%;
   /* ✅ 왼쪽에서 80px 정도 띄우기 */
@@ -140,7 +140,7 @@
 .facility-title {
   font-size: 15px;
   font-weight: bold;
-  color: #666;
+  color: #333;
   border-bottom: 1px solid #AD5457;
   padding: 0 0 10px 0;
 }

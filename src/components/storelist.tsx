@@ -130,6 +130,33 @@ export default function StoreList() {
 
           )
         })}
+
+
+        <div className="store-card-wrapper">
+        <h3
+                className="store-title"
+                style={{
+                  // transform: isMobile ? '' : `translateY(${offsetY}px)`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px' // 텍스트랑 아이콘 사이 여백
+                }}
+              >
+                <img
+                  src="/img/logo/제목옆아이콘.svg"
+                  alt="아이콘"
+                  style={{
+                    width: '18px',
+                    height: '18px',
+                    objectFit: 'contain'
+                  }}
+                />
+                牛리마을
+              </h3>
+              <div className="store-card">
+              <img src={"/samga/store/소탈이.jpg"} alt={"소탈이"} className="store-card-image" />
+              </div>
+        </div>
       </div>
 
 
