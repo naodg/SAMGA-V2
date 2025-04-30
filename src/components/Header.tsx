@@ -64,9 +64,9 @@ export default function Header() {
 
 
         <div className={`mobile-user-menu ${menuOpen ? 'open' : ''}`}>
-          <span onClick={() => navigate('/login')}>로그인</span>
-          <span onClick={() => navigate('/signup')}>회원가입</span>
-          <span onClick={() => navigate('/mypage')}>마이페이지</span>
+          <span >로그인</span>
+          <span>회원가입</span>
+          <span >마이페이지</span>
         </div>
 
 
