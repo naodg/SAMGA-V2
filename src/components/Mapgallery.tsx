@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { storeData } from '../data/storeData';
-import './MapGallery.css'
+import './Mapgallery.css'
 import { useNavigate } from 'react-router-dom';
 
 export default function MapGallery() {
