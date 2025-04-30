@@ -208,7 +208,7 @@ export interface Store {
       phone: '0507-1384-9399',
       hours: '매일 10:30 - 19:30 / 매주 월요일 휴무',
       options: [''],
-      image: '../../samga/store/태영상차림식당_1.jpg',
+      image: '../../samga/store/태영한우_1.jpg',
       detailimage: '/samga/store/대가1호점_landing_detail.jpg',
       description:'깔끔한 공간, 신선한 고기,\n젊은 입맛 사로잡다.',
       story:'',
