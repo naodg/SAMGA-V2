@@ -10,12 +10,12 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 const bannerImages = [
   {
-    src: '/img/banner/banner1.png',
+    src: '/img/banner/banner5.png',
     caption: '좋은사람과 같이 걷기 좋은 \n 삼가특화거리-소화잘되는 길',
     link: 'https://blog.naver.com/hc-urc/222571944010',
   },
   {
-    src: '/img/banner/banner2.png',
+    src: '/img/banner/banner4.png',
     caption: '4계절 각기다른 멋! 황매산 군립공원 \n 공식사이트 바로가기',
     link: 'https://www.hc.go.kr/09418/09425/09833.web'
   },
@@ -25,12 +25,12 @@ const bannerImages = [
     link: 'https://www.youtube.com/watch?v=DjprccTSapc'
   },
   {
-    src: '/img/banner/banner4.png',
+    src: '/img/banner/banner2.png',
     caption: '삼가의 멋-삼가시장 \n합천 공식유튜브 바로가기',
     link: 'https://www.youtube.com/watch?v=ZLch32VzUb0'
   },
   {
-    src: '/img/banner/banner5.png',
+    src: '/img/banner/banner1.png',
     caption: '영화같은일상 합천영상테마파크 \n 공식사이트 바로가기',
     link: 'https://hcmoviethemepark.com/'
   },
