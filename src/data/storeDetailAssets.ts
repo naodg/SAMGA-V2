@@ -19,6 +19,20 @@ type StyleText = {
         className: 'deaga1-3',
       },
     ],
+    '대가한우': [
+      {
+        text: '고기는 눈으로보고, \n 손으로 만져봐야 진짜를 안다',
+        className: 'deagaH1',
+      },
+      {
+        text: '현장부터 다져온\n좋은 고기를 알아보는 안목',
+        className: 'deagaH2',
+      },
+      {
+        text: '기본에 충실한 식사 한끼',
+        className: 'deagaH3',
+      },
+    ],
     '도원식육식당': [
       {
         text: '‘도원 식육식당’은',

@@ -304,7 +304,7 @@ export default function StoreDetail() {
                     <img src="/img/logo/videologo.svg" alt="videologo" className="video-logo" />
                     <div className="brand-text">KOREAN BEEF VILLAGE SAMGA</div>
                     <hr className="brand-divider" />
-                    {selectedStore.name !== "도원식육식당" && (
+                    {!["도원식육식당", "대가한우"].includes(selectedStore.name) && (
                         <img src={selectedStore.logo} alt="logo" className="store-sub-logo" />
                     )}
                 </div>
