@@ -8,6 +8,15 @@ import { storeData } from '../data/storeData';
 import './Mapgallery.css'
 import { useNavigate } from 'react-router-dom';
 
+import { db } from "../firebase"
+import {
+  collection,
+  getDocs,
+  query,
+  where
+} from "firebase/firestore"
+
+
 export default function MapGallery() {
   const [selectedStore, setSelectedStore] = useState<typeof storeData[0] | null>(null)
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,6 +34,41 @@ export default function MapGallery() {
 
 
   }
+
+  const getStoreRatingData = async (storeId: string) => {
+    const q = query(
+      collection(db, "reviews"),
+      where("storeId", "==", storeId)
+    )
+    const snapshot = await getDocs(q)
+    const reviews = snapshot.docs.map(doc => doc.data())
+    const total = reviews.reduce((acc, r) => acc + (r.star || 0), 0)
+    const average = reviews.length ? total / reviews.length : 0
+    return {
+      average: Number(average.toFixed(1)),
+      count: reviews.length
+    }
+  }
+
+  // 리뷰
+  const [storeRatings, setStoreRatings] = useState<{
+    [key: string]: { average: number; count: number }
+  }>({})
+
+  useEffect(() => {
+    const fetchAllRatings = async () => {
+      const result: any = {}
+      for (let i = 0; i < storeData.length; i++) {
+        const storeId = `store${i + 1}`  // ✅ 이렇게 파싱!
+        const rating = await getStoreRatingData(storeId)
+        result[storeId] = rating
+      }
+      setStoreRatings(result)
+    }
+
+    fetchAllRatings()
+  }, [])
+
 
 
   useEffect(() => {
@@ -249,58 +293,91 @@ export default function MapGallery() {
           <div className="map-gallery-map-container">
 
             {/* ✅ 지도 위에 겹쳐진 정보 카드 */}
-            {selectedStore && (
-              <div className="map-gallery-info-card">
+            {selectedStore && (() => {
+              const storeIndex = storeData.findIndex(s => s.name === selectedStore.name)
+              if (storeIndex === -1) return null;
+              const storeId = `store${storeIndex + 1}`
+              const rating = storeRatings[storeId]
 
-                {/* ⬇️ 가게명 + 별점 + 메뉴링크 한 줄 정렬 */}
-                <div className="info-header">
-                  <h3 className="store-name">
-                    {selectedStore.name}
-                    <span className="rating">★★★★★</span>
-                  </h3>
+              return (
+                <div className="map-gallery-info-card">
 
-                  <div className="menu-links">
-                    <a href="#" className="link">Review</a>
-                    <span className="divider">|</span>
-                    <a href="#" className="link">메뉴보기</a>
+                  {/* ⬇️ 가게명 + 별점 + 메뉴링크 한 줄 정렬 */}
+                  <div className="info-header">
+                    <h3 className="store-name">
+                      {selectedStore.name}
+                      <span className="rating">
+                        {[...Array(5)].map((_, i) => {
+                          const value = i + 1
+                          let imgSrc = ""
+
+                          if (rating?.average >= value) {
+                            imgSrc = "/img/icon/단골등록해제.svg"
+                          } else if (rating?.average + 0.5 >= value) {
+                            imgSrc = "/img/icon/반쪽자리별.svg"
+                          } else {
+                            imgSrc = "/img/icon/단골등록.svg"
+                          }
+
+                          return (
+                            <img
+                              key={i}
+                              src={imgSrc}
+                              alt="별점"
+                              className="star-icon"
+                              style={{ width: 16, height: 16 }}
+                            />
+                          )
+                        })}
+                        <span className="review-score">{rating?.average?.toFixed(1) || "0.0"}점</span>
+                        <span className="review-count">({rating?.count || 0}개 리뷰)</span>
+                      </span>
+                    </h3>
+
+                    <div className="menu-links">
+                      <span className="link" onClick={() => navigate("/review")}>Review</span>
+                      <span className="divider">|</span>
+                      <a href="#" className="link">메뉴보기</a>
+                    </div>
                   </div>
+
+                  <p className="store-detail">
+                    <span className="label">주소 :</span> {selectedStore.address} T. <b>{selectedStore.phone}</b>
+                  </p>
+
+                  <p className="store-detail">
+                    <span className="label">영업시간 :</span> {selectedStore.hours.split('/')[0]}
+                    {selectedStore.point && (
+                      <span className="point"> ※ {selectedStore.point}</span>
+                    )}
+                  </p>
+
+                  <p className="store-detail">
+                    <span className="label">휴무 :</span> {selectedStore.hours.split('/')[1].replace('휴무', '')}
+                  </p>
+
+                  <div className="map-footer-links">
+                    <a
+                      href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="map-link"
+                    >
+                      길찾기
+                    </a>
+                    <span className="divider">/</span>
+                    <button
+                      className="map-link"
+                      onClick={() => navigate(`/store/${encodeURIComponent(selectedStore.name)}`)}
+                    >
+                      상세페이지로 가기
+                    </button>
+                  </div>
+
                 </div>
+              )
+            })()}
 
-                <p className="store-detail">
-                  <span className="label">주소 :</span> {selectedStore.address} T. <b>{selectedStore.phone}</b>
-                </p>
-
-                <p className="store-detail">
-                  <span className="label">영업시간 :</span> {selectedStore.hours.split('/')[0]}
-                  {selectedStore.point && (
-                    <span className="point"> ※ {selectedStore.point}</span>
-                  )}
-                </p>
-
-                <p className="store-detail">
-                  <span className="label">휴무 :</span> {selectedStore.hours.split('/')[1].replace('휴무', '')}
-                </p>
-
-                <div className="map-footer-links">
-                  <a
-                    href={`https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="map-link"
-                  >
-                    길찾기
-                  </a>
-                  <span className="divider">/</span>
-                  <button
-                    className="map-link"
-                    onClick={() => navigate(`/store/${encodeURIComponent(selectedStore.name)}`)}
-                  >
-                    상세페이지로 가기
-                  </button>
-                </div>
-
-              </div>
-            )}
 
             {/* ✅ 실제 지도 div */}
             <div id="map" />

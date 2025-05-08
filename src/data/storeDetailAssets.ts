@@ -19,6 +19,20 @@ type StyleText = {
         className: 'deaga1-3',
       },
     ],
+    '도원식육식당': [
+      {
+        text: '‘도원 식육식당’은',
+        className: 'dowon1',
+      },
+      {
+        text: '고기의 본질은 결국\n‘고기’\n그 자체입니다.',
+        className: 'dowon2',
+      },
+      {
+        text: '우리집 식탁에서\n만나 볼 수 있는 삼가 한우',
+        className: 'dowon3',
+      },
+    ],
     // 다른 가게도 동일하게 정의
   }
   

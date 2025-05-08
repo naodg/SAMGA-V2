@@ -16,11 +16,9 @@
 .store-info-card {
   position: absolute;
   top: 440px;
-  /* ✅ 위에서 조금 내린 위치 */
-  right: 19%;
-  /* ✅ 왼쪽에서 80px 정도 띄우기 */
+  left: 50%;
+  transform: translateX(160px); /* → 기준점에서 오른쪽으로 이동 */
   width: 400px;
-  /* ✅ 고정된 카드 너비 */
   background: rgba(255, 255, 255, 0.85);
   padding: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -231,6 +229,33 @@
   font-family: 'PurunMyungjo', serif;
 }
 
+.store-name-line {
+  max-width: 423px;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  margin-left: 340px;
+}
+
+.store-name-text {
+  font-size: 18px;
+  color: #ad5457;
+  font-weight: bold;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+.store-name-bar {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #ad5457;
+}
+
+@media (max-width: 768px) {
+  .store-name-line {
+    display: none;
+  }
+}
 
 .store-brand-wrapper {
   width: 100%;
@@ -291,7 +316,7 @@
 }
 
 .store-sub-logo {
-  width: 250px;
+  width: 220px;
 }
 
 
@@ -326,6 +351,7 @@
   white-space: pre-line;
 }
 
+
 /* ✅ 각 텍스트 위치 및 스타일 개별 설정 */
 .deaga1-1 {
   top: 5%;
@@ -359,6 +385,37 @@
   line-height: 1.2;
 }
 
+
+.dowon1 {
+  top: 55%;
+  right: 31%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+
+}
+
+.dowon2 {
+  top: 9%;
+  left: 20.5%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+}
+
+
+.dowon3 {
+  top: 30%;
+  right: 27%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+}
+
+
 .only-pc {
   display: block;
 }
@@ -366,6 +423,8 @@
 .only-mobile {
   display: none;
 }
+
+
 
 @media (max-width: 1600px) {
   .only-pc {
@@ -389,6 +448,134 @@
 }
 
 
+.dowon-product-section {
+  padding: 40px 20px;
+  background-color: #f3ece9;
+}
+
+.dowon-product-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dowon-product-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 24px;
+  color: #333;
+}
+.dowon-product-title .highlight {
+  color: #AD5457; /* 포인트 컬러 */
+  margin-left: 6px;
+}
+
+
+.dowon-product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px 40px;
+  justify-content: space-between;
+}
+
+.dowon-product-item {
+  width: 180px;
+  text-align: start;
+}
+
+.dowon-product-item img {
+  width: 200px;
+  height: 200px;
+  border-radius: 6px;
+}
+
+.dowon-product-name {
+  font-weight: bold;
+  color: #222;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+
+.dowon-only-mobile {
+  display: none;
+}
+
+.dowon-only-pc {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+
+  .dowon-only-pc {
+    display: none;
+  }
+
+  .dowon-product-inner {
+    max-width: 100%;
+    padding: 0 16px;
+    margin: 0 auto;
+  }
+
+  .dowon-product-grid.dowon-only-mobile {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .dowon-product-item {
+    width: 47%;
+  
+    text-align: center;
+  }
+
+  .dowon-product-item img {
+    width: 100%;
+    height: 150px;
+    max-width: 100%;
+    border-radius: 6px;
+  }
+
+  .dowon-product-name {
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .idius-all {
+    text-align: right;
+    margin-top: 12px;
+    padding: 0 16px;
+  }
+
+  .idius-all a {
+    font-size: 14px;
+    color: #AD5457;
+    font-weight: 500;
+    text-decoration: none;
+  }
+}
+
+
+.idius-all {
+  text-align: right;
+  margin: 15px 310px 20px 0;
+  /* padding-right: 20px; */
+}
+
+.idius-all a {
+  font-size: 14px;
+  color: #AD5457; /* 포인트 컬러 */
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.idius-all .arrow {
+  margin-left: 4px;
+}
 
 
 .store-detail-top-wrapper {
@@ -466,6 +653,103 @@
   margin-bottom: 3px;
 }
 
+.store-review-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.store-review-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: #fff;
+}
+
+.review-titles{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.review-content {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.review-meta {
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.star-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.review-star-value {
+  margin-left: 6px;
+  font-size: 13px;
+  color: #AD5457;
+  font-weight: 500;
+}
+
+.review-comment {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #333;
+}
+
+.review-comment .comment-nickname {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.review-comment .comment-date {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.no-store-review {
+  font-size: 14px;
+  text-align: center;
+  color: #999;
+  margin: 40px 0;
+}
+
+.naver-review-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #AD5457;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+
 
 /* ✅ 기본 리뷰 박스 */
 .review-placeholder {
@@ -498,8 +782,47 @@
 
 
 
-/* 모바일  */
-@media (max-width: 1000px) {
+/* 반응형   */
+
+@media (max-width: 1700px) {
+  .deaga1-1 {
+    top: 5%;
+    right: 33%;
+    font-size: clamp(28px, 4vw, 60px);
+    font-weight: bold;
+    text-align: left;
+  
+  }
+  
+  .deaga1-2 {
+    top: 10%;
+    left: 16.5%;
+    transform: translateX(0);
+    font-size: clamp(28px, 4vw, 60px);
+    font-weight: 700;
+    text-align: start;
+    line-height: 1.2;
+  }
+  
+  /* .deaga1-2 div:last-child {
+    padding-left: 4em;
+  } */
+  
+  .deaga1-3 {
+    top: 6.5%;
+    right: 26.5%;
+    font-size: clamp(28px, 4vw, 60px);
+    font-weight: 700;
+    text-align: start;
+    line-height: 1.2;
+  }
+}
+
+
+
+
+
+@media (max-width: 1100px) {
   .store-info-card {
     position: absolute;
     left: 50%;
@@ -518,7 +841,7 @@
   }
 
   .store-slogan {
-    padding: 550px 20px 30px;
+    padding: 580px 20px 30px;
     font-size: 24px;
     line-height: 1.4;
     text-align: start;

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useMemo }  from 'react'
 import { useNavigate } from 'react-router-dom'
 import { storeData, Store } from '../data/storeData'
 import './storelist.css'
@@ -36,6 +36,18 @@ const bannerImages = [
   },
 ]
 
+// 카드 섞이는 코드
+function shuffleArray<T>(array: T[]): T[] {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+
+
 
 export default function StoreList() {
   const isMobile = window.innerWidth <= 768
@@ -43,6 +55,7 @@ export default function StoreList() {
   const handleStoreClick = (storeName: string) => {
     navigate(`/store/${encodeURIComponent(storeName)}`)
   }
+  const shuffledStores = useMemo(() => shuffleArray(storeData), []);
 
 
   return (
@@ -79,7 +92,7 @@ export default function StoreList() {
 
 
       <div className="store-card-grid">
-        {storeData.map((store, index) => {
+        {shuffledStores.map((store, index) => {
           const offsetY = [0, 50, 10][index % 3]
           return (
             <div className="store-card-wrapper">

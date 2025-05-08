@@ -2,22 +2,22 @@
 .custom-footer {
   background: #A18577;
   color: #fff8f2;
-  padding: 40px 20px;
+  padding: 40px 10px;
   font-size: 14px;
 }
 
 .footer-inner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 40px;
+  gap: 20px;
 }
 
 .footer-column {
-  flex: 1;
-  min-width: 220px;
+  flex: none;
+  min-width: 230px;
 }
 
 .footer-logo {
@@ -31,6 +31,7 @@
   font-weight: bold;
 }
 
+/* 리스트 공통 */
 .store-list,
 .footer-links,
 .tour-list {
@@ -40,9 +41,17 @@
   line-height: 1.8;
 }
 
+.manager-list{
+  max-width: 150px !important;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* 가게 리스트 */
 .store-list li {
   background-color: #6d5342;
-  /* 살짝 진한 회색 배경 */
   padding: 6px 10px;
   margin-bottom: 6px;
   border-radius: 4px;
@@ -51,11 +60,10 @@
 
 .store-list li:hover {
   background-color: #8B6E5A;
-  /* 메인보다 진한 브라운 */
   color: #fff8f2;
 }
 
-
+/* 관광지 리스트 */
 .tour-list a {
   display: block;
   background-color: #6d5342;
@@ -68,11 +76,23 @@
 
 .tour-list a:hover {
   background-color: #8B6E5A;
-  /* 메인보다 진한 브라운 */
   color: #fff8f2;
 }
 
+/* 관리자 리스트 */
+.manager-list li a {
+  display: block;
+  color: #fff8f2;
+  padding: 6px 2px;
+  text-decoration: none;
+}
 
+.manager-list li a:hover {
+  color: #fff8f2;
+  text-decoration: underline;
+}
+
+/* 이용안내 */
 .footer-links a {
   color: #fff8f2;
   text-decoration: none;
@@ -82,6 +102,7 @@
   text-decoration: underline;
 }
 
+/* SNS 아이콘 */
 .footer-sns a {
   display: inline-block;
   margin-right: 10px;
@@ -99,12 +120,14 @@
   background-color: #6d5342;
 }
 
+/* 카피라이트 */
 .footer-column .copyright {
   margin-top: 20px;
   font-size: 12px;
   color: #000;
 }
 
+/* 반응형 */
 @media (max-width: 768px) {
   .footer-inner {
     flex-direction: column;

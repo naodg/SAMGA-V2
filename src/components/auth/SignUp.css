@@ -1,0 +1,19 @@
+.signup-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+.signup-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    background: #ffffff;
+    padding-top: 60px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+}

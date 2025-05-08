@@ -4,6 +4,11 @@ import Footer from './components/Footer'
 import StoreDetail from './components/store/store_detail'
 import Mainthing from './components/mainthing'
 import StoreFilterPage from './components/storefilterpage'
+import ReviewWritePage from './components/review/ReviewWritePage'
+import ReviewListPage from './components/review/ReviewListPage'
+import SignUp from "./components/auth/SignUp"
+import SignIn from './components/auth/SignIn'
+import AdminDashboard from './components/owner/AdminDashboard'
 
 function App() {
   return (
@@ -12,9 +17,16 @@ function App() {
       <Header />
 
       <Routes>
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<SignIn />} />
+
         <Route path="/" element={<Mainthing />} />
         <Route path="/store/:name" element={<StoreDetail />} />
-        <Route path="/storefilterpage" element={<StoreFilterPage/>} />
+        <Route path="/storefilterpage" element={<StoreFilterPage />} />
+        <Route path="/review" element={<ReviewListPage />} />
+        <Route path="/write" element={<ReviewWritePage />} />
+
+        <Route path="/admin/:storeId" element={<AdminDashboard />} />
       </Routes>
 
       {/* ❓ Footer도 모든 페이지에 나오게 하려면 여기에 둬도 됨 */}

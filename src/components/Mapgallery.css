@@ -3,7 +3,7 @@
   background: #f3ece9;
   overflow: hidden;
   position: relative;
-  min-height: 1450px;
+  min-height: 1250px;
 }
 
 .map-gallery-inner {
@@ -73,7 +73,7 @@
 .search-icon-button {
   background: #ad5457;
   border: none;
-  padding: 12px 16px;
+  padding: 24px 24px;
   cursor: pointer;
   display: flex;
   align-items: center;

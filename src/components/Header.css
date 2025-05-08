@@ -20,6 +20,11 @@
   color: #fff;
 }
 
+
+.clickable {
+  cursor: pointer;
+}
+
 .header-inner-pc {
   display: flex;
   justify-content: space-between;
