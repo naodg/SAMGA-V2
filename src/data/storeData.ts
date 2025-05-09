@@ -108,7 +108,7 @@ export interface Store {
       story:'',
       logo:'/SAMGA-V2/samga/logo/대산식육식당_logo.png',
       hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
-      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
+      slogan :'엄마 손맛에\n 고기의 자부심을 더하다.',
     },
     {
       name: '대웅식육식당',
@@ -125,7 +125,7 @@ export interface Store {
       story:'',
       logo:'/SAMGA-V2/samga/logo/대웅식육식당_logo.png',
       hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
-      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
+      slogan :'땅에서 키운 정성\n 접시에 담긴 진심',
     },
     {
       name: '도원식육식당',
@@ -165,7 +165,7 @@ export interface Store {
       story:'',
       logo:'/SAMGA-V2/samga/logo/미로식육식당_logo.png',
       hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
-      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
+      slogan :'미로 속,\n  오직 맛으로\n 찾는 곳.',
     },
     {
       name: '불난가 한우',
@@ -198,7 +198,7 @@ export interface Store {
       story:'',
       logo:'/SAMGA-V2/samga/logo/삼가명품한우_logo.png',
       hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
-      slogan :'분위기 맛집 이지만,\n 고기의 풍미는\n 분위기를 넘어선다.',
+      slogan :'최고가 아니면\n 판매하지 않습니다.',
     },
     {
       name: '상구한우',
