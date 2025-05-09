@@ -229,8 +229,14 @@ export default function StoreDetail() {
 
                 <div className="store-actions">
                     <div className="action-item">
-                        <img src="/SAMGA-V2/img/icon/길찾기.svg" alt="길찾기" />
-                        <span>길찾기</span>
+                        <a
+                            href={`https://map.kakao.com/?q=${encodeURIComponent(selectedStore.name)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src="/SAMGA-V2/img/icon/길찾기.svg" alt="길찾기" />
+                            <span>길찾기</span>
+                        </a>
                     </div>
                     <div className="action-item">
                         <img src="/SAMGA-V2/img/icon/공유하기.svg" alt="공유하기" />
