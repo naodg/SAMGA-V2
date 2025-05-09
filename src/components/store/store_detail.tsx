@@ -281,7 +281,7 @@ export default function StoreDetail() {
             </div>
 
             {/* 👇 가게 소개 스토리 */}
-            <div className="store-story-wrapper">
+            <div className={`store-story-wrapper ${selectedStore.name === "대가한우" ? "no-bg" : ""}`}>
 
                 <div className="store-slogan">
                     {selectedStore.description.split('\n').map((line, i) => (
@@ -300,7 +300,7 @@ export default function StoreDetail() {
             <div className="brand-inner">
 
                 {/* 👇 브랜드 로고 + 서브로고 */}
-                <div className="store-brand-wrapper">
+                <div className={`store-brand-wrapper ${selectedStore.name === "대가한우" ? "no-bg" : ""}`}>
                     <img src="/SAMGA-V2/img/logo/videologo.svg" alt="videologo" className="video-logo" />
                     <div className="brand-text">KOREAN BEEF VILLAGE SAMGA</div>
                     <hr className="brand-divider" />

@@ -209,6 +209,9 @@
 
 
 
+.no-bg {
+  background-color: transparent !important;
+}
 
 .store-story-wrapper {
   width: 100%;
@@ -216,6 +219,7 @@
   text-align: start;
   padding: 0 20px;
   background-color: #f3ece9;
+  
 }
 
 .store-slogan {
@@ -355,21 +359,23 @@
 /* ✅ 각 텍스트 위치 및 스타일 개별 설정 */
 .deaga1-1 {
   top: 5%;
-  right: 36%;
+  right: 37%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: bold;
   text-align: left;
+  letter-spacing: -2px;
 
 }
 
 .deaga1-2 {
   top: 10%;
-  left: 16.5%;
+  left: 15.9%;
   transform: translateX(0);
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
   text-align: start;
   line-height: 1.2;
+  letter-spacing: -2px;
 }
 
 /* .deaga1-2 div:last-child {
@@ -378,20 +384,22 @@
 
 .deaga1-3 {
   top: 6.5%;
-  right: 29.5%;
+  right: 30.5%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
   text-align: start;
   line-height: 1.2;
+  letter-spacing: -2px;
 }
 
 
 .dowon1 {
   top: 55%;
-  right: 31%;
+  right: 32%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: bold;
   text-align: left;
+  letter-spacing: -2px;
 
 }
 
@@ -403,6 +411,8 @@
   font-weight: 700;
   text-align: start;
   line-height: 1.2;
+  letter-spacing: -2px;
+
 }
 
 
@@ -413,37 +423,42 @@
   font-weight: 700;
   text-align: start;
   line-height: 1.2;
+  letter-spacing: -2px;
+
 }
 
 
 
 .deagaH1 {
-  top: 57%;
-  right: 18.5%;
+  top: 62%;
+  right: 22%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: bold;
   text-align: left;
+  letter-spacing: -2px;
 
 }
 
 .deagaH2 {
-  top: 8%;
-  left: 14%;
+  top: 6%;
+  left: 21%;
   transform: translateX(0);
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
   text-align: start;
   line-height: 1.2;
+  letter-spacing: -2px;
 }
 
 
 .deagaH3 {
-  top: 15%;
-  right: 20%;
+  top: 11%;
+  right: 21.5%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
   text-align: start;
   line-height: 1.2;
+  letter-spacing: -2px;
 }
 
 
