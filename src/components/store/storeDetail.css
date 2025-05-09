@@ -430,7 +430,7 @@
 
 
 .deagaH1 {
-  top: 62%;
+  top: 61%;
   right: 22%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: bold;
@@ -554,6 +554,17 @@
 }
 
 @media (max-width: 768px) {
+  .store-brand-wrapper {
+    width: 100%;
+    background: #f3ece9;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px 20px;
+    box-sizing: border-box;
+    align-items: center;
+    /* ✅ 이거도 추가 추천 */
+  }
 
   .dowon-only-pc {
     display: none;
