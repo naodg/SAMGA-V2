@@ -12,7 +12,7 @@ import AdminDashboard from './components/owner/AdminDashboard'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/SAMGA-V2">
       {/* ✅ Header는 Routes 바깥에 넣기 (공통 레이아웃 영역) */}
       <Header />
 
