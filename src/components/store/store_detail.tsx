@@ -238,10 +238,12 @@ export default function StoreDetail() {
                             <span>길찾기</span>
                         </a>
                     </div>
+
                     <div className="action-item">
                         <img src="/SAMGA-V2/img/icon/공유하기.svg" alt="공유하기" />
                         <span>공유하기</span>
                     </div>
+                    
                     <div className="action-item" onClick={handleToggle}>
                         <img
                             src={
