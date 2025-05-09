@@ -3,22 +3,23 @@ import { db, auth } from "../../firebase"
 import { collection, addDoc, serverTimestamp, getDoc, doc } from "firebase/firestore"
 import { useNavigate } from "react-router-dom"
 import './ReviewWritePage.css'
+import { storeData } from "../../data/storeData"
 
 // 예: store 목록은 이렇게 되어 있다고 가정
-const storeList = [
-    { name: "대가1호점", id: "store1" },
-    { name: "대가식육식당", id: "store2" },
-    { name: "대가한우", id: "store3" },
-    // ... 계속 추가 가능
-]
+
 
 export default function ReviewWritePage() {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
-    const [selectedStoreId, setSelectedStoreId] = useState("store1") // 기본값 설정
+    const [selectedStoreId, setSelectedStoreId] = useState("") // 기본값 설정
     const navigate = useNavigate()
 
     const [star, setStar] = useState(0)
+
+    const storeList = storeData.map((store, index) => ({
+        name: store.name,
+        id: `store${index + 1}`
+    }))
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -66,7 +67,9 @@ export default function ReviewWritePage() {
                         value={selectedStoreId}
                         onChange={(e) => setSelectedStoreId(e.target.value)}
                         className="review-input"
+                        required
                     >
+                        <option value="" disabled> - 가게를 선택해주세요 - </option>
                         {storeList.map((store) => (
                             <option key={store.id} value={store.id}>
                                 {store.name}

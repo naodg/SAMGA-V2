@@ -4,19 +4,18 @@ import { db, auth } from "../../firebase";
 import { collection, addDoc, serverTimestamp, getDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import './ReviewWritePage.css';
+import { storeData } from "../../data/storeData";
 // 예: store 목록은 이렇게 되어 있다고 가정
-const storeList = [
-    { name: "대가1호점", id: "store1" },
-    { name: "대가식육식당", id: "store2" },
-    { name: "대가한우", id: "store3" },
-    // ... 계속 추가 가능
-];
 export default function ReviewWritePage() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [selectedStoreId, setSelectedStoreId] = useState("store1"); // 기본값 설정
+    const [selectedStoreId, setSelectedStoreId] = useState(""); // 기본값 설정
     const navigate = useNavigate();
     const [star, setStar] = useState(0);
+    const storeList = storeData.map((store, index) => ({
+        name: store.name,
+        id: `store${index + 1}`
+    }));
     const handleSubmit = async (e) => {
         e.preventDefault();
         const user = auth.currentUser;
@@ -45,7 +44,7 @@ export default function ReviewWritePage() {
             alert("저장 중 오류가 발생했습니다.");
         }
     };
-    return (_jsxs("div", { className: "review-write-page", children: [_jsx("h2", { children: "\uB9AC\uBDF0 \uC4F0\uAE30" }), _jsxs("form", { onSubmit: handleSubmit, children: [_jsxs("div", { className: "store-select-row", children: [_jsx("label", { htmlFor: "store-select", children: "\uAC00\uAC8C \uC120\uD0DD:" }), _jsx("select", { id: "store-select", value: selectedStoreId, onChange: (e) => setSelectedStoreId(e.target.value), className: "review-input", children: storeList.map((store) => (_jsx("option", { value: store.id, children: store.name }, store.id))) })] }), _jsxs("div", { className: "star-rating", children: [[...Array(5)].map((_, i) => {
+    return (_jsxs("div", { className: "review-write-page", children: [_jsx("h2", { children: "\uB9AC\uBDF0 \uC4F0\uAE30" }), _jsxs("form", { onSubmit: handleSubmit, children: [_jsxs("div", { className: "store-select-row", children: [_jsx("label", { htmlFor: "store-select", children: "\uAC00\uAC8C \uC120\uD0DD:" }), _jsxs("select", { id: "store-select", value: selectedStoreId, onChange: (e) => setSelectedStoreId(e.target.value), className: "review-input", required: true, children: [_jsx("option", { value: "", disabled: true, children: " - \uAC00\uAC8C\uB97C \uC120\uD0DD\uD574\uC8FC\uC138\uC694 - " }), storeList.map((store) => (_jsx("option", { value: store.id, children: store.name }, store.id)))] })] }), _jsxs("div", { className: "star-rating", children: [[...Array(5)].map((_, i) => {
                                 const value = (i + 1) * 1;
                                 let imgSrc = "";
                                 if (star >= value) {
