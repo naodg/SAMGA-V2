@@ -200,7 +200,7 @@ export const storeData = [
         detailimage: '/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg',
         description: '깔끔한 공간, 신선한 고기,\n젊은 입맛 사로잡다.',
         story: '',
-        logo: '/SAMGA-V2/samga/logo/태영상차림식당_logo.png',
+        logo: '/SAMGA-V2/samga/logo/태영한우_logo.png',
         hashtag: ['#한우맛집', '#가족과 함께', '#단체손님',],
         slogan: '깔끔한 공간,\n 신선한 고기,\n젊은 입맛 사로잡다.',
     }

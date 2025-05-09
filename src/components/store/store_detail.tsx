@@ -259,7 +259,9 @@ export default function StoreDetail() {
                         {(showAllFacilities ? selectedStore.options : selectedStore.options.slice(0, 4)).map(option => (
                             facilityIcons[option] && (
                                 <div className="facility-icon" key={option}>
-                                    <img src={facilityIcons[option]} alt={option} />
+                                    <div className={`facility-icon-img-wrapper ${option === "무료wifi" ? "wifi-padding" : ""}`}>
+                                        <img src={facilityIcons[option]} alt={option} />
+                                    </div>
                                     <p>{option}</p>
                                 </div>
                             )
