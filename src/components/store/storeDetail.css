@@ -388,9 +388,11 @@
 
 
 /* ✅ 각 텍스트 위치 및 스타일 개별 설정 */
+
+/* 대가 1호점 */
 .deaga1-1 {
-  top: 5%;
-  right: 37%;
+  top: 9.5%;
+  right: 35%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: bold;
   text-align: left;
@@ -399,8 +401,8 @@
 }
 
 .deaga1-2 {
-  top: 10%;
-  left: 15.9%;
+  top: 16%;
+  left: 21%;
   transform: translateX(0);
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
@@ -413,9 +415,10 @@
   padding-left: 4em;
 } */
 
+
 .deaga1-3 {
   top: 6.5%;
-  right: 30.5%;
+  right: 29.5%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
   text-align: start;
@@ -423,7 +426,7 @@
   letter-spacing: -2px;
 }
 
-
+/* 도원 */
 .dowon1 {
   top: 55%;
   right: 32%;
@@ -458,7 +461,7 @@
 
 }
 
-
+/* 대가한우 */
 
 .deagaH1 {
   top: 61%;
@@ -492,6 +495,39 @@
   letter-spacing: -2px;
 }
 
+
+/* 상구 */
+.sanggu1 {
+  top: 37%;
+  right: 27.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.sanggu2 {
+  top: 11%;
+  left: 21%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+.sanggu3 {
+  top: 50.5%;
+  right: 28%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
 
 
 

@@ -9,7 +9,7 @@ export const storeDetailAssets = {
             className: 'deaga1-2',
         },
         {
-            text: '유러피안 정원\n고요한 숲 속의\n분위기 속 카페\n플로리안',
+            text: '고요한 숲 속의\n분위기 속 카페\n플로리안',
             className: 'deaga1-3',
         },
     ],
@@ -39,6 +39,20 @@ export const storeDetailAssets = {
         {
             text: '우리집 식탁에서\n만나 볼 수 있는 삼가 한우',
             className: 'dowon3',
+        },
+    ],
+    '상구한우': [
+        {
+            text: '삼가시장 한가운데 \n 자리한 ‘상구한우’는 ',
+            className: 'sanggu1',
+        },
+        {
+            text: '처음 오신 분도,\n오래된 단골 손님도 \n편하게 들렸다 마음 놓고 \n푸짐하게 드실수 있는곳',
+            className: 'sanggu2',
+        },
+        {
+            text: '다양한 메뉴\n취향 따라 고르는 재미',
+            className: 'sanggu3',
         },
     ],
     // 다른 가게도 동일하게 정의
