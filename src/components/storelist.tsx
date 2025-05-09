@@ -64,16 +64,15 @@ export default function StoreList() {
       <div className="landing-video-wrapper">
         <img src="/SAMGA-V2/img/logo/videologo.svg" alt="삼가한우로고" className="landing-logo" />
 
-        <video
-              src="/video/합천영상.mp4"
-              width="85%"
-              // height="400px"
-              muted
-              loop
-              playsInline
-              controls
-              style={{ borderRadius: '12px',  padding: '110px 0 0' }}
-            />
+        <iframe
+            src="https://drive.google.com/file/d/1WF-K2Nu6Jer87imLhWAyKXeWraxIkvVP/preview"
+            width="85%"
+            height="400px"
+            frameBorder="0"
+            style={{ borderRadius: '12px', padding: '110px 0 0' }}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
 
       </div>
 
