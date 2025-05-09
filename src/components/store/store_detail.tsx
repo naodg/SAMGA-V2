@@ -243,7 +243,7 @@ export default function StoreDetail() {
                         <img src="/SAMGA-V2/img/icon/공유하기.svg" alt="공유하기" />
                         <span>공유하기</span>
                     </div>
-                    
+
                     <div className="action-item" onClick={handleToggle}>
                         <img
                             src={
@@ -314,9 +314,9 @@ export default function StoreDetail() {
                     <img src="/SAMGA-V2/img/logo/videologo.svg" alt="videologo" className="video-logo" />
                     <div className="brand-text">KOREAN BEEF VILLAGE SAMGA</div>
                     <hr className="brand-divider" />
-                    {!["도원식육식당", "대가한우"].includes(selectedStore.name) && (
+                    {/* {[ "대가1호점"].includes(selectedStore.name) && (
                         <img src={selectedStore.logo} alt="logo" className="store-sub-logo" />
-                    )}
+                    )} */}
                 </div>
 
             </div>

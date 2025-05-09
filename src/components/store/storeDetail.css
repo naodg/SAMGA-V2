@@ -249,7 +249,7 @@
   margin: auto;
   text-align: start;
   padding: 0 20px;
-  background-color: #f3ece9;
+  /* background-color: #f3ece9; */
   
 }
 
@@ -294,7 +294,7 @@
 
 .store-brand-wrapper {
   width: 100%;
-  background: #f3ece9;
+  /* background: #f3ece9; */
   text-align: center;
   justify-content: center;
   align-items: center;
