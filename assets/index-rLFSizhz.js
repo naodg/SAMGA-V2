@@ -3213,25 +3213,22 @@ This typically indicates that your device does not have a healthy Internet conne
 그 이유를 고집한다.`,story:"",logo:"/SAMGA-V2/samga/logo/대가한우_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`맛있는 고기는
  늘 이유가 있다
  그 이유를 고집한다`,slogan2:'"가장 최고로 준비해 드릴 수 없을 때는 문을 닫습니다."',detailImagelist:["/SAMGA-V2/samga/store/deagaH/대가한우상세페이지_M_1.jpg","/SAMGA-V2/samga/store/deagaH/대가한우상세페이지_M_2.jpg","/SAMGA-V2/samga/store/deagaH/대가한우상세페이지_M_3.jpg","/SAMGA-V2/samga/store/deagaH/대가한우상세페이지_PC_1.jpg","/SAMGA-V2/samga/store/deagaH/대가한우상세페이지_PC_2.jpg","/SAMGA-V2/samga/store/deagaH/대가한우상세페이지_PC_3.jpg"]},{name:"대산식육식당",lat:35.413304,lng:128.123713,address:"경남 합천군 삼가1로 104",phone:"055-932-0289",hours:"매일 10:30 - 19:30 / 매주 월요일 휴무",options:["남여화장실구분","단체이용예약가능","예약가능","주문배송","무료wifi"],image:"/SAMGA-V2/samga/store/대산식육식당_디테일_1.png",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`엄마 손맛에
- 고기의 자부심을 더하다.`,story:"",logo:"/SAMGA-V2/samga/logo/대산식육식당_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`분위기 맛집 이지만,
- 고기의 풍미는
- 분위기를 넘어선다.`},{name:"대웅식육식당",lat:35.412476,lng:128.124175,address:"경남 합천군 삼가면 345-1",phone:"055-933-5566",hours:"매일 11:00 - 18:00 / 매주 월요일 휴무",point:"고기 품절 시 조기 마감",options:["주문배송","무료wifi","예약가능","단체이용예약가능","남여화장실구분","일반식사메뉴","주차장","유아의자","제로페이","포장가능"],image:"/SAMGA-V2/samga/store/대웅식육식당_1.JPG",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`땅에서 키운 정성
- 접시에 담긴 진심`,story:"",logo:"/SAMGA-V2/samga/logo/대웅식육식당_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`분위기 맛집 이지만,
- 고기의 풍미는
- 분위기를 넘어선다.`},{name:"도원식육식당",lat:35.4145,lng:128.1234,address:"경남 합천군 삼가중앙길 40",phone:"055-932-9595",hours:"매일 10:30 - 19:30 / 유동적 휴일 운영",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","제로페이","유아의자"],image:"/SAMGA-V2/samga/store/도원식육식당_1.JPG",detailimage:"/SAMGA-V2/samga/store/도원식육식당_landing_detail.jpg",description:`평점보다 더 정확한 건,
+ 고기의 자부심을 더하다.`,story:"",logo:"/SAMGA-V2/samga/logo/대산식육식당_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`엄마 손맛에
+ 고기의 자부심을 더하다.`},{name:"대웅식육식당",lat:35.412476,lng:128.124175,address:"경남 합천군 삼가면 345-1",phone:"055-933-5566",hours:"매일 11:00 - 18:00 / 매주 월요일 휴무",point:"고기 품절 시 조기 마감",options:["주문배송","무료wifi","예약가능","단체이용예약가능","남여화장실구분","일반식사메뉴","주차장","유아의자","제로페이","포장가능"],image:"/SAMGA-V2/samga/store/대웅식육식당_1.JPG",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`땅에서 키운 정성
+ 접시에 담긴 진심`,story:"",logo:"/SAMGA-V2/samga/logo/대웅식육식당_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`땅에서 키운 정성
+ 접시에 담긴 진심`},{name:"도원식육식당",lat:35.4145,lng:128.1234,address:"경남 합천군 삼가중앙길 40",phone:"055-932-9595",hours:"매일 10:30 - 19:30 / 유동적 휴일 운영",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","제로페이","유아의자"],image:"/SAMGA-V2/samga/store/도원식육식당_1.JPG",detailimage:"/SAMGA-V2/samga/store/도원식육식당_landing_detail.jpg",description:`평점보다 더 정확한 건,
  믿고 듣는 입소문. `,story:"",logo:"/SAMGA-V2/samga/logo/도원식육식당_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`평점보다
  더 정확한건
  믿고 듣는 입소문.`,detailImagelist:["/SAMGA-V2/samga/store/dowon/도원식육식당상세페이지_M_1.jpg","/SAMGA-V2/samga/store/dowon/도원식육식당상세페이지_M_2.jpg","/SAMGA-V2/samga/store/dowon/도원식육식당상세페이지_M_3.jpg","/SAMGA-V2/samga/store/dowon/도원식육식당상세페이지_PC_1.jpg","/SAMGA-V2/samga/store/dowon/도원식육식당상세페이지_PC_2.jpg","/SAMGA-V2/samga/store/dowon/도원식육식당상세페이지_PC_3.jpg"]},{name:"미로식육식당",lat:35.412652,lng:128.123201,address:"경남 합천군 삼가면 일부5길 6-5 1층",phone:"055-933-7744",hours:"매일 10:00 - 19:30 / 유동적 휴일 운영",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","제로페이","유아의자","단체이용예약가능"],image:"/SAMGA-V2/samga/store/미로식육식당_1.JPG",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`미로 속,
- 오직 맛으로 찾는 곳.`,story:"",logo:"/SAMGA-V2/samga/logo/미로식육식당_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`분위기 맛집 이지만,
- 고기의 풍미는
- 분위기를 넘어선다.`},{name:"불난가 한우",lat:35.414209,lng:128.120978,address:"경남 합천군 삼가면 삼가중앙1길 38",phone:"055-932-4623",hours:"매일 10:30 - 19:30 / 매주 월요일 휴무",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","제로페이","유아의자","단체이용예약가능"],image:"/SAMGA-V2/samga/store/불난가한우_1.jpg",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`소개해 준 친구에게 고마운 집,
+ 오직 맛으로 찾는 곳.`,story:"",logo:"/SAMGA-V2/samga/logo/미로식육식당_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`미로 속,
+  오직 맛으로
+ 찾는 곳.`},{name:"불난가 한우",lat:35.414209,lng:128.120978,address:"경남 합천군 삼가면 삼가중앙1길 38",phone:"055-932-4623",hours:"매일 10:30 - 19:30 / 매주 월요일 휴무",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","제로페이","유아의자","단체이용예약가능"],image:"/SAMGA-V2/samga/store/불난가한우_1.jpg",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`소개해 준 친구에게 고마운 집,
  불이 붙을 만한 이유가 있다.`,story:"",logo:"/SAMGA-V2/samga/logo/불난가한우_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`소개해 준 친구에게
  고마운 집,
  불이 붙을 만한
  이유가 있다.`},{name:"삼가명품한우",lat:35.412749,lng:128.119125,address:"경남 합천군 삼가면 서부로 39",phone:"055-931-5004",hours:"매일 11:00 - 20:00 / 매주 수요일 휴무",point:"15:00 -  17:00 브레이크 타임",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","유아의자","단체이용예약가능"],image:"/SAMGA-V2/samga/store/삼가명품한우_1.jpg",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`최고가 아니면
- 판매하지 않습니다.`,story:"",logo:"/SAMGA-V2/samga/logo/삼가명품한우_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`분위기 맛집 이지만,
- 고기의 풍미는
- 분위기를 넘어선다.`},{name:"상구한우",lat:35.413601,lng:128.122624,address:"경남 합천군 삼가면 삼가중앙길 26 1층",phone:"055-933-3969",hours:"매일 10:00 - 19:00 / 매주 화요일 휴무, 삼가 장날은 수요일 휴무",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","제로페이","유아의자","단체이용예약가능"],image:"/SAMGA-V2/samga/store/상구한우_1.jpg",detailimage:"/SAMGA-V2/samga/store/상구한우_landing_detail.jpg",description:`일상 속 고깃집,
+ 판매하지 않습니다.`,story:"",logo:"/SAMGA-V2/samga/logo/삼가명품한우_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`최고가 아니면
+ 판매하지 않습니다.`},{name:"상구한우",lat:35.413601,lng:128.122624,address:"경남 합천군 삼가면 삼가중앙길 26 1층",phone:"055-933-3969",hours:"매일 10:00 - 19:00 / 매주 화요일 휴무, 삼가 장날은 수요일 휴무",options:["무료wifi","주문배송","포장가능","주차장","남여화장실구분","일반식사메뉴","제로페이","유아의자","단체이용예약가능"],image:"/SAMGA-V2/samga/store/상구한우_1.jpg",detailimage:"/SAMGA-V2/samga/store/상구한우_landing_detail.jpg",description:`일상 속 고깃집,
  그러나 결코 평범하지 않은 맛.`,story:"",logo:"/SAMGA-V2/samga/logo/상구한우_logo.png",hashtag:["#한우맛집","#가족과 함께","#단체손님"],slogan:`일상 속 고깃집,
  그러나 결코
  평범하지 않은 맛.`,detailImagelist:["/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_M_1.jpg","/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_M_2.jpg","/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_M_3.jpg","/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_PC_1.jpg","/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_PC_2.jpg","/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_PC_3.jpg"]},{name:"태영한우",lat:35.413468,lng:128.123151,address:"경남 합천군 삼가면 일부5길 11",phone:"0507-1384-9399",hours:"매일 10:30 - 19:30 / 매주 월요일 휴무",options:[""],image:"/SAMGA-V2/samga/store/태영한우_1.jpg",detailimage:"/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg",description:`깔끔한 공간, 신선한 고기,
