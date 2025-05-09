@@ -17,7 +17,7 @@ export default function Footer() {
 
         {/* 1. 로고 + 기본 정보 */}
         <div className="footer-column left">
-          <img src="/img/logo/logo.svg" alt="우리마을삼가 로고" className="footer-logo" />
+          <img src="/SAMGA-V2/img/logo/logo.svg" alt="우리마을삼가 로고" className="footer-logo" />
           <p>
             대표 : 합천군 도시재생지원 센터<br />
             사업자 등록번호 : -<br />

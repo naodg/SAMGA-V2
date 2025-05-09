@@ -220,11 +220,11 @@ export default function ReviewListPage() {
                       let imgSrc = ""
 
                       if (review.star >= value) {
-                        imgSrc = "/img/icon/단골등록해제.svg" // 가득 찬 별
+                        imgSrc = "/SAMGA-V2/img/icon/단골등록해제.svg" // 가득 찬 별
                       } else if (review.star + 0.5 >= value) {
-                        imgSrc = "/img/icon/반쪽자리별.svg" // 반쪽 별
+                        imgSrc = "/SAMGA-V2/img/icon/반쪽자리별.svg" // 반쪽 별
                       } else {
-                        imgSrc = "/img/icon/단골등록.svg" // 빈 별
+                        imgSrc = "/SAMGA-V2/img/icon/단골등록.svg" // 빈 별
                       }
 
                       return (

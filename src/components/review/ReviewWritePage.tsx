@@ -82,9 +82,9 @@ export default function ReviewWritePage() {
                         let imgSrc = ""
 
                         if (star >= value) {
-                            imgSrc = "/img/icon/단골등록해제.svg" // ⭐️ 가득 찬 별
+                            imgSrc = "/SAMGA-V2/img/icon/단골등록해제.svg" // ⭐️ 가득 찬 별
                         } else {
-                            imgSrc = "/img/icon/단골등록.svg" // ⭐️ 빈 별
+                            imgSrc = "/SAMGA-V2/img/icon/단골등록.svg" // ⭐️ 빈 별
                         }
 
                         return (

@@ -120,13 +120,13 @@ export default function StoreDetail() {
 
 
     const facilityIcons: Record<string, string> = {
-        '주문배송': '/img/amenities/주문배송.svg',
-        '무료wifi': '/img/amenities/무료wifi.svg',
-        '남여화장실구분': '/img/amenities/남여화장실구분.svg',
-        '단체이용예약가능': '/img/amenities/단체이용예약가능.svg',
-        '주차장': '/img/amenities/주차장.svg',
-        '제로페이': '/img/amenities/제로페이.svg',
-        '유아의자': '/img/amenities/유아의자.svg',
+        '주문배송': '/SAMGA-V2/img/amenities/주문배송.svg',
+        '무료wifi': '/SAMGA-V2/img/amenities/무료wifi.svg',
+        '남여화장실구분': '/SAMGA-V2/img/amenities/남여화장실구분.svg',
+        '단체이용예약가능': '/SAMGA-V2/img/amenities/단체이용예약가능.svg',
+        '주차장': '/SAMGA-V2/img/amenities/주차장.svg',
+        '제로페이': '/SAMGA-V2/img/amenities/제로페이.svg',
+        '유아의자': '/SAMGA-V2/img/amenities/유아의자.svg',
     }
 
 
@@ -204,11 +204,11 @@ export default function StoreDetail() {
                             const value = i + 1
                             let src = ''
                             if (average >= value) {
-                                src = '/img/icon/단골등록해제.svg' // 가득 찬 별
+                                src = '/SAMGA-V2/img/icon/단골등록해제.svg' // 가득 찬 별
                             } else if (average + 0.5 >= value) {
-                                src = '/img/icon/반쪽자리별.svg' // 반쪽 별
+                                src = '/SAMGA-V2/img/icon/반쪽자리별.svg' // 반쪽 별
                             } else {
-                                src = '/img/icon/단골등록.svg' // 빈 별
+                                src = '/SAMGA-V2/img/icon/단골등록.svg' // 빈 별
                             }
 
                             return <img key={i} src={src} alt="별" style={{ width: '18px', height: '18px', marginRight: '2px' }} />
@@ -229,26 +229,26 @@ export default function StoreDetail() {
 
                 <div className="store-actions">
                     <div className="action-item">
-                        <img src="/img/icon/길찾기.svg" alt="길찾기" />
+                        <img src="/SAMGA-V2/img/icon/길찾기.svg" alt="길찾기" />
                         <span>길찾기</span>
                     </div>
                     <div className="action-item">
-                        <img src="/img/icon/공유하기.svg" alt="공유하기" />
+                        <img src="/SAMGA-V2/img/icon/공유하기.svg" alt="공유하기" />
                         <span>공유하기</span>
                     </div>
                     <div className="action-item" onClick={handleToggle}>
                         <img
                             src={
                                 isFavorite
-                                    ? "/img/icon/단골등록해제.svg"
-                                    : "/img/icon/단골등록.svg"
+                                    ? "/SAMGA-V2/img/icon/단골등록해제.svg"
+                                    : "/SAMGA-V2/img/icon/단골등록.svg"
                             }
                             alt={isFavorite ? "단골해제" : "단골등록"}
                         />
                         <span>{isFavorite ? "단골해제" : "단골등록"}</span>
                     </div>
                     <div className="action-item">
-                        <img src="/img/icon/리뷰쓰기.svg" alt="리뷰쓰기" />
+                        <img src="/SAMGA-V2/img/icon/리뷰쓰기.svg" alt="리뷰쓰기" />
                         <span onClick={() => navigate('/write')}>리뷰쓰기</span>
                     </div>
                 </div>
@@ -301,7 +301,7 @@ export default function StoreDetail() {
 
                 {/* 👇 브랜드 로고 + 서브로고 */}
                 <div className="store-brand-wrapper">
-                    <img src="/img/logo/videologo.svg" alt="videologo" className="video-logo" />
+                    <img src="/SAMGA-V2/img/logo/videologo.svg" alt="videologo" className="video-logo" />
                     <div className="brand-text">KOREAN BEEF VILLAGE SAMGA</div>
                     <hr className="brand-divider" />
                     {!["도원식육식당", "대가한우"].includes(selectedStore.name) && (
@@ -363,31 +363,31 @@ export default function StoreDetail() {
                         <div className="dowon-product-grid dowon-only-pc">
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/25792545-088d-4d5c-bb89-762a3b6533b0?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/1.png" alt="1번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/1.png" alt="1번 상품" />
                                     <div className="dowon-product-name">한우(대패)로스구이(2-3인)</div>
                                 </a>
                             </div>
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/d0e10218-942c-4664-b1b3-0c6c770c9e7e?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/2.png" alt="2번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/2.png" alt="2번 상품" />
                                     <div className="dowon-product-name">한우(만능)자투리1키로</div>
                                 </a>
                             </div>
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/1953a42a-00ca-4418-af1b-576b2876e7f5?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/3.png" alt="3번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/3.png" alt="3번 상품" />
                                     <div className="dowon-product-name">(눈꽃)(1++9)한우 등심(300G)</div>
                                 </a>
                             </div>
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/4ee9f37c-16ff-4457-aab2-e823035a4b4d?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/4.png" alt="4번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/4.png" alt="4번 상품" />
                                     <div className="dowon-product-name">(국내산)돼지 갈비찜</div>
                                 </a>
                             </div>
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/bd28e21e-e78c-4296-ae61-1f48da56bbe2?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/5.png" alt="5번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/5.png" alt="5번 상품" />
                                     <div className="dowon-product-name">(명품한우선물)한우특모듬0.6KG</div>
                                 </a>
                             </div>
@@ -397,25 +397,25 @@ export default function StoreDetail() {
                         <div className="dowon-product-grid dowon-only-mobile">
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/25792545-088d-4d5c-bb89-762a3b6533b0?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/1.png" alt="1번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/1.png" alt="1번 상품" />
                                     <div className="dowon-product-name">한우(대패)로스구이(2-3인)</div>
                                 </a>
                             </div>
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/d0e10218-942c-4664-b1b3-0c6c770c9e7e?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/2.png" alt="2번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/2.png" alt="2번 상품" />
                                     <div className="dowon-product-name">한우(만능)자투리1키로</div>
                                 </a>
                             </div>
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/1953a42a-00ca-4418-af1b-576b2876e7f5?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/3.png" alt="3번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/3.png" alt="3번 상품" />
                                     <div className="dowon-product-name">(눈꽃)(1++9)한우 등심(300G)</div>
                                 </a>
                             </div>
                             <div className="dowon-product-item">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.idus.com/v2/product/4ee9f37c-16ff-4457-aab2-e823035a4b4d?search_word=%EB%8F%84%EC%9B%90+%ED%95%9C%EC%9A%B0&keyword_channel=user">
-                                    <img src="/samga/store/dowon/4.png" alt="4번 상품" />
+                                    <img src="/SAMGA-V2/samga/store/dowon/4.png" alt="4번 상품" />
                                     <div className="dowon-product-name">(국내산)돼지 갈비찜</div>
                                 </a>
                             </div>
@@ -457,7 +457,7 @@ export default function StoreDetail() {
                 <div className="store-images">
                     {imageCandidates.map((name, idx) => (
                         ['.jpg', '.JPG', '.png'].map((ext) => {
-                            const src = `/samga/store/${currentFolder}/${name}${ext}`
+                            const src = `/SAMGA-V2/samga/store/${currentFolder}/${name}${ext}`
                             return (
                                 <img
                                     key={src}
@@ -479,7 +479,7 @@ export default function StoreDetail() {
             <div className="store-review-wrapper">
 
                 <div className='review-item'>
-                    <img src='/img/icon/리뷰쓰기.svg' alt="리뷰제목" />
+                    <img src='/SAMGA-V2/img/icon/리뷰쓰기.svg' alt="리뷰제목" />
                     <span>리뷰</span>
                 </div>
 
@@ -499,11 +499,11 @@ export default function StoreDetail() {
                                             let imgSrc = ""
 
                                             if (review.star >= value) {
-                                                imgSrc = "/img/icon/단골등록해제.svg" // 가득 찬 별
+                                                imgSrc = "/SAMGA-V2/img/icon/단골등록해제.svg" // 가득 찬 별
                                             } else if (review.star + 0.5 >= value) {
-                                                imgSrc = "/img/icon/반쪽자리별.svg" // 반쪽 별
+                                                imgSrc = "/SAMGA-V2/img/icon/반쪽자리별.svg" // 반쪽 별
                                             } else {
-                                                imgSrc = "/img/icon/단골등록.svg" // 빈 별
+                                                imgSrc = "/SAMGA-V2/img/icon/단골등록.svg" // 빈 별
                                             }
 
                                             return (
