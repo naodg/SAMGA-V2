@@ -181,7 +181,7 @@ export interface Store {
       story:'',
       logo:'/SAMGA-V2/samga/logo/불난가한우_logo.png',
       hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
-      slogan :'소개해 준 친구에게 고마운 집,\n 불이 붙을 만한\n 이유가 있다.',
+      slogan :'소개해 준 친구에게\n 고마운 집,\n 불이 붙을 만한\n 이유가 있다.',
     },
     {
       name: '삼가명품한우',
