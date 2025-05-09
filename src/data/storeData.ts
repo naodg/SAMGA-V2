@@ -214,7 +214,7 @@ export interface Store {
       story:'',
       logo:'/SAMGA-V2/samga/logo/상구한우_logo.png',
       hashtag: ['#한우맛집','#가족과 함께','#단체손님',],
-      slogan :'일상 속 고깃집,\n 그러나 결코 평범하지 않은 맛.',
+      slogan :'일상 속 고깃집,\n 그러나 결코\n 평범하지 않은 맛.',
       detailImagelist : [
         '/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_M_1.jpg',
         '/SAMGA-V2/samga/store/sanggu/상구한우상세페이지_M_2.jpg',
