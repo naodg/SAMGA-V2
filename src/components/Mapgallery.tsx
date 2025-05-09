@@ -21,7 +21,7 @@ export default function MapGallery() {
   const [selectedStore, setSelectedStore] = useState<typeof storeData[0] | null>(null)
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredStores, setFilteredStores] = useState(storeData);
-  const [showMap, setShowMap] = useState(false)
+  const [showMap, setShowMap] = useState(true)
   const [showStoreInfo, setShowStoreInfo] = useState(false)
   const mapRef = useRef(null);
 
@@ -184,29 +184,29 @@ export default function MapGallery() {
   }, [showMap, filteredStores])
 
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      const searchBar = document.querySelector('.map-gallery-searchbar');
-      const mapArea = document.getElementById('map');
-      const mapContainer = document.querySelector('.map-gallery-map-container'); // ✅ 추가!
+  // useEffect(() => {
+  //   const handleClickOutside = (e: MouseEvent) => {
+  //     const searchBar = document.querySelector('.map-gallery-searchbar');
+  //     const mapArea = document.getElementById('map');
+  //     const mapContainer = document.querySelector('.map-gallery-map-container'); // ✅ 추가!
 
-      const clickedTarget = e.target as Node;
+  //     const clickedTarget = e.target as Node;
 
-      if (
-        searchBar &&
-        !searchBar.contains(clickedTarget) &&
-        mapArea &&
-        !mapArea.contains(clickedTarget) &&
-        mapContainer &&
-        !mapContainer.contains(clickedTarget) // ✅ 여기도 포함시켜!
-      ) {
-        setShowMap(false);
-      }
-    };
+  //     if (
+  //       searchBar &&
+  //       !searchBar.contains(clickedTarget) &&
+  //       mapArea &&
+  //       !mapArea.contains(clickedTarget) &&
+  //       mapContainer &&
+  //       !mapContainer.contains(clickedTarget) // ✅ 여기도 포함시켜!
+  //     ) {
+  //       setShowMap(false);
+  //     }
+  //   };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => document.removeEventListener('mousedown', handleClickOutside);
+  // }, []);
 
 
 

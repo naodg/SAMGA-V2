@@ -14,7 +14,7 @@ export default function MapGallery() {
     const [selectedStore, setSelectedStore] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredStores, setFilteredStores] = useState(storeData);
-    const [showMap, setShowMap] = useState(false);
+    const [showMap, setShowMap] = useState(true);
     const [showStoreInfo, setShowStoreInfo] = useState(false);
     const mapRef = useRef(null);
     const navigate = useNavigate();
@@ -144,25 +144,26 @@ export default function MapGallery() {
             map.setLevel(3);
         }
     }, [showMap, filteredStores]);
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            const searchBar = document.querySelector('.map-gallery-searchbar');
-            const mapArea = document.getElementById('map');
-            const mapContainer = document.querySelector('.map-gallery-map-container'); // ✅ 추가!
-            const clickedTarget = e.target;
-            if (searchBar &&
-                !searchBar.contains(clickedTarget) &&
-                mapArea &&
-                !mapArea.contains(clickedTarget) &&
-                mapContainer &&
-                !mapContainer.contains(clickedTarget) // ✅ 여기도 포함시켜!
-            ) {
-                setShowMap(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+    // useEffect(() => {
+    //   const handleClickOutside = (e: MouseEvent) => {
+    //     const searchBar = document.querySelector('.map-gallery-searchbar');
+    //     const mapArea = document.getElementById('map');
+    //     const mapContainer = document.querySelector('.map-gallery-map-container'); // ✅ 추가!
+    //     const clickedTarget = e.target as Node;
+    //     if (
+    //       searchBar &&
+    //       !searchBar.contains(clickedTarget) &&
+    //       mapArea &&
+    //       !mapArea.contains(clickedTarget) &&
+    //       mapContainer &&
+    //       !mapContainer.contains(clickedTarget) // ✅ 여기도 포함시켜!
+    //     ) {
+    //       setShowMap(false);
+    //     }
+    //   };
+    //   document.addEventListener('mousedown', handleClickOutside);
+    //   return () => document.removeEventListener('mousedown', handleClickOutside);
+    // }, []);
     return (_jsxs("div", { className: "map-gallery-wrapper", children: [_jsxs("div", { className: "map-gallery-inner", children: [_jsxs("div", { className: "map-gallery-swiper-container", children: [_jsx(Swiper, { className: "map-gallery-swiper", modules: [Navigation, Pagination, Autoplay], navigation: true, pagination: { clickable: true }, autoplay: { delay: 2000 }, loop: true, children: ['대가1호점', '미로식육식당', '태영식육식당'].map((name, i) => (_jsx(SwiperSlide, { children: _jsx("img", { src: `/SAMGA-V2/img/landing/${name}_1.jpg`, alt: name, className: "map-gallery-slide-img" }) }, i))) }), _jsxs("div", { className: "map-gallery-searchbar", children: [_jsx("button", { className: "search-icon-button", onClick: () => {
                                             if (searchQuery.trim() === '') {
                                                 setFilteredStores(storeData);
