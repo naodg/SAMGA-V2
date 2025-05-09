@@ -80,7 +80,7 @@ export const storeData = [
         story: '',
         logo: '/SAMGA-V2/samga/logo/대산식육식당_logo.png',
         hashtag: ['#한우맛집', '#가족과 함께', '#단체손님',],
-        slogan: '엄마 손맛에\n 고기의 자부심을 더하다.',
+        slogan: '엄마 손맛에\n 고기의 자부심을 \n더하다.',
     },
     {
         name: '대웅식육식당',
