@@ -37,7 +37,7 @@ export default function Signin() {
     return (
         <div className="signup-page">
             <div className="signup-wrapper">
-                <h2>로그인</h2>
+                <div className="signup-text">로그인</div>
                 <form onSubmit={handleLogin}>
                     <input
                         type="email"

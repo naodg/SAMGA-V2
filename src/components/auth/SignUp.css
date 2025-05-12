@@ -11,9 +11,19 @@
     align-items: center;
 
     min-height: 100vh;
-    background: #ffffff;
-    padding-top: 60px;
+    background: #f3ece9;
     box-sizing: border-box;
     position: relative;
     z-index: 10;
+}
+
+.signup-text{
+  font-size: 36px;
+  color: 896858;
+}
+
+.signup-wrapper input{
+  min-width: 400px;
+  min-height: 35px;
+  margin-bottom: 15px;
 }
