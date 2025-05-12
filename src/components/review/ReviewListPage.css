@@ -225,9 +225,9 @@
 
 
   /* Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .review-list-page {
-      padding: 20px;
+      padding: 100px 20px;
     }
   
     .review-list-grid {

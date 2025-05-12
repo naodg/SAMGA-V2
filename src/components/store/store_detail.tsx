@@ -299,7 +299,10 @@ export default function StoreDetail() {
                     ))}
                 </div>
 
-                <div className="store-name-line">
+                <div
+                    className={`store-name-line ${selectedStore.name === '대가1호점' ? 'extra-padding' : ''
+                        }`}
+                >
                     <span className="store-name-text">{selectedStore.name}</span>
                     <div className="store-name-bar" />
                 </div>

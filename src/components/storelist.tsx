@@ -50,7 +50,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 
 export default function StoreList() {
-  const isMobile = window.innerWidth <= 768
+  const isMobile = window.innerWidth <= 900
   const navigate = useNavigate()
   const handleStoreClick = (storeName: string) => {
     navigate(`/store/${encodeURIComponent(storeName)}`)

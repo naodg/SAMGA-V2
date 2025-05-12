@@ -272,6 +272,11 @@
   margin-left: 385px;
 }
 
+.extra-padding {
+  padding-top: 32px; /* 원하는 만큼 조절 */
+}
+
+
 .store-name-text {
   font-size: 18px;
   color: #ad5457;
@@ -286,7 +291,7 @@
   background-color: #ad5457;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .store-name-line {
     display: none;
   }
@@ -620,7 +625,7 @@
   display: flex;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .store-brand-wrapper {
     width: 100%;
     background: #f3ece9;

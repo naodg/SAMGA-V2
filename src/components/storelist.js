@@ -45,7 +45,7 @@ function shuffleArray(array) {
     return result;
 }
 export default function StoreList() {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 900;
     const navigate = useNavigate();
     const handleStoreClick = (storeName) => {
         navigate(`/store/${encodeURIComponent(storeName)}`);
