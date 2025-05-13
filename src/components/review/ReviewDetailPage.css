@@ -12,6 +12,14 @@
   background: #fff;
 }
 
+.review-sticker {
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  width: 60px;
+  z-index: 2;
+}
+
 .review-header {
   display: flex;
   justify-content: space-between;

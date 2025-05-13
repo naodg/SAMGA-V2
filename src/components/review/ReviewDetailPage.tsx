@@ -94,6 +94,27 @@ export default function ReviewDetailPage() {
     return (
         <div className="review-detail-page">
             <div className="review-box">
+
+                {/* ✅ 가게별 로고 표시 */}
+                <img src={store.logo} className="review-sticker" alt={store.name} />
+
+                {/* ✅ 수정 / 삭제 버튼 */}
+                <div className="review-actions">
+                    <img
+                        src="/SAMGA-V2/img/icon/수정.svg"
+                        alt="수정"
+                        className="icon-button"
+                        onClick={() => alert("수정")}
+                    />
+                    <img
+                        src="/SAMGA-V2/img/icon/삭제.svg"
+                        alt="삭제"
+                        className="icon-button"
+                        onClick={() => alert("삭제")}
+                    />
+                </div>
+
+
                 <div className="review-header">
                     <h2>{store.name}</h2>
                     <div className="review-stars">
