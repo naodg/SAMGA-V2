@@ -6,7 +6,8 @@
 
 .review-write-page h2 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 10px;
 }
 
 .store-select-row {
@@ -77,8 +78,8 @@
   transition: 0.2s;
 }
 .star-svg {
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
 }
 

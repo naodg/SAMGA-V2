@@ -54,7 +54,7 @@ export default function ReviewListPage() {
         newReviews.forEach(review => {
             fetchCommentsForReview(review.id);
         });
-        if (snapshot.docs.length < 20) {
+        if (snapshot.docs.length < 15) {
             setIsEnd(true);
         }
         const lastVisible = snapshot.docs[snapshot.docs.length - 1];
