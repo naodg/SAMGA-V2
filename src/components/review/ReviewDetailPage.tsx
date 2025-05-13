@@ -140,7 +140,14 @@ export default function ReviewDetailPage() {
                 <div className="review-footer">
                     <div className="review-icons">
                         <img src="/SAMGA-V2/img/icon/좋아용.svg" alt="좋아요" />
-                        <img src="/SAMGA-V2/img/icon/댓글.svg" alt="댓글" />
+                        <img
+                            src={
+                                comment
+                                    ? "/SAMGA-V2/img/icon/댓글있음.svg"
+                                    : "/SAMGA-V2/img/icon/댓글.svg"
+                            }
+                            alt="댓글"
+                        />
                     </div>
                     <div className="review-meta">
                         작성자: {review.nickname}
