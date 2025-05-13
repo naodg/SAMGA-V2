@@ -45,6 +45,7 @@
   /* ✅ grid overflow 방지 */
   box-sizing: border-box;
   /* ✅ padding 포함 계산 */
+  
 }
 
 
@@ -63,10 +64,12 @@
   position: absolute;
   top: -20px;
   left: -80px;
-  width: 300px;
+  width: 100%;
+  min-width: 100px;
   height: auto;
   z-index: 13;
   pointer-events: none;
+  
 }
 
 
