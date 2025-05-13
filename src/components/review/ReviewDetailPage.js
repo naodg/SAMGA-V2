@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc, collection, getDocs, addDoc, serverTimestamp, updateDoc, arrayUnion, arrayRemove, deleteDoc } from "firebase/firestore";
@@ -15,8 +15,12 @@ export default function ReviewDetailPage() {
     const [store, setStore] = useState(null);
     const [liked, setLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
+    //   리뷰 수정
     const [editMode, setEditMode] = useState(false);
     const [editedContent, setEditedContent] = useState("");
+    //   댓글수정
+    const [editCommentMode, setEditCommentMode] = useState(false);
+    const [editedComment, setEditedComment] = useState("");
     const getStoreById = (storeId) => {
         const index = parseInt(storeId.replace("store", ""));
         return storeData[index - 1];
@@ -89,6 +93,7 @@ export default function ReviewDetailPage() {
             setLikeCount(prev => prev + 1);
         }
     };
+    // 리뷰 수정 삭제
     const handleUpdate = async () => {
         if (!editedContent.trim())
             return alert("내용을 입력해주세요.");
@@ -107,6 +112,25 @@ export default function ReviewDetailPage() {
         alert("삭제되었습니다.");
         navigate("/review");
     };
+    // 댓글 수정삭제
+    const handleUpdateComment = async () => {
+        if (!editedComment.trim())
+            return alert("내용을 입력해주세요.");
+        await updateDoc(doc(db, "reviews", id, "comments", comment.id), {
+            content: editedComment
+        });
+        setComment((prev) => ({ ...prev, content: editedComment }));
+        setEditCommentMode(false);
+        alert("댓글이 수정되었습니다.");
+    };
+    const handleDeleteComment = async () => {
+        const ok = window.confirm("댓글을 삭제할까요?");
+        if (!ok)
+            return;
+        await deleteDoc(doc(db, "reviews", id, "comments", comment.id));
+        alert("댓글이 삭제되었습니다.");
+        setComment(null);
+    };
     if (!review || !store)
         return _jsx("div", { children: "\uB85C\uB529 \uC911..." });
     return (_jsx("div", { className: "review-detail-page", children: _jsxs("div", { className: "review-box", children: [auth.currentUser?.uid === review.userId && (_jsxs("div", { className: "review-actions", children: [_jsx("img", { src: "/SAMGA-V2/img/icon/\uC218\uC815.svg", alt: "\uC218\uC815", className: "icon-button", onClick: () => {
@@ -118,5 +142,8 @@ export default function ReviewDetailPage() {
                                         ? "/SAMGA-V2/img/icon/좋아용누름.svg"
                                         : "/SAMGA-V2/img/icon/좋아용.svg", alt: "\uC88B\uC544\uC694", className: "heart-icon", onClick: toggleLike }), _jsx("span", { children: likeCount }), _jsx("img", { src: comment
                                         ? "/SAMGA-V2/img/icon/댓글있음.svg"
-                                        : "/SAMGA-V2/img/icon/댓글.svg", alt: "\uB313\uAE00" })] }), _jsxs("div", { className: "review-meta", children: ["\uC791\uC131\uC790: ", review.nickname, _jsx("br", {}), review.createdAt?.toDate().toLocaleString()] })] }), comment ? (_jsxs("div", { className: "comment-wrapper", children: [_jsx("img", { src: store.logo, alt: store.name, className: "comment-sticker" }), _jsxs("div", { className: "comment-bubble", children: [auth.currentUser?.uid === comment.userId && (_jsxs("div", { className: "comment-actions", children: [_jsx("img", { src: "/SAMGA-V2/img/icon/\uC218\uC815.svg", alt: "\uC218\uC815", className: "icon-button" }), _jsx("img", { src: "/SAMGA-V2/img/icon/\uC0AD\uC81C.svg", alt: "\uC0AD\uC81C", className: "icon-button" })] })), _jsx("div", { className: "comment-body", children: comment.content })] })] })) : userInfo?.role === "owner" && userInfo?.storeId === review.storeId ? (_jsxs("div", { className: "comment-form", children: [_jsx("textarea", { value: replyText, onChange: (e) => setReplyText(e.target.value), placeholder: "\uB2F5\uAE00\uC744 \uC791\uC131\uD574\uC8FC\uC138\uC694." }), _jsx("button", { onClick: handleReply, children: "\uB4F1\uB85D" })] })) : null] }) }));
+                                        : "/SAMGA-V2/img/icon/댓글.svg", alt: "\uB313\uAE00" })] }), _jsxs("div", { className: "review-meta", children: ["\uC791\uC131\uC790: ", review.nickname, _jsx("br", {}), review.createdAt?.toDate().toLocaleString()] })] }), comment ? (_jsxs("div", { className: "comment-wrapper", children: [_jsx("img", { src: store.logo, alt: store.name, className: "comment-sticker" }), _jsxs("div", { className: "comment-bubble", children: [auth.currentUser?.uid === comment.userId && (_jsx("div", { className: "comment-actions", children: editCommentMode ? (_jsxs(_Fragment, { children: [_jsx("button", { onClick: handleUpdateComment, children: "\uC800\uC7A5" }), _jsx("button", { onClick: () => setEditCommentMode(false), children: "\uCDE8\uC18C" })] })) : (_jsxs(_Fragment, { children: [_jsx("img", { src: "/SAMGA-V2/img/icon/\uC218\uC815.svg", alt: "\uC218\uC815", className: "icon-button", onClick: () => {
+                                                    setEditCommentMode(true);
+                                                    setEditedComment(comment.content);
+                                                } }), _jsx("img", { src: "/SAMGA-V2/img/icon/\uC0AD\uC81C.svg", alt: "\uC0AD\uC81C", className: "icon-button", onClick: handleDeleteComment })] })) })), _jsx("div", { className: "comment-body", children: editCommentMode ? (_jsxs(_Fragment, { children: [_jsx("textarea", { className: "edit-textarea", value: editedComment, onChange: (e) => setEditedComment(e.target.value) }), _jsxs("div", { className: "edit-buttons", children: [_jsx("button", { onClick: handleUpdateComment, children: "\uC800\uC7A5" }), _jsx("button", { onClick: () => setEditCommentMode(false), children: "\uCDE8\uC18C" })] })] })) : (comment.content) })] })] })) : userInfo?.role === "owner" && userInfo?.storeId === review.storeId ? (_jsxs("div", { className: "comment-form", children: [_jsx("textarea", { value: replyText, onChange: (e) => setReplyText(e.target.value), placeholder: "\uB2F5\uAE00\uC744 \uC791\uC131\uD574\uC8FC\uC138\uC694." }), _jsx("button", { onClick: handleReply, children: "\uB4F1\uB85D" })] })) : null] }) }));
 }
