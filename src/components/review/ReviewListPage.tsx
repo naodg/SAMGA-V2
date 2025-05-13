@@ -268,7 +268,11 @@ export default function ReviewListPage() {
               {store && (
                 <>
                   <div className="store-badge-wrapper">
-                    <img src="/SAMGA-V2/img/icon/수퍼히어로랜딩.svg" className="store-badge-icon" alt="소탈이" />
+                    <img
+                      src={`/SAMGA-V2/img/review_icons/${store.name}.jpg`}
+                      className="store-badge-icon"
+                      alt={store.name}
+                    />
                     <div className="store-badge">
                       <span className="store-badge-name">{store.name}</span>
                     </div>
