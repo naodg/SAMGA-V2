@@ -53,6 +53,6 @@ export default function ReviewWritePage() {
                                 else {
                                     imgSrc = "/SAMGA-V2/img/icon/단골등록.svg"; // ⭐️ 빈 별
                                 }
-                                return (_jsx("img", { src: imgSrc, alt: `${value}점`, className: "star-svg", onClick: () => setStar(value), style: { width: "24px", height: "24px", cursor: "pointer" } }, i));
+                                return (_jsx("img", { src: imgSrc, alt: `${value}점`, className: "star-svg", onClick: () => setStar(value) }, i));
                             }), _jsxs("span", { className: "star-value", children: [star, "\uC810"] })] }), _jsx("textarea", { placeholder: "\uB0B4\uC6A9", value: content, onChange: (e) => setContent(e.target.value), className: "review-textarea", required: true }), _jsx("div", { className: "review-submit-wrapper", children: _jsx("button", { type: "submit", className: "review-submit-button", children: "\uB9AC\uBDF0 \uC800\uC7A5" }) })] })] }));
 }

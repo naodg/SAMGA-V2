@@ -97,7 +97,6 @@ export default function ReviewWritePage() {
                                 alt={`${value}점`}
                                 className="star-svg"
                                 onClick={() => setStar(value)}
-                                style={{ width: "24px", height: "24px", cursor: "pointer" }}
                             />
                         )
                     })}

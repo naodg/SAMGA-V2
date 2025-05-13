@@ -1,31 +1,31 @@
 .review-write-page {
-    padding: 140px 0 100px 0 ;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .review-write-page h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .store-select-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  
-  .store-select-row label {
-    white-space: nowrap;
-    font-size: 16px;
-  }
-  
-  .review-submit-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 16px;
-  }
+  padding: 140px 0 100px 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.review-write-page h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.store-select-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.store-select-row label {
+  white-space: nowrap;
+  font-size: 16px;
+}
+
+.review-submit-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
 
 
 .review-input,
@@ -38,141 +38,72 @@
   border-radius: 6px;
   box-sizing: border-box;
 }
-  
-  .review-textarea {
-    height: 200px;
-    resize: vertical;
-    margin-top: 10px;
-  }
-  
-  .review-submit-button {
-    padding: 12px 20px;
-    background-color: #AD5457;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-  }
-  
-  .review-submit-button:hover {
-    background-color: #9c3e41;
-  }
 
-
-  .star-rating {
-    display: flex;
-    align-items: center;
-    margin: 12px 0;
-  }
-  
-  .star-rating span {
-    font-size: 30px;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  
-  .star-rating .on {
-    color: #f5a623;
-  }
-  
-  .star-rating .off {
-    color: #ddd;
-  }
-  
-  .star-rating .star-value {
-    margin-left: 10px;
-    font-size: 16px;
-    color: #555;
-  }
-
-
-
-  
-  /* ✅ 반응형 */
-  @media (max-width: 900px) {
-    .review-write-page {
-      padding: 100px 20px;
-    }
-  
-    .review-input,
-    .review-textarea {
-      font-size: 14px;
-    }
-  
-    .review-submit-button {
-      font-size: 14px;
-      padding: 10px 16px;
-    }
-  }
-  
-
-
-.review-card {
-  position: relative;
-  padding: 20px;
-  border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.review-textarea {
+  height: 200px;
+  resize: vertical;
+  margin-top: 10px;
 }
 
-/* 오른쪽 상단 배지 */
-.store-badge {
-  position: absolute;
-  top: -27px;
-  right: 10px;
-  background: #f3f3f3;
-  padding: 4px 12px 4px 6px;
-  border: 1px solid #555;
-  border-radius: 10px;
+.review-submit-button {
+  padding: 12px 20px;
+  background-color: #AD5457;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.review-submit-button:hover {
+  background-color: #9c3e41;
+}
+
+
+.star-rating {
   display: flex;
+  justify-content: center;
+  /* ⭐ 가운데 정렬 */
   align-items: center;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* 세로 정렬 */
+  gap: 8px;
+  /* ⭐ 별 사이 및 점수와 간격 */
+  margin: 15px 0;
 }
 
-.store-badge-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+.star-rating span {
+  font-size: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.star-svg {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
 }
 
-.store-badge-name {
-  font-weight: 600;
+.star-rating .star-value {
+  margin-left: 10px;
   font-size: 20px;
-  white-space: nowrap;
+  color: #555;
 }
 
-/* 상호명 + 별점 라인 */
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.store-name {
-  font-size: 18px;
-  font-weight: bold;
-  white-space: nowrap;
-}
 
-.review-main {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
 
-/* 하단 아이콘 */
-.review-icons {
-  display: flex;
-  gap: 10px;
-}
+/* ✅ 반응형 */
+@media (max-width: 900px) {
+  .review-write-page {
+    padding: 100px 20px;
+  }
 
-.review-icons img {
-  width: 20px;
-  height: 20px;
+  .review-input,
+  .review-textarea {
+    font-size: 14px;
+  }
+
+  .review-submit-button {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
 }

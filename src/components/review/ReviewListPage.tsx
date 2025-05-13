@@ -243,25 +243,14 @@ export default function ReviewListPage() {
             >
               {store && (
                 <>
-                  {/* <div className="store-badge">
+                  <div className="store-badge">
+                    
                     <img
                       src={`/SAMGA-V2/img/review_icons/${store.name}.jpg`}
                       className="store-badge-icon"
                       alt={store.name}
                     />
-                  </div> */}
-
-                  <div className="store-badge-wrapper">
-                    <img
-                      src="/SAMGA-V2/img/icon/소탈이.svg"
-                      alt="소탈이"
-                      className="sotali-icon"
-                    />
-                    <div className="store-badge">
-                      <span className="store-badge-name">{store.name}</span>
-                    </div>
                   </div>
-
 
                   <div className="review-main">
                     <div className="review-header">
@@ -310,6 +299,7 @@ export default function ReviewListPage() {
                           }
                           alt="댓글"
                         />
+                        <span>{commentsMap[review.id]?.length}</span>
                       </div>
                       <div className="review-meta">
                         <span className="review-nickname">작성자: {review.nickname}</span>
