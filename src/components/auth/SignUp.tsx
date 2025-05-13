@@ -87,7 +87,7 @@ export default function SignUp() {
     return (
         <div className="signup-page">
             <div className="signup-wrapper">
-                <h2 className="signup-text">회원가입</h2>
+                <div className="signup-text">회원가입</div>
                 <form onSubmit={handleSignUp}>
                     <input
                         type="text"

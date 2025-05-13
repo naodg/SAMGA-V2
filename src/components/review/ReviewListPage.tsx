@@ -75,7 +75,7 @@ export default function ReviewListPage() {
         console.error("해당 가게 이름이 storeData에 없습니다.");
         return;
       }
-    
+
       q = query(
         collection(db, "reviews"),
         where("storeId", "==", storeId),
@@ -83,7 +83,7 @@ export default function ReviewListPage() {
         limit(20)
       );
     }
-    
+
 
     if (!initial && lastDoc) {
       q = query(q, startAfter(lastDoc))
@@ -208,90 +208,61 @@ export default function ReviewListPage() {
         {reviews.map((review) => {
           const store = getStoreById(review.storeId)
           return (
-            <div className="review-card" key={review.id}>
+            <div
+              className="review-card"
+              key={review.id}
+              onClick={() => navigate(`/review/${review.id}`)}
+              style={{ cursor: "pointer" }}
+            >
+
               {store && (
-                <div className="store-info">
-                  <img src={store.logo} alt={`${store.name} 로고`} className="store-logo" />
-                  <p className="store-name">{store.name}</p>
-
-                  <div className="review-stars">
-                    {[...Array(5)].map((_, i) => {
-                      const value = i + 1
-                      let imgSrc = ""
-
-                      if (review.star >= value) {
-                        imgSrc = "/SAMGA-V2/img/icon/단골등록해제.svg" // 가득 찬 별
-                      } else if (review.star + 0.5 >= value) {
-                        imgSrc = "/SAMGA-V2/img/icon/반쪽자리별.svg" // 반쪽 별
-                      } else {
-                        imgSrc = "/SAMGA-V2/img/icon/단골등록.svg" // 빈 별
-                      }
-
-                      return (
-                        <img
-                          key={i}
-                          src={imgSrc}
-                          alt="별점"
-                          className="star-icon"
-                        />
-                      )
-                    })}
-                    <span className="review-star-value">
-                      {(review.star ?? 0).toFixed(1)}점
-                    </span>
+                <>
+                  <div className="store-badge">
+                    <img src="/SAMGA-V2/img/icon/소탈이.svg" className="store-badge-icon" alt="store" />
+                    <span className="store-badge-name">{store.name}</span>
                   </div>
 
-                </div>
-              )}
-
-              <div className="review-content">
-                <h3>{review.title}</h3>
-                <p>{review.content}</p>
-              </div>
-
-              <div className="review-meta">
-                <span className="review-nickname">작성자: {review.nickname}</span>
-                <span className="review-date">
-                  {review.createdAt?.toDate().toLocaleString() || "작성일 없음"}
-                </span>
-              </div>
-
-              {commentsMap[review.id]?.map((comment) => (
-                <div key={comment.id} className="comment-item">
-                  <div className="comment-nickname">{comment.nickname}</div>
-                  <div className="comment-content">{comment.content}</div>
-                  <div className="comment-date">
-                    {comment.createdAt?.toDate().toLocaleString()}
-                  </div>
-                </div>
-              ))}
-
-
-              {currentUserRole === "owner" && userStoreId === review.storeId && (
-                <div className="reply-toggle">
-                  {!showReplyForm[review.id] ? (
-                    <button onClick={() => setShowReplyForm(prev => ({ ...prev, [review.id]: true }))}>
-                      답글 달기
-                    </button>
-                  ) : (
-                    <div className="reply-form">
-                      <textarea
-                        className="reply-textarea"
-                        placeholder="답글을 입력하세요"
-                        value={replyContent[review.id] || ""}
-                        onChange={(e) =>
-                          setReplyContent(prev => ({ ...prev, [review.id]: e.target.value }))
-                        }
-                      />
-                      <div className="reply-submit">
-                        <button onClick={() => handleSubmitReply(review.id)}>등록</button>
+                  <div className="review-main">
+                    <div className="review-header">
+                      <h3 className="store-name">{store.name}</h3>
+                      <div className="review-stars">
+                        {[...Array(5)].map((_, i) => {
+                          const value = i + 1;
+                          const src =
+                            review.star >= value
+                              ? "/SAMGA-V2/img/icon/단골등록해제.svg"
+                              : review.star + 0.5 >= value
+                                ? "/SAMGA-V2/img/icon/반쪽자리별.svg"
+                                : "/SAMGA-V2/img/icon/단골등록.svg";
+                          return <img key={i} src={src} className="star-icon" alt="별" />;
+                        })}
+                        <span className="review-star-value">{(review.star ?? 0).toFixed(1)}점</span>
                       </div>
                     </div>
-                  )}
-                </div>
-              )}
 
+                    <div className="review-content">
+                      <p>{review.content}</p>
+                    </div>
+
+                    <div className="review-footer">
+                      <div className="review-icons">
+                        <img src="/SAMGA-V2/img/icon/좋아용.svg" alt="좋아요" />
+                        <img src="/SAMGA-V2/img/icon/댓글.svg" alt="댓글" />
+                      </div>
+                      <div className="review-meta">
+                        <span className="review-nickname">작성자: {review.nickname}</span>
+                        <br />
+                        <span className="review-date">
+                          {review.createdAt?.toDate().toLocaleString() || "날짜 없음"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
+
+
           )
         })}
       </div>

@@ -327,7 +327,7 @@
   /* ✅ PC 메인 콘텐츠 */
   .pc-main-layout {
     display: flex;
-    height: calc(100vh - 240px); /* 화면 꽉 채우되, 검색바+필터 높이 감안 */
+    height: calc(100vh - 130px); /* 화면 꽉 채우되, 검색바+필터 높이 감안 */
     overflow: hidden;
   }
   

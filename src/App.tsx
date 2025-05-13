@@ -9,6 +9,7 @@ import ReviewListPage from './components/review/ReviewListPage'
 import SignUp from "./components/auth/SignUp"
 import SignIn from './components/auth/SignIn'
 import AdminDashboard from './components/owner/AdminDashboard'
+import ReviewDetailPage from './components/review/ReviewDetailPage'
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/storefilterpage" element={<StoreFilterPage />} />
         <Route path="/review" element={<ReviewListPage />} />
         <Route path="/write" element={<ReviewWritePage />} />
+        <Route path="/review/:id" element={<ReviewDetailPage />} />
+
 
         <Route path="/admin/:storeId" element={<AdminDashboard />} />
       </Routes>
