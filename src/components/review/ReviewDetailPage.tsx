@@ -21,6 +21,7 @@ interface ReviewType {
     nickname: string;
     content: string;
     star: number;
+    likes: string[];
     createdAt: any;
 }
 
