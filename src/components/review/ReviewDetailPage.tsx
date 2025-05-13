@@ -51,6 +51,7 @@ export default function ReviewDetailPage() {
                 };
                 const storeObj = getStoreById(reviewData.storeId);
                 setStore(storeObj);
+                setReview(reviewData);
             }
 
             // 댓글
