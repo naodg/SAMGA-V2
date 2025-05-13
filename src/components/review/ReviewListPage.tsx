@@ -268,7 +268,7 @@ export default function ReviewListPage() {
               {store && (
                 <>
                   <div className="store-badge">
-                    <img src="/SAMGA-V2/img/icon/소탈이.svg" className="store-badge-icon" alt="store" />
+                    <img src="/SAMGA-V2/img/icon/수퍼히어로랜딩.svg" className="store-badge-icon" alt="store" />
                     <span className="store-badge-name">{store.name}</span>
                   </div>
 
@@ -319,6 +319,7 @@ export default function ReviewListPage() {
                           }
                           alt="댓글"
                         />
+
                       </div>
                       <div className="review-meta">
                         <span className="review-nickname">작성자: {review.nickname}</span>
