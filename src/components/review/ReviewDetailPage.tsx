@@ -7,6 +7,7 @@ import {
     getDocs,
     addDoc,
     serverTimestamp,
+    updateDoc, arrayUnion, arrayRemove
 } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { storeData } from "../../data/storeData";
@@ -30,6 +31,10 @@ export default function ReviewDetailPage() {
     const [userInfo, setUserInfo] = useState<any>(null);
     const [replyText, setReplyText] = useState("");
     const [store, setStore] = useState<any>(null);
+
+    const [liked, setLiked] = useState(false);         // 내가 좋아요 눌렀는지
+    const [likeCount, setLikeCount] = useState(0);     // 전체 좋아요 개수
+
 
     // ✅ storeId → storeData 파싱 함수
     const getStoreById = (storeId: string) => {
@@ -90,7 +95,40 @@ export default function ReviewDetailPage() {
         window.location.reload(); // 새로고침
     };
 
+
+
+
+    const toggleLike = async () => {
+        const reviewRef = doc(db, "reviews", review.id);
+        const uid = auth.currentUser?.uid;
+        if (!uid) return;
+
+        if (liked) {
+            await updateDoc(reviewRef, {
+                likes: arrayRemove(uid)
+            });
+            setLiked(false);
+            setLikeCount(prev => prev - 1);
+        } else {
+            await updateDoc(reviewRef, {
+                likes: arrayUnion(uid)
+            });
+            setLiked(true);
+            setLikeCount(prev => prev + 1);
+        }
+    };
+
+
     if (!review || !store) return <div>로딩 중...</div>;
+
+
+    useEffect(() => {
+        if (review && auth.currentUser) {
+            setLiked(review.likes.includes(auth.currentUser.uid));
+            setLikeCount(review.likes.length);
+        }
+    }, [review]);
+
 
     return (
         <div className="review-detail-page">
@@ -132,7 +170,18 @@ export default function ReviewDetailPage() {
 
                 <div className="review-footer">
                     <div className="review-icons">
-                        <img src="/SAMGA-V2/img/icon/좋아용.svg" alt="좋아요" />
+                        <img
+                            src={
+                                liked
+                                    ? "/SAMGA-V2/img/icon/좋아용누름.svg"
+                                    : "/SAMGA-V2/img/icon/좋아용.svg"
+                            }
+                            alt="좋아요"
+                            className="heart-icon"
+                            onClick={toggleLike}
+                        />
+                        <span>{likeCount}</span>
+
                         <img
                             src={
                                 comment
