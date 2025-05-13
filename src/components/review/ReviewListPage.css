@@ -54,45 +54,8 @@
   position: absolute;
   top: -35px;
   right: 20px;
-  width: 150px;
-  /* 텍스트 박스 기준 너비 고정 */
-  height: 80px;
   z-index: 10;
   overflow: visible;
-}
-
-
-.store-badge-icon {
-  position: absolute;
-  top: -20px;
-  left: -80px;
-  width: 90px;
-  height: auto;
-  z-index: 13;
-  pointer-events: none;
-}
-
-/* 텍스트 박스 */
-.store-badge {
-  position: relative;
-  background: #f3e5e5;
-  border: 1px solid #555;
-  border-radius: 999px;
-  padding: 6px 10px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  font-weight: 400;
-  z-index: 2;
-  top: 15px;
-  left: -10px;
-}
-
-.store-badge-name {
-  font-weight: 300;
-  font-size: 18px;
-  white-space: nowrap;
-  text-align: center;
 }
 
 

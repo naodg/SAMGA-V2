@@ -273,9 +273,6 @@ export default function ReviewListPage() {
                       className="store-badge-icon"
                       alt={store.name}
                     />
-                    <div className="store-badge">
-                      <span className="store-badge-name">{store.name}</span>
-                    </div>
                   </div>
 
 
