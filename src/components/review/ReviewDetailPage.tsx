@@ -159,10 +159,34 @@ export default function ReviewDetailPage() {
 
             {/* 🔥 답글 */}
             {comment ? (
-                <div className="comment-box">
-                    <div className="comment-header">{comment.nickname}</div>
-                    <div className="comment-body">{comment.content}</div>
+                <div className="comment-wrapper">
+                    {/* ✅ 가게별 로고 표시 */}
+                    <img
+                        src={store.logo}
+                        alt={store.name}
+                        className="comment-sticker"
+                    />
+
+                    {/* ✅ 말풍선 본체 */}
+                    <div className="comment-bubble">
+                        <div className="comment-actions">
+                            <img
+                                src="/SAMGA-V2/img/icon/수정.svg"
+                                alt="수정"
+                                className="icon-button"
+                            />
+                            <img
+                                src="/SAMGA-V2/img/icon/삭제.svg"
+                                alt="삭제"
+                                className="icon-button"
+                            />
+                        </div>
+                        <div className="comment-body">
+                            {comment.content}
+                        </div>
+                    </div>
                 </div>
+
             ) : userInfo?.role === "owner" && userInfo?.storeId === review.storeId ? (
                 <div className="comment-form">
                     <textarea
