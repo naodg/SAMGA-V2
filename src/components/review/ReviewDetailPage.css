@@ -1,0 +1,108 @@
+.review-detail-page {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
+
+.review-box {
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  background: #fff;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.review-star-value {
+  font-size: 14px;
+  margin-left: 6px;
+  color: #555;
+}
+
+.review-content {
+  margin: 16px 0;
+  font-size: 16px;
+}
+
+.review-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.review-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.review-icons img {
+  width: 20px;
+}
+
+.review-meta {
+  font-size: 13px;
+  color: #888;
+  text-align: right;
+}
+
+/* 댓글 */
+.comment-box {
+  margin-top: 40px;
+  background: #eee;
+  padding: 16px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.comment-header {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.comment-body {
+  font-size: 15px;
+}
+
+/* 댓글 작성 */
+.comment-form {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.comment-form button {
+  align-self: flex-end;
+  background: #AD5457;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
