@@ -261,8 +261,6 @@ export default function ReviewDetailPage() {
                                 <div className="comment-actions">
                                     {editCommentMode ? (
                                         <>
-                                            <button onClick={handleUpdateComment}>저장</button>
-                                            <button onClick={() => setEditCommentMode(false)}>취소</button>
                                         </>
                                     ) : (
                                         <>
