@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import "./ReviewDetailPage.css";
+import { storeData } from "../../data/storeData";
 
 export default function ReviewDetailPage() {
   const { id } = useParams(); // 리뷰 ID
@@ -19,6 +20,14 @@ export default function ReviewDetailPage() {
   const [comment, setComment] = useState<any>(null);
   const [userInfo, setUserInfo] = useState<any>(null);
   const [replyText, setReplyText] = useState("");
+
+  const getStoreById = (storeId: string) => {
+  const index = parseInt(storeId.replace("store", ""));
+  return storeData[index - 1]; // 배열은 0부터 시작이니까
+};
+
+const store = getStoreById(review.storeId);
+
 
   // 🔥 리뷰 데이터 불러오기
   useEffect(() => {
@@ -69,7 +78,7 @@ export default function ReviewDetailPage() {
     <div className="review-detail-page">
       <div className="review-box">
         <div className="review-header">
-          <h2>{review.storeName}</h2>
+          <h2>{store?.name}</h2>
           <div className="review-stars">
             {[...Array(5)].map((_, i) => (
               <img
