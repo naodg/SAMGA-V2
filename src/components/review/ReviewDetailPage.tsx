@@ -100,20 +100,13 @@ export default function ReviewDetailPage() {
                 {/* <img src={store.logo} className="review-sticker" alt={store.name} /> */}
 
                 {/* ✅ 수정 / 삭제 버튼 */}
-                <div className="review-actions">
-                    <img
-                        src="/SAMGA-V2/img/icon/수정.svg"
-                        alt="수정"
-                        className="icon-button"
-                        onClick={() => alert("수정")}
-                    />
-                    <img
-                        src="/SAMGA-V2/img/icon/삭제.svg"
-                        alt="삭제"
-                        className="icon-button"
-                        onClick={() => alert("삭제")}
-                    />
-                </div>
+                {auth.currentUser?.uid === review.userId && (
+                    <div className="review-actions">
+                        <img src="/SAMGA-V2/img/icon/수정.svg" alt="수정" className="icon-button" />
+                        <img src="/SAMGA-V2/img/icon/삭제.svg" alt="삭제" className="icon-button" />
+                    </div>
+                )}
+
 
 
                 <div className="review-header">
@@ -169,18 +162,13 @@ export default function ReviewDetailPage() {
 
                     {/* ✅ 말풍선 본체 */}
                     <div className="comment-bubble">
-                        <div className="comment-actions">
-                            <img
-                                src="/SAMGA-V2/img/icon/수정.svg"
-                                alt="수정"
-                                className="icon-button"
-                            />
-                            <img
-                                src="/SAMGA-V2/img/icon/삭제.svg"
-                                alt="삭제"
-                                className="icon-button"
-                            />
-                        </div>
+                        {auth.currentUser?.uid === comment.userId && (
+                            <div className="comment-actions">
+                                <img src="/SAMGA-V2/img/icon/수정.svg" alt="수정" className="icon-button" />
+                                <img src="/SAMGA-V2/img/icon/삭제.svg" alt="삭제" className="icon-button" />
+                            </div>
+                        )}
+
                         <div className="comment-body">
                             {comment.content}
                         </div>

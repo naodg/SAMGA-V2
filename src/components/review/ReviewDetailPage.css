@@ -58,7 +58,8 @@
 
 .review-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 15px;
     align-items: center;
     padding: 15px 0 0 0;
 }
@@ -115,12 +116,23 @@
   gap: 12px;
 }
 
-/* 말풍선 본체 */
+/* 왼쪽 로고 */
+.comment-sticker {
+  width: 120px;
+  height: 60px;
+  object-fit: contain;
+  /* border-radius: 999px; */
+  /* background-color: white; */
+  padding: 4px 14px 4px 4px;
+  /* box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); */
+}
+
+/* 오른쪽 말풍선 */
 .comment-bubble {
+  position: relative;
   background: #ddd;
   padding: 16px 20px;
   border-radius: 20px;
-  position: relative;
   min-height: 80px;
   flex: 1;
 }
@@ -138,14 +150,6 @@
   border-bottom: 10px solid transparent;
 }
 
-/* "대가" 스티커 */
-.comment-sticker {
-  position: absolute;
-  top: -20px;
-  left: 0;
-  width: 60px;
-  z-index: 2;
-}
 
 /* 수정 / 삭제 */
 .comment-actions {
