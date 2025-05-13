@@ -59,6 +59,18 @@
 }
 
 
+.store-badge-icon {
+  position: absolute;
+  top: -20px;
+  left: -80px;
+  width: 300px;
+  height: auto;
+  z-index: 13;
+  pointer-events: none;
+}
+
+
+
 
 
 /* 내부 구조 */
