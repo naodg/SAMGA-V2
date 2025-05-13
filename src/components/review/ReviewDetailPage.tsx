@@ -97,6 +97,13 @@ export default function ReviewDetailPage() {
 
 
 
+    // 이후에 useEffect 안에서 조건 체크는 가능!
+    useEffect(() => {
+        if (review && auth.currentUser) {
+            setLiked(review.likes.includes(auth.currentUser.uid));
+            setLikeCount(review.likes.length);
+        }
+    }, [review]);
 
     const toggleLike = async () => {
         const reviewRef = doc(db, "reviews", review.id);

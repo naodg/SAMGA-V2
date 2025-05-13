@@ -66,6 +66,13 @@ export default function ReviewDetailPage() {
         alert("댓글 등록 완료!");
         window.location.reload(); // 새로고침
     };
+    // 이후에 useEffect 안에서 조건 체크는 가능!
+    useEffect(() => {
+        if (review && auth.currentUser) {
+            setLiked(review.likes.includes(auth.currentUser.uid));
+            setLikeCount(review.likes.length);
+        }
+    }, [review]);
     const toggleLike = async () => {
         const reviewRef = doc(db, "reviews", review.id);
         const uid = auth.currentUser?.uid;
