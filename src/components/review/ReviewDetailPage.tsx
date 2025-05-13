@@ -7,12 +7,10 @@ import {
   getDocs,
   addDoc,
   serverTimestamp,
-  deleteDoc,
-  updateDoc,
 } from "firebase/firestore";
 import { db, auth } from "../../firebase";
-import "./ReviewDetailPage.css";
 import { storeData } from "../../data/storeData";
+import "./ReviewDetailPage.css";
 
 export default function ReviewDetailPage() {
   const { id } = useParams(); // 리뷰 ID
@@ -20,30 +18,38 @@ export default function ReviewDetailPage() {
   const [comment, setComment] = useState<any>(null);
   const [userInfo, setUserInfo] = useState<any>(null);
   const [replyText, setReplyText] = useState("");
+  const [store, setStore] = useState<any>(null);
 
+  // ✅ storeId → storeData 파싱 함수
   const getStoreById = (storeId: string) => {
-  const index = parseInt(storeId.replace("store", ""));
-  return storeData[index - 1]; // 배열은 0부터 시작이니까
-};
+    const index = parseInt(storeId.replace("store", ""));
+    return storeData[index - 1]; // 배열은 0부터 시작
+  };
 
-const store = getStoreById(review.storeId);
-
-
-  // 🔥 리뷰 데이터 불러오기
+  // ✅ 리뷰, 댓글, 유저정보 불러오기
   useEffect(() => {
     const fetchData = async () => {
       if (!id) return;
 
+      // 리뷰
       const reviewSnap = await getDoc(doc(db, "reviews", id));
       if (reviewSnap.exists()) {
-        setReview({ id: reviewSnap.id, ...reviewSnap.data() });
+        const reviewData = { id: reviewSnap.id, ...reviewSnap.data() };
+        setReview(reviewData);
+
+        // ⬇️ store 정보 파싱
+        const storeObj = getStoreById(reviewData.storeId);
+        setStore(storeObj);
       }
 
+      // 댓글
       const commentSnap = await getDocs(collection(db, "reviews", id, "comments"));
       if (!commentSnap.empty) {
-        setComment({ id: commentSnap.docs[0].id, ...commentSnap.docs[0].data() });
+        const commentData = commentSnap.docs[0];
+        setComment({ id: commentData.id, ...commentData.data() });
       }
 
+      // 유저정보
       const user = auth.currentUser;
       if (user) {
         const userSnap = await getDoc(doc(db, "users", user.uid));
@@ -56,7 +62,7 @@ const store = getStoreById(review.storeId);
     fetchData();
   }, [id]);
 
-  // 🔥 답글 등록
+  // ✅ 답글 등록
   const handleReply = async () => {
     if (!replyText.trim()) return alert("댓글을 입력해주세요.");
 
@@ -69,16 +75,16 @@ const store = getStoreById(review.storeId);
 
     setReplyText("");
     alert("댓글 등록 완료!");
-    window.location.reload(); // 새로고침으로 갱신
+    window.location.reload(); // 새로고침
   };
 
-  if (!review) return <div>로딩 중...</div>;
+  if (!review || !store) return <div>로딩 중...</div>;
 
   return (
     <div className="review-detail-page">
       <div className="review-box">
         <div className="review-header">
-          <h2>{store?.name}</h2>
+          <h2>{store.name}</h2>
           <div className="review-stars">
             {[...Array(5)].map((_, i) => (
               <img
@@ -95,7 +101,9 @@ const store = getStoreById(review.storeId);
             <span className="review-star-value">{review.star.toFixed(1)}점</span>
           </div>
         </div>
+
         <p className="review-content">{review.content}</p>
+
         <div className="review-footer">
           <div className="review-icons">
             <img src="/SAMGA-V2/img/icon/좋아용.svg" alt="좋아요" />
@@ -109,7 +117,7 @@ const store = getStoreById(review.storeId);
         </div>
       </div>
 
-      {/* 🔥 답글 출력 or 작성 */}
+      {/* 🔥 답글 */}
       {comment ? (
         <div className="comment-box">
           <div className="comment-header">{comment.nickname}</div>
