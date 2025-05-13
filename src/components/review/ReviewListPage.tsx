@@ -21,7 +21,6 @@ import './ReviewListPage.css'
 
 interface Review {
   id: string
-  title: string
   content: string
   storeId: string
   nickname: string

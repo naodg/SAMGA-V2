@@ -105,14 +105,14 @@ export default function ReviewWritePage() {
                 </div>
 
 
-                <input
+                {/* <input
                     type="text"
                     placeholder="제목"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="review-input"
                     required
-                />
+                /> */}
                 <textarea
                     placeholder="내용"
                     value={content}
