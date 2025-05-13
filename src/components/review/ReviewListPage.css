@@ -51,21 +51,14 @@
 
 
 /* 상단 소탈이 뱃지 */
-.store-badge-wrapper {
-  position: absolute;
-  top: -35px;
-  right: 20px;
-  z-index: 10;
-  overflow: visible;
-}
+
 
 
 .store-badge-icon {
   position: absolute;
   top: -20px;
   left: -80px;
-  width: 100%;
-  min-width: 100px;
+  width: 150px;
   height: auto;
   z-index: 13;
   pointer-events: none;

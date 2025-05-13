@@ -19,7 +19,6 @@ export default function ReviewListPage() {
     const [replyContent, setReplyContent] = useState({});
     const [showReplyForm, setShowReplyForm] = useState({});
     const [userStoreId, setUserStoreId] = useState("");
-    // 댓글들을 저장하는 상태
     const [commentsMap, setCommentsMap] = useState({});
     const uid = auth.currentUser?.uid;
     const [likeMap, setLikeMap] = useState({});
@@ -52,7 +51,6 @@ export default function ReviewListPage() {
         else {
             setReviews(prev => [...prev, ...newReviews]);
         }
-        // 댓글도 같이 불러오기
         newReviews.forEach(review => {
             fetchCommentsForReview(review.id);
         });
@@ -71,7 +69,6 @@ export default function ReviewListPage() {
         };
         fetchAll();
     }, [selectedStoreId]);
-    // 사장님들 답글 
     useEffect(() => {
         const fetchUserInfo = async () => {
             const user = auth.currentUser;
@@ -82,7 +79,7 @@ export default function ReviewListPage() {
             if (snap.exists()) {
                 const data = snap.data();
                 setCurrentUserRole(data.role);
-                setUserStoreId(data.storeId); // 🔥 이거 추가!
+                setUserStoreId(data.storeId);
             }
         };
         fetchUserInfo();
@@ -107,7 +104,6 @@ export default function ReviewListPage() {
         setReplyContent(prev => ({ ...prev, [reviewId]: "" }));
         setShowReplyForm(prev => ({ ...prev, [reviewId]: false }));
     };
-    // 답글 불러오기 
     const fetchCommentsForReview = async (reviewId) => {
         const commentSnapshot = await getDocs(collection(db, "reviews", reviewId, "comments"));
         const comments = commentSnapshot.docs.map((doc) => ({
@@ -152,7 +148,7 @@ export default function ReviewListPage() {
     };
     return (_jsxs("div", { className: "review-list-page", children: [_jsxs("div", { className: "review-list-header", children: [_jsx("h2", { className: "review-title", children: "\uB9AC\uBDF0 \uBAA9\uB85D" }), _jsxs("select", { value: selectedStoreId, onChange: (e) => setSelectedStoreId(e.target.value), className: "store-filter-dropdown", children: [_jsx("option", { value: "all", children: "\uC804\uCCB4 \uBCF4\uAE30" }), storeData.map((store, i) => (_jsx("option", { value: store.name, children: store.name }, i)))] })] }), reviews.length === 0 && _jsx("p", { className: "no-review", children: "\uC791\uC131\uB41C \uB9AC\uBDF0\uAC00 \uC544\uC9C1 \uC5C6\uC5B4\uC694!" }), _jsx("div", { className: "review-list-grid", children: reviews.map((review) => {
                     const store = getStoreById(review.storeId);
-                    return (_jsx("div", { className: "review-card", onClick: () => navigate(`/review/${review.id}`), style: { cursor: "pointer" }, children: store && (_jsxs(_Fragment, { children: [_jsx("div", { className: "store-badge-wrapper", children: _jsx("img", { src: `/SAMGA-V2/img/review_icons/${store.name}.jpg`, className: "store-badge-icon", alt: store.name }) }), _jsxs("div", { className: "review-main", children: [_jsxs("div", { className: "review-header", children: [_jsx("h3", { className: "store-name", children: store.name }), _jsxs("div", { className: "review-stars", children: [[...Array(5)].map((_, i) => {
+                    return (_jsx("div", { className: "review-card", onClick: () => navigate(`/review/${review.id}`), style: { cursor: "pointer", position: "relative" }, children: store && (_jsxs(_Fragment, { children: [_jsx("div", { className: "store-badge-wrapper", children: _jsx("img", { src: `/SAMGA-V2/img/review_icons/${store.name}.jpg`, className: "store-badge-icon", alt: store.name }) }), _jsxs("div", { className: "review-main", children: [_jsxs("div", { className: "review-header", children: [_jsx("h3", { className: "store-name", children: store.name }), _jsxs("div", { className: "review-stars", children: [[...Array(5)].map((_, i) => {
                                                             const value = i + 1;
                                                             const src = review.star >= value
                                                                 ? "/SAMGA-V2/img/icon/단골등록해제.svg"
@@ -163,7 +159,7 @@ export default function ReviewListPage() {
                                                         }), _jsxs("span", { className: "review-star-value", children: [(review.star ?? 0).toFixed(1), "\uC810"] })] })] }), _jsx("div", { className: "review-content", children: _jsx("p", { children: review.content }) }), _jsxs("div", { className: "review-footer", children: [_jsxs("div", { className: "review-icons", children: [_jsx("img", { src: likeMap[review.id]
                                                                 ? "/SAMGA-V2/img/icon/좋아용누름.svg"
                                                                 : "/SAMGA-V2/img/icon/좋아용.svg", alt: "\uC88B\uC544\uC694", onClick: (e) => {
-                                                                e.stopPropagation(); // 상세페이지 이동 막기
+                                                                e.stopPropagation();
                                                                 toggleLike(review.id);
                                                             }, style: { cursor: "pointer" } }), _jsx("span", { children: likeCountMap[review.id] || 0 }), _jsx("img", { src: commentsMap[review.id]?.length
                                                                 ? "/SAMGA-V2/img/icon/댓글있음.svg"

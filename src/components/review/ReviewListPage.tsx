@@ -27,7 +27,7 @@ interface Review {
   nickname: string
   createdAt: any
   star?: number
-  likes?: string[] // 👈 이거 추가!
+  likes?: string[]
 }
 
 interface Comment {
@@ -52,19 +52,12 @@ export default function ReviewListPage() {
   const [currentUserRole, setCurrentUserRole] = useState<string>("")
   const [replyContent, setReplyContent] = useState<{ [key: string]: string }>({})
   const [showReplyForm, setShowReplyForm] = useState<{ [key: string]: boolean }>({})
-
   const [userStoreId, setUserStoreId] = useState("")
-
-  // 댓글들을 저장하는 상태
   const [commentsMap, setCommentsMap] = useState<Record<string, Comment[]>>({})
-
 
   const uid = auth.currentUser?.uid;
   const [likeMap, setLikeMap] = useState<Record<string, boolean>>({});
   const [likeCountMap, setLikeCountMap] = useState<Record<string, number>>({});
-
-
-
 
   const fetchReviews = async (initial = false) => {
     let q = query(
@@ -72,7 +65,6 @@ export default function ReviewListPage() {
       orderBy("createdAt", "desc"),
       limit(20)
     )
-
 
     let storeId = selectedStoreId;
 
@@ -93,7 +85,6 @@ export default function ReviewListPage() {
       );
     }
 
-
     if (!initial && lastDoc) {
       q = query(q, startAfter(lastDoc))
     }
@@ -110,7 +101,6 @@ export default function ReviewListPage() {
       setReviews(prev => [...prev, ...newReviews])
     }
 
-    // 댓글도 같이 불러오기
     newReviews.forEach(review => {
       fetchCommentsForReview(review.id)
     })
@@ -130,11 +120,9 @@ export default function ReviewListPage() {
       setIsEnd(false)
       await fetchReviews(true)
     }
-
     fetchAll()
   }, [selectedStoreId])
 
-  // 사장님들 답글 
   useEffect(() => {
     const fetchUserInfo = async () => {
       const user = auth.currentUser
@@ -145,13 +133,11 @@ export default function ReviewListPage() {
       if (snap.exists()) {
         const data = snap.data()
         setCurrentUserRole(data.role)
-        setUserStoreId(data.storeId) // 🔥 이거 추가!
+        setUserStoreId(data.storeId)
       }
     }
-
     fetchUserInfo()
   }, [])
-
 
   const handleSubmitReply = async (reviewId: string) => {
     const user = auth.currentUser
@@ -177,8 +163,6 @@ export default function ReviewListPage() {
     setShowReplyForm(prev => ({ ...prev, [reviewId]: false }))
   }
 
-
-  // 답글 불러오기 
   const fetchCommentsForReview = async (reviewId: string) => {
     const commentSnapshot = await getDocs(
       collection(db, "reviews", reviewId, "comments")
@@ -190,8 +174,6 @@ export default function ReviewListPage() {
 
     setCommentsMap(prev => ({ ...prev, [reviewId]: comments }))
   }
-
-
 
   useEffect(() => {
     if (reviews.length && uid) {
@@ -208,7 +190,6 @@ export default function ReviewListPage() {
       setLikeCountMap(newCountMap);
     }
   }, [reviews, uid]);
-
 
   const toggleLike = async (reviewId: string) => {
     const user = auth.currentUser;
@@ -232,8 +213,6 @@ export default function ReviewListPage() {
     }
   };
 
-
-
   return (
     <div className="review-list-page">
       <div className="review-list-header">
@@ -245,9 +224,7 @@ export default function ReviewListPage() {
         >
           <option value="all">전체 보기</option>
           {storeData.map((store, i) => (
-            <option key={i} value={store.name}>
-              {store.name}
-            </option>
+            <option key={i} value={store.name}>{store.name}</option>
           ))}
         </select>
       </div>
@@ -262,9 +239,8 @@ export default function ReviewListPage() {
               className="review-card"
               key={review.id}
               onClick={() => navigate(`/review/${review.id}`)}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", position: "relative" }}
             >
-
               {store && (
                 <>
                   <div className="store-badge-wrapper">
@@ -274,7 +250,6 @@ export default function ReviewListPage() {
                       alt={store.name}
                     />
                   </div>
-
 
                   <div className="review-main">
                     <div className="review-header">
@@ -308,7 +283,7 @@ export default function ReviewListPage() {
                           }
                           alt="좋아요"
                           onClick={(e) => {
-                            e.stopPropagation(); // 상세페이지 이동 막기
+                            e.stopPropagation();
                             toggleLike(review.id);
                           }}
                           style={{ cursor: "pointer" }}
@@ -323,7 +298,6 @@ export default function ReviewListPage() {
                           }
                           alt="댓글"
                         />
-
                       </div>
                       <div className="review-meta">
                         <span className="review-nickname">작성자: {review.nickname}</span>
@@ -337,8 +311,6 @@ export default function ReviewListPage() {
                 </>
               )}
             </div>
-
-
           )
         })}
       </div>
@@ -349,9 +321,7 @@ export default function ReviewListPage() {
         </button>
       )}
 
-      <button className="write-review-fixed" onClick={() => navigate("/write")}>
-        리뷰 쓰기
-      </button>
+      <button className="write-review-fixed" onClick={() => navigate("/write")}>리뷰 쓰기</button>
     </div>
   )
 }
