@@ -7,7 +7,7 @@ import {
     getDocs,
     addDoc,
     serverTimestamp,
-    updateDoc, arrayUnion, arrayRemove
+    updateDoc, arrayUnion, arrayRemove ,deleteDoc
 } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { storeData } from "../../data/storeData";
@@ -35,6 +35,12 @@ export default function ReviewDetailPage() {
 
     const [liked, setLiked] = useState(false);         // 내가 좋아요 눌렀는지
     const [likeCount, setLikeCount] = useState(0);     // 전체 좋아요 개수
+
+
+    // 수정
+    const [editMode, setEditMode] = useState(false);
+    const [editedContent, setEditedContent] = useState("");
+
 
 
     // ✅ storeId → storeData 파싱 함수
@@ -131,6 +137,31 @@ export default function ReviewDetailPage() {
 
 
 
+    // 수정
+    const handleUpdate = async () => {
+        if (!editedContent.trim()) return alert("내용을 입력해주세요.");
+        await updateDoc(doc(db, "reviews", id!), {
+            content: editedContent,
+        });
+        setReview((prev: any) => ({ ...prev, content: editedContent }));
+        setEditMode(false);
+        alert("리뷰가 수정되었습니다.");
+    };
+
+
+    // 삭제
+
+    const handleDelete = async () => {
+        const ok = window.confirm("정말로 삭제하시겠어요?");
+        if (!ok) return;
+
+        await deleteDoc(doc(db, "reviews", id!));
+        alert("삭제되었습니다.");
+        window.location.href = "/review"; // 목록 페이지로 이동
+    };
+
+
+
     return (
         <div className="review-detail-page">
             <div className="review-box">
@@ -141,10 +172,24 @@ export default function ReviewDetailPage() {
                 {/* ✅ 수정 / 삭제 버튼 */}
                 {auth.currentUser?.uid === review.userId && (
                     <div className="review-actions">
-                        <img src="/SAMGA-V2/img/icon/수정.svg" alt="수정" className="icon-button" />
-                        <img src="/SAMGA-V2/img/icon/삭제.svg" alt="삭제" className="icon-button" />
+                        <img
+                            src="/SAMGA-V2/img/icon/수정.svg"
+                            alt="수정"
+                            className="icon-button"
+                            onClick={() => {
+                                setEditMode(true);
+                                setEditedContent(review.content); // 기존 내용으로 세팅
+                            }}
+                        />
+                        <img
+                            src="/SAMGA-V2/img/icon/삭제.svg"
+                            alt="삭제"
+                            className="icon-button"
+                            onClick={handleDelete}
+                        />
                     </div>
                 )}
+
 
 
 
@@ -198,6 +243,26 @@ export default function ReviewDetailPage() {
                         {review.createdAt?.toDate().toLocaleString()}
                     </div>
                 </div>
+
+
+                {editMode ? (
+                    <div className="edit-form">
+                        <textarea
+                            value={editedContent}
+                            onChange={(e) => setEditedContent(e.target.value)}
+                            className="edit-textarea"
+                        />
+                        <div className="edit-buttons">
+                            <button onClick={handleUpdate}>저장</button>
+                            <button onClick={() => setEditMode(false)}>취소</button>
+                        </div>
+                    </div>
+                ) : (
+                    <p className="review-content">{review.content}</p>
+                )}
+
+
+
             </div>
 
             {/* 🔥 답글 */}
