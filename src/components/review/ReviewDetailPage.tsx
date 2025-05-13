@@ -156,7 +156,7 @@ export default function ReviewDetailPage() {
                     <div className="comment-header">{comment.nickname}</div>
                     <div className="comment-body">{comment.content}</div>
                 </div>
-            ) : userInfo?.role === "owner" ? (
+            ) : userInfo?.role === "owner" && userInfo?.storeId === review.storeId ? (
                 <div className="comment-form">
                     <textarea
                         value={replyText}
@@ -166,6 +166,7 @@ export default function ReviewDetailPage() {
                     <button onClick={handleReply}>등록</button>
                 </div>
             ) : null}
+
         </div>
     );
 }
