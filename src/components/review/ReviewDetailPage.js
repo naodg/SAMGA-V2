@@ -25,9 +25,10 @@ export default function ReviewDetailPage() {
             // 리뷰
             const reviewSnap = await getDoc(doc(db, "reviews", id));
             if (reviewSnap.exists()) {
-                const reviewData = { id: reviewSnap.id, ...reviewSnap.data() };
-                setReview(reviewData);
-                // ⬇️ store 정보 파싱
+                const reviewData = {
+                    id: reviewSnap.id,
+                    ...reviewSnap.data(),
+                };
                 const storeObj = getStoreById(reviewData.storeId);
                 setStore(storeObj);
             }
