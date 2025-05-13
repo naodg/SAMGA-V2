@@ -7,7 +7,7 @@ import {
     getDocs,
     addDoc,
     serverTimestamp,
-    updateDoc, arrayUnion, arrayRemove ,deleteDoc
+    updateDoc, arrayUnion, arrayRemove, deleteDoc
 } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { storeData } from "../../data/storeData";
@@ -212,7 +212,23 @@ export default function ReviewDetailPage() {
                     </div>
                 </div>
 
-                <p className="review-content">{review.content}</p>
+                {/* ✅ 수정 모드일 때 textarea, 아니면 그냥 리뷰 내용 */}
+                {editMode ? (
+                    <div className="edit-form">
+                        <textarea
+                            value={editedContent}
+                            onChange={(e) => setEditedContent(e.target.value)}
+                            className="edit-textarea"
+                            placeholder="리뷰 내용을 수정하세요"
+                        />
+                        <div className="edit-buttons">
+                            <button onClick={handleUpdate}>저장</button>
+                            <button onClick={() => setEditMode(false)}>취소</button>
+                        </div>
+                    </div>
+                ) : (
+                    <p className="review-content">{review.content}</p>
+                )}
 
                 <div className="review-footer">
                     <div className="review-icons">
@@ -245,62 +261,42 @@ export default function ReviewDetailPage() {
                 </div>
 
 
-                {editMode ? (
-                    <div className="edit-form">
-                        <textarea
-                            value={editedContent}
-                            onChange={(e) => setEditedContent(e.target.value)}
-                            className="edit-textarea"
+                {/* 🔥 답글 */}
+                {comment ? (
+                    <div className="comment-wrapper">
+                        {/* ✅ 가게별 로고 표시 */}
+                        <img
+                            src={store.logo}
+                            alt={store.name}
+                            className="comment-sticker"
                         />
-                        <div className="edit-buttons">
-                            <button onClick={handleUpdate}>저장</button>
-                            <button onClick={() => setEditMode(false)}>취소</button>
+
+                        {/* ✅ 말풍선 본체 */}
+                        <div className="comment-bubble">
+                            {auth.currentUser?.uid === comment.userId && (
+                                <div className="comment-actions">
+                                    <img src="/SAMGA-V2/img/icon/수정.svg" alt="수정" className="icon-button" />
+                                    <img src="/SAMGA-V2/img/icon/삭제.svg" alt="삭제" className="icon-button" />
+                                </div>
+                            )}
+
+                            <div className="comment-body">
+                                {comment.content}
+                            </div>
                         </div>
                     </div>
-                ) : (
-                    <p className="review-content">{review.content}</p>
-                )}
 
-
+                ) : userInfo?.role === "owner" && userInfo?.storeId === review.storeId ? (
+                    <div className="comment-form">
+                        <textarea
+                            value={replyText}
+                            onChange={(e) => setReplyText(e.target.value)}
+                            placeholder="답글을 작성해주세요."
+                        />
+                        <button onClick={handleReply}>등록</button>
+                    </div>
+                ) : null}
 
             </div>
-
-            {/* 🔥 답글 */}
-            {comment ? (
-                <div className="comment-wrapper">
-                    {/* ✅ 가게별 로고 표시 */}
-                    <img
-                        src={store.logo}
-                        alt={store.name}
-                        className="comment-sticker"
-                    />
-
-                    {/* ✅ 말풍선 본체 */}
-                    <div className="comment-bubble">
-                        {auth.currentUser?.uid === comment.userId && (
-                            <div className="comment-actions">
-                                <img src="/SAMGA-V2/img/icon/수정.svg" alt="수정" className="icon-button" />
-                                <img src="/SAMGA-V2/img/icon/삭제.svg" alt="삭제" className="icon-button" />
-                            </div>
-                        )}
-
-                        <div className="comment-body">
-                            {comment.content}
-                        </div>
-                    </div>
-                </div>
-
-            ) : userInfo?.role === "owner" && userInfo?.storeId === review.storeId ? (
-                <div className="comment-form">
-                    <textarea
-                        value={replyText}
-                        onChange={(e) => setReplyText(e.target.value)}
-                        placeholder="답글을 작성해주세요."
-                    />
-                    <button onClick={handleReply}>등록</button>
-                </div>
-            ) : null}
-
-        </div>
-    );
+            );
 }
