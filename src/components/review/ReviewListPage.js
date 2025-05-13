@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { db, auth } from "../../firebase";
-import { collection, getDocs, query, orderBy, where, limit, startAfter, doc, getDoc, addDoc, serverTimestamp, } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, where, limit, startAfter, doc, getDoc, addDoc, serverTimestamp, updateDoc, arrayUnion, arrayRemove, } from "firebase/firestore";
 import { storeData } from "../../data/storeData";
 import { useNavigate } from "react-router-dom";
 import './ReviewListPage.css';
@@ -21,6 +21,9 @@ export default function ReviewListPage() {
     const [userStoreId, setUserStoreId] = useState("");
     // 댓글들을 저장하는 상태
     const [commentsMap, setCommentsMap] = useState({});
+    const uid = auth.currentUser?.uid;
+    const [likeMap, setLikeMap] = useState({});
+    const [likeCountMap, setLikeCountMap] = useState({});
     const fetchReviews = async (initial = false) => {
         let q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(20));
         let storeId = selectedStoreId;
@@ -113,6 +116,40 @@ export default function ReviewListPage() {
         }));
         setCommentsMap(prev => ({ ...prev, [reviewId]: comments }));
     };
+    useEffect(() => {
+        if (reviews.length && uid) {
+            const newLikeMap = {};
+            const newCountMap = {};
+            reviews.forEach(r => {
+                const likes = r.likes || [];
+                newLikeMap[r.id] = likes.includes(uid);
+                newCountMap[r.id] = likes.length;
+            });
+            setLikeMap(newLikeMap);
+            setLikeCountMap(newCountMap);
+        }
+    }, [reviews, uid]);
+    const toggleLike = async (reviewId) => {
+        const user = auth.currentUser;
+        if (!user)
+            return alert("로그인 필요!");
+        const reviewRef = doc(db, "reviews", reviewId);
+        const alreadyLiked = likeMap[reviewId];
+        if (alreadyLiked) {
+            await updateDoc(reviewRef, {
+                likes: arrayRemove(user.uid),
+            });
+            setLikeMap(prev => ({ ...prev, [reviewId]: false }));
+            setLikeCountMap(prev => ({ ...prev, [reviewId]: prev[reviewId] - 1 }));
+        }
+        else {
+            await updateDoc(reviewRef, {
+                likes: arrayUnion(user.uid),
+            });
+            setLikeMap(prev => ({ ...prev, [reviewId]: true }));
+            setLikeCountMap(prev => ({ ...prev, [reviewId]: (prev[reviewId] || 0) + 1 }));
+        }
+    };
     return (_jsxs("div", { className: "review-list-page", children: [_jsxs("div", { className: "review-list-header", children: [_jsx("h2", { className: "review-title", children: "\uB9AC\uBDF0 \uBAA9\uB85D" }), _jsxs("select", { value: selectedStoreId, onChange: (e) => setSelectedStoreId(e.target.value), className: "store-filter-dropdown", children: [_jsx("option", { value: "all", children: "\uC804\uCCB4 \uBCF4\uAE30" }), storeData.map((store, i) => (_jsx("option", { value: store.name, children: store.name }, i)))] })] }), reviews.length === 0 && _jsx("p", { className: "no-review", children: "\uC791\uC131\uB41C \uB9AC\uBDF0\uAC00 \uC544\uC9C1 \uC5C6\uC5B4\uC694!" }), _jsx("div", { className: "review-list-grid", children: reviews.map((review) => {
                     const store = getStoreById(review.storeId);
                     return (_jsx("div", { className: "review-card", onClick: () => navigate(`/review/${review.id}`), style: { cursor: "pointer" }, children: store && (_jsxs(_Fragment, { children: [_jsxs("div", { className: "store-badge", children: [_jsx("img", { src: "/SAMGA-V2/img/icon/\uC18C\uD0C8\uC774.svg", className: "store-badge-icon", alt: "store" }), _jsx("span", { className: "store-badge-name", children: store.name })] }), _jsxs("div", { className: "review-main", children: [_jsxs("div", { className: "review-header", children: [_jsx("h3", { className: "store-name", children: store.name }), _jsxs("div", { className: "review-stars", children: [[...Array(5)].map((_, i) => {
@@ -123,6 +160,13 @@ export default function ReviewListPage() {
                                                                     ? "/SAMGA-V2/img/icon/반쪽자리별.svg"
                                                                     : "/SAMGA-V2/img/icon/단골등록.svg";
                                                             return _jsx("img", { src: src, className: "star-icon", alt: "\uBCC4" }, i);
-                                                        }), _jsxs("span", { className: "review-star-value", children: [(review.star ?? 0).toFixed(1), "\uC810"] })] })] }), _jsx("div", { className: "review-content", children: _jsx("p", { children: review.content }) }), _jsxs("div", { className: "review-footer", children: [_jsxs("div", { className: "review-icons", children: [_jsx("img", { src: "/SAMGA-V2/img/icon/\uC88B\uC544\uC6A9.svg", alt: "\uC88B\uC544\uC694" }), _jsx("img", { src: "/SAMGA-V2/img/icon/\uB313\uAE00.svg", alt: "\uB313\uAE00" })] }), _jsxs("div", { className: "review-meta", children: [_jsxs("span", { className: "review-nickname", children: ["\uC791\uC131\uC790: ", review.nickname] }), _jsx("br", {}), _jsx("span", { className: "review-date", children: review.createdAt?.toDate().toLocaleString() || "날짜 없음" })] })] })] })] })) }, review.id));
+                                                        }), _jsxs("span", { className: "review-star-value", children: [(review.star ?? 0).toFixed(1), "\uC810"] })] })] }), _jsx("div", { className: "review-content", children: _jsx("p", { children: review.content }) }), _jsxs("div", { className: "review-footer", children: [_jsxs("div", { className: "review-icons", children: [_jsx("img", { src: likeMap[review.id]
+                                                                ? "/SAMGA-V2/img/icon/좋아용누름.svg"
+                                                                : "/SAMGA-V2/img/icon/좋아용.svg", alt: "\uC88B\uC544\uC694", onClick: (e) => {
+                                                                e.stopPropagation(); // 상세페이지 이동 막기
+                                                                toggleLike(review.id);
+                                                            }, style: { cursor: "pointer" } }), _jsx("span", { children: likeCountMap[review.id] || 0 }), _jsx("img", { src: commentsMap[review.id]?.length
+                                                                ? "/SAMGA-V2/img/icon/댓글있음.svg"
+                                                                : "/SAMGA-V2/img/icon/댓글.svg", alt: "\uB313\uAE00" })] }), _jsxs("div", { className: "review-meta", children: [_jsxs("span", { className: "review-nickname", children: ["\uC791\uC131\uC790: ", review.nickname] }), _jsx("br", {}), _jsx("span", { className: "review-date", children: review.createdAt?.toDate().toLocaleString() || "날짜 없음" })] })] })] })] })) }, review.id));
                 }) }), !isEnd && (_jsx("button", { className: "load-more-button", onClick: () => fetchReviews(), children: "\uB354\uBCF4\uAE30" })), _jsx("button", { className: "write-review-fixed", onClick: () => navigate("/write"), children: "\uB9AC\uBDF0 \uC4F0\uAE30" })] }));
 }

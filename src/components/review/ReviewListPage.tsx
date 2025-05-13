@@ -14,6 +14,7 @@ import {
   getDoc,
   addDoc,
   serverTimestamp,
+  updateDoc, arrayUnion, arrayRemove,
 } from "firebase/firestore"
 import { storeData } from "../../data/storeData"
 import { useNavigate } from "react-router-dom"
@@ -26,6 +27,7 @@ interface Review {
   nickname: string
   createdAt: any
   star?: number
+  likes?: string[] // 👈 이거 추가!
 }
 
 interface Comment {
@@ -55,6 +57,14 @@ export default function ReviewListPage() {
 
   // 댓글들을 저장하는 상태
   const [commentsMap, setCommentsMap] = useState<Record<string, Comment[]>>({})
+
+
+  const uid = auth.currentUser?.uid;
+  const [likeMap, setLikeMap] = useState<Record<string, boolean>>({});
+  const [likeCountMap, setLikeCountMap] = useState<Record<string, number>>({});
+
+
+
 
   const fetchReviews = async (initial = false) => {
     let q = query(
@@ -183,6 +193,47 @@ export default function ReviewListPage() {
 
 
 
+  useEffect(() => {
+    if (reviews.length && uid) {
+      const newLikeMap: Record<string, boolean> = {};
+      const newCountMap: Record<string, number> = {};
+
+      reviews.forEach(r => {
+        const likes = r.likes || [];
+        newLikeMap[r.id] = likes.includes(uid);
+        newCountMap[r.id] = likes.length;
+      });
+
+      setLikeMap(newLikeMap);
+      setLikeCountMap(newCountMap);
+    }
+  }, [reviews, uid]);
+
+
+  const toggleLike = async (reviewId: string) => {
+    const user = auth.currentUser;
+    if (!user) return alert("로그인 필요!");
+
+    const reviewRef = doc(db, "reviews", reviewId);
+    const alreadyLiked = likeMap[reviewId];
+
+    if (alreadyLiked) {
+      await updateDoc(reviewRef, {
+        likes: arrayRemove(user.uid),
+      });
+      setLikeMap(prev => ({ ...prev, [reviewId]: false }));
+      setLikeCountMap(prev => ({ ...prev, [reviewId]: prev[reviewId] - 1 }));
+    } else {
+      await updateDoc(reviewRef, {
+        likes: arrayUnion(user.uid),
+      });
+      setLikeMap(prev => ({ ...prev, [reviewId]: true }));
+      setLikeCountMap(prev => ({ ...prev, [reviewId]: (prev[reviewId] || 0) + 1 }));
+    }
+  };
+
+
+
   return (
     <div className="review-list-page">
       <div className="review-list-header">
@@ -245,8 +296,29 @@ export default function ReviewListPage() {
 
                     <div className="review-footer">
                       <div className="review-icons">
-                        <img src="/SAMGA-V2/img/icon/좋아용.svg" alt="좋아요" />
-                        <img src="/SAMGA-V2/img/icon/댓글.svg" alt="댓글" />
+                        <img
+                          src={
+                            likeMap[review.id]
+                              ? "/SAMGA-V2/img/icon/좋아용누름.svg"
+                              : "/SAMGA-V2/img/icon/좋아용.svg"
+                          }
+                          alt="좋아요"
+                          onClick={(e) => {
+                            e.stopPropagation(); // 상세페이지 이동 막기
+                            toggleLike(review.id);
+                          }}
+                          style={{ cursor: "pointer" }}
+                        />
+                        <span>{likeCountMap[review.id] || 0}</span>
+
+                        <img
+                          src={
+                            commentsMap[review.id]?.length
+                              ? "/SAMGA-V2/img/icon/댓글있음.svg"
+                              : "/SAMGA-V2/img/icon/댓글.svg"
+                          }
+                          alt="댓글"
+                        />
                       </div>
                       <div className="review-meta">
                         <span className="review-nickname">작성자: {review.nickname}</span>
