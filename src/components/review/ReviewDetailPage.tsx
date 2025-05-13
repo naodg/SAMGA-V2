@@ -130,13 +130,6 @@ export default function ReviewDetailPage() {
     if (!review || !store) return <div>로딩 중...</div>;
 
 
-    useEffect(() => {
-        if (review && auth.currentUser) {
-            setLiked(review.likes.includes(auth.currentUser.uid));
-            setLikeCount(review.likes.length);
-        }
-    }, [review]);
-
 
     return (
         <div className="review-detail-page">

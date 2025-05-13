@@ -95,12 +95,6 @@ export default function ReviewDetailPage() {
     };
     if (!review || !store)
         return _jsx("div", { children: "\uB85C\uB529 \uC911..." });
-    useEffect(() => {
-        if (review && auth.currentUser) {
-            setLiked(review.likes.includes(auth.currentUser.uid));
-            setLikeCount(review.likes.length);
-        }
-    }, [review]);
     return (_jsxs("div", { className: "review-detail-page", children: [_jsxs("div", { className: "review-box", children: [auth.currentUser?.uid === review.userId && (_jsxs("div", { className: "review-actions", children: [_jsx("img", { src: "/SAMGA-V2/img/icon/\uC218\uC815.svg", alt: "\uC218\uC815", className: "icon-button" }), _jsx("img", { src: "/SAMGA-V2/img/icon/\uC0AD\uC81C.svg", alt: "\uC0AD\uC81C", className: "icon-button" })] })), _jsxs("div", { className: "review-header", children: [_jsx("h2", { children: store.name }), _jsxs("div", { className: "review-stars", children: [[...Array(5)].map((_, i) => (_jsx("img", { src: review.star >= i + 1
                                             ? "/SAMGA-V2/img/icon/단골등록해제.svg"
                                             : "/SAMGA-V2/img/icon/단골등록.svg", alt: "\uBCC4", className: "star-icon" }, i))), _jsxs("span", { className: "review-star-value", children: [review.star.toFixed(1), "\uC810"] })] })] }), _jsx("p", { className: "review-content", children: review.content }), _jsxs("div", { className: "review-footer", children: [_jsxs("div", { className: "review-icons", children: [_jsx("img", { src: liked
