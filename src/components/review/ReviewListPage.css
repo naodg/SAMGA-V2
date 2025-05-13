@@ -54,17 +54,27 @@
 
 
 
-.store-badge-icon {
+/* 상단 소탈이 뱃지 */
+.store-badge {
   position: absolute;
-  top: -20px;
-  left: -80px;
-  width: 150px;
-  height: auto;
-  z-index: 13;
-  pointer-events: none;
-  
+  top: -120px;
+  right: 20px;
+  background: #f3f3f3;
+  padding: 4px 12px 4px 6px;
+  border: 1px solid #555;
+  border-radius: 0px !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.store-badge-icon {
+  width: 180px;
+  height: auto;
+  border-radius: 0;
+  object-fit: cover;
+}
 
 
 
