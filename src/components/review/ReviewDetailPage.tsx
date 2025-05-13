@@ -97,7 +97,7 @@ export default function ReviewDetailPage() {
             <div className="review-box">
 
                 {/* ✅ 가게별 로고 표시 */}
-                <img src={store.logo} className="review-sticker" alt={store.name} />
+                {/* <img src={store.logo} className="review-sticker" alt={store.name} /> */}
 
                 {/* ✅ 수정 / 삭제 버튼 */}
                 <div className="review-actions">
