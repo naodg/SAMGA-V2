@@ -91,7 +91,7 @@ export default function SignUp() {
                 <form onSubmit={handleSignUp}>
                     <input
                         type="text"
-                        placeholder="닉네임"
+                        placeholder="본인 이름"
                         value={nickname}
                         onChange={(e) => setNickname(e.target.value)}
                         required

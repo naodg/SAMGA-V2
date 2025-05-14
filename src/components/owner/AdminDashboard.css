@@ -52,11 +52,11 @@
 .admin-table td {
     padding: 15px;
     font-size: 15px;
-    background-color: #f6dede;
+    background-color: #a94d4d42;
 }
 
 .admin-table tbody tr:nth-child(even) td {
-    background-color: #fff0f0;
+    background-color: #fcf5f5;
 }
 
 .download-icon {
