@@ -43,10 +43,14 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-wrapper">
-      <h2 className="admin-title">
-        <img src="/SAMGA-V2//img/icon/수퍼히어로랜딩.svg" alt="캐릭터" className="admin-icon" />
-        {storeName} 단골 리스트
-      </h2>
+      <div className="admin-header">
+        <div className="admin-title">
+          <img src="/img/icon/character.svg" alt="캐릭터" className="admin-icon" />
+          <span>{storeName} 단골 리스트</span>
+        </div>
+
+        <img src="/img/icon/download.svg" alt="다운로드" className="download-icon" />
+      </div>
 
       <table className="admin-table">
         <thead>
