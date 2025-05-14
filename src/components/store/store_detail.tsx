@@ -151,7 +151,7 @@ export default function StoreDetail() {
             const user = auth.currentUser
             if (!user || !storeId) return
 
-            const ref = doc(db, "favorites", storeId, "users", user.uid)
+            const ref = doc(db, "favorites", storeId, "users", user.uid,)
             const snap = await getDoc(ref)
             setIsFavorite(snap.exists())
         }
@@ -166,7 +166,7 @@ export default function StoreDetail() {
 
         const userDoc = await getDoc(doc(db, "users", user.uid))
         if (!userDoc.exists()) return alert("유저 정보가 없습니다.")
-        const { nickname, phone } = userDoc.data()
+        const { nickname, phone, email } = userDoc.data()
 
         const favRef = doc(db, "favorites", storeId, "users", user.uid)
         const favSnap = await getDoc(favRef)
@@ -179,13 +179,14 @@ export default function StoreDetail() {
             await setDoc(favRef, {
                 nickname,
                 phone,
+                email,
                 createdAt: new Date()
             })
             setIsFavorite(true)
             alert("단골로 등록되었습니다!")
         }
     }
-    console.log(selectedStore.detailImagelist)
+    // console.log(selectedStore.detailImagelist)
 
     return (
         <div className="store-detail-wrapper">

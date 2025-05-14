@@ -29,11 +29,12 @@ export default function AdminDashboard() {
             }
             setAuthChecked(true);
         };
+        console.log(favorites);
         fetch();
     }, [storeId]);
     if (!authChecked)
         return _jsx("p", { children: "\uB85C\uB529 \uC911..." });
     if (userStoreId !== storeId)
         return _jsx("p", { children: "\uD574\uB2F9 \uAC00\uAC8C\uC5D0 \uB300\uD55C \uC811\uADFC \uAD8C\uD55C\uC774 \uC5C6\uC2B5\uB2C8\uB2E4." });
-    return (_jsxs("div", { className: "admin-wrapper", children: [_jsxs("h2", { className: "admin-title", children: [_jsx("img", { src: "/SAMGA-V2//img/icon/\uC218\uD37C\uD788\uC5B4\uB85C\uB79C\uB529.svg", alt: "\uCE90\uB9AD\uD130", className: "admin-icon" }), storeName, " \uB2E8\uACE8 \uB9AC\uC2A4\uD2B8"] }), _jsxs("table", { className: "admin-table", children: [_jsx("thead", { children: _jsxs("tr", { children: [_jsx("th", { children: "\uC774\uB984" }), _jsx("th", { children: "\uC804\uD654\uBC88\uD638" }), _jsx("th", { children: "\uC774\uBA54\uC77C" }), _jsx("th", { children: _jsx("img", { src: "/SAMGA-V2//img/icon/download.svg", alt: "\uB2E4\uC6B4\uB85C\uB4DC", className: "download-icon" }) })] }) }), _jsx("tbody", { children: favorites.map((f, i) => (_jsxs("tr", { children: [_jsx("td", { children: f.nickname }), _jsx("td", { children: f.phone }), _jsx("td", { children: f.email }), _jsx("td", {})] }, i))) })] })] }));
+    return (_jsxs("div", { className: "admin-wrapper", children: [_jsxs("h2", { className: "admin-title", children: [_jsx("img", { src: "/SAMGA-V2//img/icon/\uC218\uD37C\uD788\uC5B4\uB85C\uB79C\uB529.svg", alt: "\uCE90\uB9AD\uD130", className: "admin-icon" }), storeName, " \uB2E8\uACE8 \uB9AC\uC2A4\uD2B8"] }), _jsxs("table", { className: "admin-table", children: [_jsx("thead", { children: _jsxs("tr", { children: [_jsx("th", { children: "\uC774\uB984" }), _jsx("th", { children: "\uC804\uD654\uBC88\uD638" }), _jsx("th", { children: "\uC774\uBA54\uC77C" }), _jsx("th", { children: _jsx("img", { src: "/SAMGA-V2//img/icon/\uB2E4\uC6B4\uB85C\uB4DC.svg", alt: "\uB2E4\uC6B4\uB85C\uB4DC", className: "download-icon" }) })] }) }), _jsx("tbody", { children: favorites.map((f, i) => (_jsxs("tr", { children: [_jsx("td", { children: f.nickname }), _jsx("td", { children: f.phone }), _jsx("td", { children: f.email }), _jsx("td", {})] }, i))) })] })] }));
 }

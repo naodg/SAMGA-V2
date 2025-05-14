@@ -33,6 +33,7 @@ export default function AdminDashboard() {
 
       setAuthChecked(true)
     }
+    console.log(favorites)
 
     fetch()
   }, [storeId])
@@ -54,7 +55,7 @@ export default function AdminDashboard() {
             <th>전화번호</th>
             <th>이메일</th>
             <th>
-              <img src="/SAMGA-V2//img/icon/download.svg" alt="다운로드" className="download-icon" />
+              <img src="/SAMGA-V2//img/icon/다운로드.svg" alt="다운로드" className="download-icon" />
             </th>
           </tr>
         </thead>

@@ -114,7 +114,7 @@ export default function StoreDetail() {
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (!userDoc.exists())
             return alert("유저 정보가 없습니다.");
-        const { nickname, phone } = userDoc.data();
+        const { nickname, phone, email } = userDoc.data();
         const favRef = doc(db, "favorites", storeId, "users", user.uid);
         const favSnap = await getDoc(favRef);
         if (favSnap.exists()) {
@@ -126,13 +126,14 @@ export default function StoreDetail() {
             await setDoc(favRef, {
                 nickname,
                 phone,
+                email,
                 createdAt: new Date()
             });
             setIsFavorite(true);
             alert("단골로 등록되었습니다!");
         }
     };
-    console.log(selectedStore.detailImagelist);
+    // console.log(selectedStore.detailImagelist)
     return (_jsxs("div", { className: "store-detail-wrapper", children: [_jsx("div", { className: "store-hero-image", style: { backgroundImage: `url(${selectedStore.detailimage})` } }), _jsxs("div", { className: "store-info-card", children: [_jsx("img", { src: selectedStore.logo, alt: "\uB85C\uACE0", className: "store-main-logo" }), _jsxs("div", { className: "store-name-stars", children: [_jsx("h2", { className: "store-name", children: selectedStore.name }), _jsxs("div", { className: "star-icons", children: [[...Array(5)].map((_, i) => {
                                         const value = i + 1;
                                         let src = '';
