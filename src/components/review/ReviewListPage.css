@@ -166,7 +166,8 @@
 
 .review-meta span {
   display: block;
-  line-height: 0.1; /* 필요 시 줄 간격도 조정 가능 */
+  /* line-height: 0.1;  */
+  /* 필요 시 줄 간격도 조정 가능 */
 }
 
 

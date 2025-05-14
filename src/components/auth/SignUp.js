@@ -3,8 +3,10 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import "./SignUp.css";
+import { useEffect } from "react";
+import { getAuth, signInWithCustomToken } from "firebase/auth";
 export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -22,6 +24,11 @@ export default function SignUp() {
             setPhoneError("");
         }
     };
+    useEffect(() => {
+        if (!window.Kakao.isInitialized()) {
+            window.Kakao.init("d65716a4db9e8a93aaff1dfc09ee36b8"); // ← 실제 키 넣어줘
+        }
+    }, []);
     const handleSignUp = async (e) => {
         e.preventDefault();
         setError("");
@@ -74,7 +81,50 @@ export default function SignUp() {
         }
         return numbersOnly; // 11자리 넘으면 하이픈 없이 그대로
     };
-    return (_jsx("div", { className: "signup-page", children: _jsxs("div", { className: "signup-wrapper", children: [_jsx("div", { className: "signup-text", children: "\uD68C\uC6D0\uAC00\uC785" }), _jsxs("form", { onSubmit: handleSignUp, children: [_jsx("input", { type: "text", placeholder: "\uBCF8\uC778 \uC774\uB984", value: nickname, onChange: (e) => setNickname(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "email", placeholder: "\uC774\uBA54\uC77C", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "password", placeholder: "\uBE44\uBC00\uBC88\uD638", value: password, onChange: (e) => setPassword(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "text", placeholder: "\uC804\uD654\uBC88\uD638 (\uC608: 010-1234-5678)", value: phone, onChange: (e) => {
+    const handleKakaoLogin = () => {
+        window.Kakao.Auth.login({
+            success: async () => {
+                try {
+                    const res = await window.Kakao.API.request({ url: "/v2/user/me" });
+                    const kakaoId = res.id;
+                    const email = res.kakao_account.email || "";
+                    const nickname = res.kakao_account.profile.nickname || "카카오유저";
+                    // 🔥 1. 서버에서 Firebase Custom Token 발급 (예원 Functions 기준)
+                    const firebaseToken = await fetch(`/api/kakao-login?uid=${kakaoId}`).then(res => res.text());
+                    // 🔥 2. Firebase 로그인
+                    const auth = getAuth();
+                    await signInWithCustomToken(auth, firebaseToken);
+                    const user = auth.currentUser;
+                    if (!user) {
+                        alert("Firebase 로그인 실패");
+                        return;
+                    }
+                    // 🔥 3. Firestore에 회원 정보 저장
+                    const userRef = doc(db, "users", user.uid);
+                    const userSnap = await getDoc(userRef);
+                    if (!userSnap.exists()) {
+                        await setDoc(userRef, {
+                            email,
+                            nickname,
+                            phone: "", // 카카오는 전화번호 안 줘서 비워둠
+                            role: "user",
+                            createdAt: new Date()
+                        });
+                    }
+                    alert(`${nickname}님, 카카오 로그인 완료!`);
+                }
+                catch (err) {
+                    console.error("카카오 로그인 실패:", err);
+                    alert("카카오 로그인 중 오류 발생");
+                }
+            },
+            fail: (err) => {
+                console.error("카카오 로그인 실패:", err);
+                alert("카카오 로그인에 실패했어요.");
+            }
+        });
+    };
+    return (_jsx("div", { className: "signup-page", children: _jsxs("div", { className: "signup-wrapper", children: [_jsx("div", { className: "signup-text", children: "\uD68C\uC6D0\uAC00\uC785" }), _jsxs("form", { onSubmit: handleSignUp, children: [_jsx("input", { type: "text", placeholder: "\uBCF8\uC778 \uC774\uB984", value: nickname, onChange: (e) => setNickname(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "email", placeholder: "\uC774\uBA54\uC77C", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "password", placeholder: "\uBE44\uBC00\uBC88\uD638", value: password, onChange: (e) => setPassword(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "text", placeholder: "\uC804\uD654\uBC88\uD638 - \uC81C\uC678\uD6C4 \uC785\uB825\uD574\uC8FC\uC138\uC694", value: phone, onChange: (e) => {
                                 const formatted = formatPhoneNumber(e.target.value);
                                 setPhone(formatted);
                                 validatePhone(formatted);

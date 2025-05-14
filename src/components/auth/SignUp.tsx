@@ -2,8 +2,18 @@
 import React, { useState } from "react"
 import { auth, db } from "../../firebase"
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth"
-import { doc, setDoc } from "firebase/firestore"
+import { doc, setDoc ,getDoc } from "firebase/firestore"
 import "./SignUp.css"
+import { useEffect } from "react"
+import { getAuth, signInWithCustomToken } from "firebase/auth"
+
+
+declare global {
+    interface Window {
+        Kakao: any;
+    }
+}
+
 
 export default function SignUp() {
     const [email, setEmail] = useState("")
@@ -25,9 +35,16 @@ export default function SignUp() {
     };
 
 
+    useEffect(() => {
+        if (!window.Kakao.isInitialized()) {
+            window.Kakao.init("d65716a4db9e8a93aaff1dfc09ee36b8"); // ← 실제 키 넣어줘
+        }
+    }, []);
+
 
 
     const handleSignUp = async (e: React.FormEvent) => {
+
         e.preventDefault()
         setError("")
         setSuccess("")
@@ -84,6 +101,58 @@ export default function SignUp() {
 
 
 
+    const handleKakaoLogin = () => {
+        window.Kakao.Auth.login({
+            success: async () => {
+                try {
+                    const res = await window.Kakao.API.request({ url: "/v2/user/me" })
+
+                    const kakaoId = res.id
+                    const email = res.kakao_account.email || ""
+                    const nickname = res.kakao_account.profile.nickname || "카카오유저"
+
+                    // 🔥 1. 서버에서 Firebase Custom Token 발급 (예원 Functions 기준)
+                    const firebaseToken = await fetch(`/api/kakao-login?uid=${kakaoId}`).then(res => res.text())
+
+                    // 🔥 2. Firebase 로그인
+                    const auth = getAuth()
+                    await signInWithCustomToken(auth, firebaseToken)
+
+                    const user = auth.currentUser
+                    if (!user) {
+                        alert("Firebase 로그인 실패")
+                        return
+                    }
+
+                    // 🔥 3. Firestore에 회원 정보 저장
+                    const userRef = doc(db, "users", user.uid)
+                    const userSnap = await getDoc(userRef)
+
+                    if (!userSnap.exists()) {
+                        await setDoc(userRef, {
+                            email,
+                            nickname,
+                            phone: "", // 카카오는 전화번호 안 줘서 비워둠
+                            role: "user",
+                            createdAt: new Date()
+                        })
+                    }
+
+                    alert(`${nickname}님, 카카오 로그인 완료!`)
+                } catch (err) {
+                    console.error("카카오 로그인 실패:", err)
+                    alert("카카오 로그인 중 오류 발생")
+                }
+            },
+            fail: (err) => {
+                console.error("카카오 로그인 실패:", err)
+                alert("카카오 로그인에 실패했어요.")
+            }
+        })
+    }
+
+
+
     return (
         <div className="signup-page">
             <div className="signup-wrapper">
@@ -115,7 +184,7 @@ export default function SignUp() {
                     <br />
                     <input
                         type="text"
-                        placeholder="전화번호 (예: 010-1234-5678)"
+                        placeholder="전화번호 - 제외후 입력해주세요"
                         value={phone}
                         onChange={(e) => {
                             const formatted = formatPhoneNumber(e.target.value)
