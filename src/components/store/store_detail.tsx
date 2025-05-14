@@ -514,6 +514,12 @@ export default function StoreDetail() {
 
                             return (
                                 <div className="store-review-card" key={idx}>
+
+                                    <div className="review-content">
+                                        <p>{review.content}</p>
+                                    </div>
+
+
                                     <div className="review-header">
                                         <div className="review-stars">
                                             {[...Array(5)].map((_, i) => {
@@ -530,9 +536,6 @@ export default function StoreDetail() {
                                         </div>
                                     </div>
 
-                                    <div className="review-content">
-                                        <p>{review.content}</p>
-                                    </div>
 
                                     <div className="review-footer">
                                         <div className="review-icons">
@@ -570,13 +573,6 @@ export default function StoreDetail() {
 
                 <div className="review-link-wrapper">
                     <a
-                        href={`/review/${storeId}`}
-                        className="review-more-link"
-                    >
-                        리뷰 더보기
-                    </a>
-
-                    <a
                         href={`https://search.naver.com/search.naver?query=${encodeURIComponent(storeName)} 리뷰`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -584,6 +580,15 @@ export default function StoreDetail() {
                     >
                         네이버 리뷰 보러가기
                     </a>
+
+                    <a
+                        href={`/review/`}
+                        className="review-more-link"
+                    >
+                        리뷰 더보기
+                    </a>
+
+                    
                 </div>
 
 
