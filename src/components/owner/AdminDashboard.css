@@ -7,6 +7,17 @@
     /* ⭐ 가운데 정렬 */
 }
 
+
+.admin-header {
+  display: flex;
+  justify-content: flex-start; /* ✅ 제목은 왼쪽, 아이콘은 오른쪽 */
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
 .admin-title {
     font-size: 24px;
     font-weight: 800;
