@@ -5,6 +5,8 @@ import { auth, db } from "../../firebase"
 import { doc, getDoc, getDocs, collection } from "firebase/firestore"
 import './AdminDashboard.css'
 import { storeData } from "../../data/storeData"
+import * as XLSX from 'xlsx'
+import { saveAs } from 'file-saver'
 
 export default function AdminDashboard() {
   const { storeId } = useParams() // store1 등
@@ -38,6 +40,21 @@ export default function AdminDashboard() {
     fetch()
   }, [storeId])
 
+  // 엑셀로 다운로드
+  const handleDownload = () => {
+  // favorites 배열을 시트로 변환
+  const worksheet = XLSX.utils.json_to_sheet(favorites)
+  const workbook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Favorites")
+
+  // 파일로 변환
+  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" })
+  const blob = new Blob([excelBuffer], { type: "application/octet-stream" })
+
+  // 저장
+  saveAs(blob, `${storeName}_단골리스트.xlsx`)
+}
+
   if (!authChecked) return <p>로딩 중...</p>
   if (userStoreId !== storeId) return <p>해당 가게에 대한 접근 권한이 없습니다.</p>
 
@@ -49,7 +66,6 @@ export default function AdminDashboard() {
           <span>{storeName} 단골 리스트</span>
         </div>
 
-        {/* <img src="/SAMGA-V2//img/icon/download.svg" alt="다운로드" className="download-icon" /> */}
       </div>
 
       <table className="admin-table">
@@ -59,7 +75,7 @@ export default function AdminDashboard() {
             <th>전화번호</th>
             <th>이메일</th>
             <th>
-              <img src="/SAMGA-V2//img/icon/다운로드.svg" alt="다운로드" className="download-icon" />
+              <img src="/SAMGA-V2//img/icon/다운로드.svg" alt="다운로드" className="download-icon"  onClick={handleDownload}/>
             </th>
           </tr>
         </thead>

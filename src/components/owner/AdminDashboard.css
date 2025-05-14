@@ -13,15 +13,15 @@
   justify-content: flex-start; /* ✅ 제목은 왼쪽, 아이콘은 오른쪽 */
   align-items: center;
   width: 100%;
-  max-width: 900px;
-  margin-bottom: 30px;
+  max-width: 800px;
+  margin-bottom: 0px;
   padding: 0 10px;
 }
 
 .admin-title {
     font-size: 24px;
     font-weight: 800;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     display: flex;
     align-items: flex-start;
     gap: 10px;
