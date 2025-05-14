@@ -1,14 +1,38 @@
 import './Footer.css';
 import { useNavigate } from "react-router-dom"
 import { storeData } from "../data/storeData"
+import { useEffect, useState } from "react"
+import { doc, getDoc } from "firebase/firestore"
+import { auth, db } from "../firebase"
 
 export default function Footer() {
 
   const navigate = useNavigate()
 
-  const handleClick = (storeIndex: number) => {
-    navigate(`/admin/store${storeIndex + 1}`) // store1, store2...
+  const [userStoreId, setUserStoreId] = useState("")
+
+  useEffect(() => {
+    const fetchUserStoreId = async () => {
+      const user = auth.currentUser
+      if (!user) return
+
+      const snap = await getDoc(doc(db, "users", user.uid))
+      if (snap.exists()) {
+        setUserStoreId(snap.data().storeId || "")
+      }
+    }
+
+    fetchUserStoreId()
+  }, [])
+
+  const handleClick = (storeId: string) => {
+  const userStoreId = auth.currentUser?.uid // 또는 Firestore에서 user 정보 불러오기
+  if (userStoreId !== storeId) {
+    alert("접근 권한이 없습니다!")
+    return
   }
+  navigate(`/admin/${storeId}`)
+}
 
 
   return (
@@ -89,16 +113,20 @@ export default function Footer() {
             {storeData.map((store, index) => (
               <li
                 key={index}
-                onClick={() => handleClick(index)}
+                onClick={() => handleClick(`store${index + 1}`)}
                 style={{ cursor: "pointer", marginBottom: "4px" }}
               >
                 {store.name}
               </li>
             ))}
+
           </ul>
         </div>
 
       </div>
+
+
+
     </footer>
   );
 }

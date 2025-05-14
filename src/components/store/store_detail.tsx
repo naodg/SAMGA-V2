@@ -19,6 +19,7 @@ interface Review {
     nickname: string
     createdAt: any
     star?: number
+    likes?:string[]
 }
 
 interface Comment {
@@ -499,61 +500,70 @@ export default function StoreDetail() {
                 {storeReviews.length > 0 ? (
                     // 리뷰가 있을 때
                     <div className="store-review-list">
-                        {storeReviews.map((review, idx) => (
-                            <div className="store-review-card" key={idx}>
-                                <div className='review-titles'>
+                        {storeReviews.map((review, idx) => {
+                            const comments = reviewComments[review.id] || [];
+                            const likeCount = review.likes?.length || 0;
 
-                                    <div className="review-title">{review.title}</div>
-
-
-                                    <div className="review-stars">
-                                        {[...Array(5)].map((_, i) => {
-                                            const value = i + 1
-                                            let imgSrc = ""
-
-                                            if (review.star >= value) {
-                                                imgSrc = "/SAMGA-V2/img/icon/단골등록해제.svg" // 가득 찬 별
-                                            } else if (review.star + 0.5 >= value) {
-                                                imgSrc = "/SAMGA-V2/img/icon/반쪽자리별.svg" // 반쪽 별
-                                            } else {
-                                                imgSrc = "/SAMGA-V2/img/icon/단골등록.svg" // 빈 별
-                                            }
-
-                                            return (
-                                                <img
-                                                    key={i}
-                                                    src={imgSrc}
-                                                    alt="별점"
-                                                    className="star-icon"
-                                                />
-                                            )
-                                        })}
-                                        <span className="review-star-value">
-                                            {(review.star ?? 0).toFixed(1)}점
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="review-content">{review.content}</div>
-
-                                <div className="review-meta">
-                                    <span>{review.nickname}</span>
-                                    <span>{review.createdAt?.toDate().toLocaleString()}</span>
-                                </div>
-
-                                {/* 댓글 있으면 보여줌 */}
-                                {reviewComments[review.id]?.map((comment, cidx) => (
-                                    <div className="review-comment" key={cidx}>
-                                        <div className="comment-nickname">{comment.nickname}</div>
-                                        <div className="comment-content">{comment.content}</div>
-                                        <div className="comment-date">
-                                            {comment.createdAt?.toDate().toLocaleString()}
+                            return (
+                                <div className="store-review-card" key={idx}>
+                                    <div className="review-header">
+                                        <div className="review-stars">
+                                            {[...Array(5)].map((_, i) => {
+                                                const value = i + 1;
+                                                let src =
+                                                    review.star >= value
+                                                        ? "/SAMGA-V2/img/icon/단골등록해제.svg"
+                                                        : review.star + 0.5 >= value
+                                                            ? "/SAMGA-V2/img/icon/반쪽자리별.svg"
+                                                            : "/SAMGA-V2/img/icon/단골등록.svg";
+                                                return <img key={i} src={src} className="star-icon" alt="별" />;
+                                            })}
+                                            <span className="review-star-value">{(review.star ?? 0).toFixed(1)}점</span>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        ))}
+
+                                    <div className="review-content">
+                                        <p>{review.content}</p>
+                                    </div>
+
+                                    <div className="review-footer">
+                                        <div className="review-icons">
+                                            <img src="/SAMGA-V2/img/icon/좋아용.svg" alt="좋아요" />
+                                            <span>{likeCount}</span>
+                                            <img
+                                                src={
+                                                    comments.length > 0
+                                                        ? "/SAMGA-V2/img/icon/댓글있음.svg"
+                                                        : "/SAMGA-V2/img/icon/댓글.svg"
+                                                }
+                                                alt="댓글"
+                                            />
+                                            <span>{comments.length}</span>
+                                        </div>
+                                        <div className="review-meta">
+                                            <span className="review-nickname">{review.nickname}</span>
+                                            <span className="review-date">
+                                                {review.createdAt?.toDate().toLocaleString()}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* 댓글 출력 */}
+                                    {comments.map((comment, cidx) => (
+                                        <div className="review-comment" key={cidx}>
+                                            <div className="comment-nickname">{comment.nickname}</div>
+                                            <div className="comment-content">{comment.content}</div>
+                                            <div className="comment-date">
+                                                {comment.createdAt?.toDate().toLocaleString()}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            );
+                        })}
                     </div>
+
+
                 ) : (
                     // 리뷰가 하나도 없을 때 이거 보여줘야지!
                     <p className="no-store-review">아직 등록된 리뷰가 없습니다. 첫 리뷰를 남겨보세요!</p>
