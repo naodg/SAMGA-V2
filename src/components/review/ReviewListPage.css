@@ -57,7 +57,7 @@
 /* 상단 소탈이 뱃지 */
 .store-badge {
   position: absolute;
-  top: -30px;
+  top: -35px;
   right: 20px;
   border: none;
   display: flex;

@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 import { auth, db } from "../../firebase"
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth"
-import { doc, setDoc ,getDoc } from "firebase/firestore"
+import { doc, setDoc, getDoc } from "firebase/firestore"
 import "./SignUp.css"
 import { useEffect } from "react"
 import { getAuth, signInWithCustomToken } from "firebase/auth"
@@ -198,6 +198,11 @@ export default function SignUp() {
 
                     <button type="submit">회원가입</button>
                 </form>
+
+
+                <button type="button" onClick={handleKakaoLogin} className="kakao-btn">
+                    카카오로 회원가입
+                </button>
 
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
