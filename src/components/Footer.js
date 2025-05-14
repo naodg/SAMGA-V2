@@ -20,12 +20,26 @@ export default function Footer() {
         };
         fetchUserStoreId();
     }, []);
-    const handleClick = (storeId) => {
-        const userStoreId = auth.currentUser?.uid; // 또는 Firestore에서 user 정보 불러오기
-        if (userStoreId !== storeId) {
-            alert("접근 권한이 없습니다!");
+    const handleClick = async (storeId) => {
+        const user = auth.currentUser;
+        if (!user) {
+            alert("로그인이 필요합니다.");
             return;
         }
+        // Firestore에서 유저 정보 불러오기
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (!userDoc.exists()) {
+            alert("유저 정보를 찾을 수 없습니다.");
+            return;
+        }
+        const userData = userDoc.data();
+        const userStoreId = userData.storeId;
+        if (userData.role !== "owner" || userStoreId !== storeId) {
+            alert("접근 권한이 없습니다!");
+            console.log(userStoreId, 'dfsdfd', storeId);
+            return;
+        }
+        // 권한 확인 후 이동
         navigate(`/admin/${storeId}`);
     };
     return (_jsx("footer", { className: "custom-footer", children: _jsxs("div", { className: "footer-inner", children: [_jsxs("div", { className: "footer-column left", children: [_jsx("img", { src: "/SAMGA-V2/img/logo/logo.svg", alt: "\uC6B0\uB9AC\uB9C8\uC744\uC0BC\uAC00 \uB85C\uACE0", className: "footer-logo" }), _jsxs("p", { children: ["\uB300\uD45C : \uD569\uCC9C\uAD70 \uB3C4\uC2DC\uC7AC\uC0DD\uC9C0\uC6D0 \uC13C\uD130", _jsx("br", {}), "\uC0AC\uC5C5\uC790 \uB4F1\uB85D\uBC88\uD638 : -", _jsx("br", {}), "\uC8FC\uC18C : 50223 \uACBD\uC0C1\uB0A8\uB3C4 \uD569\uCC9C\uAD70 \uC0BC\uAC00\uBA74 \uC0BC\uAC001\uB85C 100", _jsx("br", {}), "\uD329\uC2A4 : -", _jsx("br", {}), "\uC774\uBA54\uC77C : 000@gmail.com", _jsx("br", {})] }), _jsxs("ul", { className: "footer-links", children: [_jsx("li", { children: _jsx("a", { children: "\uD68C\uC0AC\uC18C\uAC1C" }) }), _jsx("li", { children: _jsx("a", { children: "\uC774\uC6A9\uC57D\uAD00" }) }), _jsx("li", { children: _jsx("a", { children: "\uAC1C\uC778\uC815\uBCF4\uCC98\uB9AC\uBC29\uCE68" }) }), _jsx("li", { children: _jsx("a", { children: "\uC774\uC6A9\uC548\uB0B4" }) })] }), _jsxs("div", { className: "footer-sns", children: [_jsx("a", { children: "f" }), _jsx("a", { children: "i" }), _jsx("a", { children: "k" })] }), _jsxs("p", { className: "copyright", children: ["Copyright \u00A9 \uC6B0\uB9AC\uB9C8\uC744\uC0BC\uAC00. All rights reserved.", _jsx("br", {}), "\uD638\uC2A4\uD305 by Cafe24 | \uB514\uC790\uC778 by NAON"] })] }), _jsxs("div", { className: "footer-column store", children: [_jsx("h4", { children: "\uAC00\uAC8C \uB9AC\uC2A4\uD2B8" }), _jsxs("ul", { className: "store-list", children: [_jsx("li", { children: "\uB300\uAC001\uD638\uC810" }), _jsx("li", { children: "\uB300\uAC00\uC2DD\uC721\uC2DD\uB2F9" }), _jsx("li", { children: "\uB300\uAC00\uD55C\uC6B0" }), _jsx("li", { children: "\uB300\uC0B0\uC2DD\uC721\uC2DD\uB2F9" }), _jsx("li", { children: "\uB300\uC6C5\uC2DD\uC721\uC2DD\uB2F9" }), _jsx("li", { children: "\uB3C4\uC6D0\uC2DD\uC721\uC2DD\uB2F9" }), _jsx("li", { children: "\uBBF8\uB85C\uC2DD\uC721\uC2DD\uB2F9" }), _jsx("li", { children: "\uBD88\uB09C\uAC00\uD55C\uC6B0" }), _jsx("li", { children: "\uC0BC\uAC00\uBA85\uD488\uD55C\uC6B0" }), _jsx("li", { children: "\uC0C1\uAD6C\uD55C\uC6B0" }), _jsx("li", { children: "\uD0DC\uC601\uD55C\uC6B0" })] })] }), _jsxs("div", { className: "footer-column tourism", children: [_jsx("h4", { children: "\uC8FC\uBCC0\uAD00\uAD11\uC9C0" }), _jsxs("ul", { className: "tour-list", children: [_jsx("li", { children: _jsx("a", { href: "https://blog.naver.com/hc-urc/222571944010", target: "_blank", rel: "noopener noreferrer", children: "\uC0BC\uAC00\uD2B9\uD654\uAC70\uB9AC" }) }), _jsx("li", { children: _jsx("a", { href: "https://www.hc.go.kr/09418/09425/09833.web", target: "_blank", rel: "noopener noreferrer", children: "\uD669\uB9E4\uC0B0" }) }), _jsx("li", { children: _jsx("a", { href: "https://www.youtube.com/watch?v=DjprccTSapc", target: "_blank", rel: "noopener noreferrer", children: "\uC815\uC591\uB2AA" }) }), _jsx("li", { children: _jsx("a", { href: "https://www.youtube.com/watch?v=ZLch32VzUb0", target: "_blank", rel: "noopener noreferrer", children: "\uC0BC\uAC00\uC2DC\uC7A5" }) }), _jsx("li", { children: _jsx("a", { href: "https://hcmoviethemepark.com/", target: "_blank", rel: "noopener noreferrer", children: "\uD569\uCC9C\uC601\uC0C1\uD14C\uB9C8\uD30C\uD06C" }) })] })] }), _jsxs("div", { className: "footer-column manager", children: [_jsx("h4", { children: "\uAC00\uAC8C \uAD00\uB9AC\uC790 \uD398\uC774\uC9C0" }), _jsx("ul", { className: "manager-list", children: storeData.map((store, index) => (_jsx("li", { onClick: () => handleClick(`store${index + 1}`), style: { cursor: "pointer", marginBottom: "4px" }, children: store.name }, index))) })] })] }) }));

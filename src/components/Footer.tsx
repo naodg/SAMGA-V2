@@ -25,15 +25,32 @@ export default function Footer() {
     fetchUserStoreId()
   }, [])
 
-  const handleClick = (storeId: string) => {
-  const userStoreId = auth.currentUser?.uid // 또는 Firestore에서 user 정보 불러오기
-  if (userStoreId !== storeId) {
-    alert("접근 권한이 없습니다!")
-    return
-  }
-  navigate(`/admin/${storeId}`)
-}
+  const handleClick = async (storeId: string) => {
+    const user = auth.currentUser
+    if (!user) {
+      alert("로그인이 필요합니다.")
+      return
+    }
 
+    // Firestore에서 유저 정보 불러오기
+    const userDoc = await getDoc(doc(db, "users", user.uid))
+    if (!userDoc.exists()) {
+      alert("유저 정보를 찾을 수 없습니다.")
+      return
+    }
+
+    const userData = userDoc.data()
+    const userStoreId = userData.storeId
+
+    if (userData.role !== "owner" || userStoreId !== storeId) {
+      alert("접근 권한이 없습니다!")
+      console.log(userStoreId , 'dfsdfd', storeId)
+      return
+    }
+
+    // 권한 확인 후 이동
+    navigate(`/admin/${storeId}`)
+  }
 
   return (
     <footer className="custom-footer">
