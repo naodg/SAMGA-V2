@@ -200,9 +200,9 @@ export default function SignUp() {
                 </form>
 
 
-                <button type="button" onClick={handleKakaoLogin} className="kakao-btn">
+                {/* <button type="button" onClick={handleKakaoLogin} className="kakao-btn">
                     카카오로 회원가입
-                </button>
+                </button> */}
 
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
