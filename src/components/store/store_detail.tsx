@@ -19,7 +19,7 @@ interface Review {
     nickname: string
     createdAt: any
     star?: number
-    likes?:string[]
+    likes?: string[]
 }
 
 interface Comment {
@@ -87,7 +87,14 @@ export default function StoreDetail() {
                 id: doc.id,
                 ...doc.data()
             })) as Review[]
-            setStoreReviews(reviews)
+
+            // ⭐️ 별점 5점짜리만 추려서 최신순 정렬 후 3개만
+            const filtered = reviews
+                .filter(r => r.star === 5)
+                .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds)
+                .slice(0, 3)
+
+            setStoreReviews(filtered)
         }
 
         fetchStoreReviews()
@@ -549,16 +556,7 @@ export default function StoreDetail() {
                                         </div>
                                     </div>
 
-                                    {/* 댓글 출력 */}
-                                    {comments.map((comment, cidx) => (
-                                        <div className="review-comment" key={cidx}>
-                                            <div className="comment-nickname">{comment.nickname}</div>
-                                            <div className="comment-content">{comment.content}</div>
-                                            <div className="comment-date">
-                                                {comment.createdAt?.toDate().toLocaleString()}
-                                            </div>
-                                        </div>
-                                    ))}
+
                                 </div>
                             );
                         })}
@@ -570,14 +568,24 @@ export default function StoreDetail() {
                     <p className="no-store-review">아직 등록된 리뷰가 없습니다. 첫 리뷰를 남겨보세요!</p>
                 )}
 
-                <a
-                    href={`https://search.naver.com/search.naver?query=${encodeURIComponent(storeName)} 리뷰`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="naver-review-link"
-                >
-                    네이버 리뷰 보러가기 →
-                </a>
+                <div className="review-link-wrapper">
+                    <a
+                        href={`/review/${storeId}`}
+                        className="review-more-link"
+                    >
+                        리뷰 더보기
+                    </a>
+
+                    <a
+                        href={`https://search.naver.com/search.naver?query=${encodeURIComponent(storeName)} 리뷰`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="naver-review-link"
+                    >
+                        네이버 리뷰 보러가기
+                    </a>
+                </div>
+
 
             </div>
         </div >

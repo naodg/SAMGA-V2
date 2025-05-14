@@ -55,7 +55,12 @@ export default function StoreDetail() {
                 id: doc.id,
                 ...doc.data()
             }));
-            setStoreReviews(reviews);
+            // ⭐️ 별점 5점짜리만 추려서 최신순 정렬 후 3개만
+            const filtered = reviews
+                .filter(r => r.star === 5)
+                .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds)
+                .slice(0, 3);
+            setStoreReviews(filtered);
         };
         fetchStoreReviews();
     }, [selectedStore]);
@@ -175,8 +180,8 @@ export default function StoreDetail() {
                                                     return _jsx("img", { src: src, className: "star-icon", alt: "\uBCC4" }, i);
                                                 }), _jsxs("span", { className: "review-star-value", children: [(review.star ?? 0).toFixed(1), "\uC810"] })] }) }), _jsx("div", { className: "review-content", children: _jsx("p", { children: review.content }) }), _jsxs("div", { className: "review-footer", children: [_jsxs("div", { className: "review-icons", children: [_jsx("img", { src: "/SAMGA-V2/img/icon/\uC88B\uC544\uC6A9.svg", alt: "\uC88B\uC544\uC694" }), _jsx("span", { children: likeCount }), _jsx("img", { src: comments.length > 0
                                                             ? "/SAMGA-V2/img/icon/댓글있음.svg"
-                                                            : "/SAMGA-V2/img/icon/댓글.svg", alt: "\uB313\uAE00" }), _jsx("span", { children: comments.length })] }), _jsxs("div", { className: "review-meta", children: [_jsx("span", { className: "review-nickname", children: review.nickname }), _jsx("span", { className: "review-date", children: review.createdAt?.toDate().toLocaleString() })] })] }), comments.map((comment, cidx) => (_jsxs("div", { className: "review-comment", children: [_jsx("div", { className: "comment-nickname", children: comment.nickname }), _jsx("div", { className: "comment-content", children: comment.content }), _jsx("div", { className: "comment-date", children: comment.createdAt?.toDate().toLocaleString() })] }, cidx)))] }, idx));
+                                                            : "/SAMGA-V2/img/icon/댓글.svg", alt: "\uB313\uAE00" }), _jsx("span", { children: comments.length })] }), _jsxs("div", { className: "review-meta", children: [_jsx("span", { className: "review-nickname", children: review.nickname }), _jsx("span", { className: "review-date", children: review.createdAt?.toDate().toLocaleString() })] })] })] }, idx));
                         }) })) : (
                     // 리뷰가 하나도 없을 때 이거 보여줘야지!
-                    _jsx("p", { className: "no-store-review", children: "\uC544\uC9C1 \uB4F1\uB85D\uB41C \uB9AC\uBDF0\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4. \uCCAB \uB9AC\uBDF0\uB97C \uB0A8\uACA8\uBCF4\uC138\uC694!" })), _jsx("a", { href: `https://search.naver.com/search.naver?query=${encodeURIComponent(storeName)} 리뷰`, target: "_blank", rel: "noopener noreferrer", className: "naver-review-link", children: "\uB124\uC774\uBC84 \uB9AC\uBDF0 \uBCF4\uB7EC\uAC00\uAE30 \u2192" })] })] }));
+                    _jsx("p", { className: "no-store-review", children: "\uC544\uC9C1 \uB4F1\uB85D\uB41C \uB9AC\uBDF0\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4. \uCCAB \uB9AC\uBDF0\uB97C \uB0A8\uACA8\uBCF4\uC138\uC694!" })), _jsxs("div", { className: "review-link-wrapper", children: [_jsx("a", { href: `/review/${storeId}`, className: "review-more-link", children: "\uB9AC\uBDF0 \uB354\uBCF4\uAE30" }), _jsx("a", { href: `https://search.naver.com/search.naver?query=${encodeURIComponent(storeName)} 리뷰`, target: "_blank", rel: "noopener noreferrer", className: "naver-review-link", children: "\uB124\uC774\uBC84 \uB9AC\uBDF0 \uBCF4\uB7EC\uAC00\uAE30" })] })] })] }));
 }

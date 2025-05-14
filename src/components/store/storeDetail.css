@@ -929,6 +929,27 @@
   line-height: 1.6;
 }
 
+.review-link-wrapper {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.review-more-link{
+  display: inline-block;
+  margin-top: 16px;
+  background-color: #AD5457;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
 /* ✅ 네이버 리뷰 링크 버튼 */
 .naver-review-link {
   display: inline-block;
