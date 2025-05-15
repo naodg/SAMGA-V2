@@ -3241,7 +3241,12 @@ This typically indicates that your device does not have a healthy Internet conne
 분위기 속 카페
 플로리안`,className:"deaga1-3"}],대가한우:[{text:`고기는 눈으로보고, 
  손으로 만져봐야 진짜를 안다`,className:"deagaH1"},{text:`현장부터 다져온
-좋은 고기를 알아보는 안목`,className:"deagaH2"},{text:"기본에 충실한 식사 한끼",className:"deagaH3"}],도원식육식당:[{text:"‘도원 식육식당’은",className:"dowon1"},{text:`고기의 본질은 결국
+좋은 고기를 알아보는 안목`,className:"deagaH2"},{text:"기본에 충실한 식사 한끼",className:"deagaH3"}],대산식육시당:[{text:`삼가에 뿌리내린 
+ 어머니의 고깃집 
+‘대산 식육식당’은`,className:"deasan1"},{text:`어머니의 고기에 대한
+애정과 정성이 맛으로
+전해지기를 바랍니다.`,className:"deasan2"},{text:`편안한 공간,
+ 함께하기 좋은 식당`,className:"deasan3"}],도원식육식당:[{text:"‘도원 식육식당’은",className:"dowon1"},{text:`고기의 본질은 결국
 ‘고기’
 그 자체입니다.`,className:"dowon2"},{text:`우리집 식탁에서
 만나 볼 수 있는 삼가 한우`,className:"dowon3"}],상구한우:[{text:`삼가시장 한가운데 
