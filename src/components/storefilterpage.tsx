@@ -479,7 +479,7 @@ export default function StoreFilterPage() {
                         onClick={() => navigate(`/store/${encodeURIComponent(store.name)}`)}
                       >
                         <img
-                          src={store.image || '/SAMGA-V2/img/default.jpg'}
+                          src={store.filterimage || '/SAMGA-V2/img/default.jpg'}
                           alt={store.name}
                           className="store-thumbnail"
                         />
