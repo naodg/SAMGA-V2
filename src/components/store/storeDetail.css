@@ -15,7 +15,7 @@
 
 .store-info-card {
   position: absolute;
-  top: 440px;
+  top: 500px;
   left: 50%;
   transform: translateX(160px); /* → 기준점에서 오른쪽으로 이동 */
   width: 400px;
