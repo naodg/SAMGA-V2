@@ -92,7 +92,7 @@ export default function SignUp() {
                             const uid = res.id.toString();
                             const email = kakao_account.email || "";
                             const nickname = kakao_account.profile.nickname || "";
-                            const phone = kakao_account.phone_number || "";
+                            // const phone = kakao_account.phone_number || ""
                             await setDoc(doc(db, "users", uid), {
                                 email,
                                 nickname,
