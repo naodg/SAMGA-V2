@@ -17,6 +17,13 @@
     z-index: 10;
 }
 
+.auth-image {
+  flex: 1;
+  background-image: url("/SAMGA-V2/img/logo/짤린소탈이.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
 .signup-text{
   font-size: 36px;
   color: #896858;

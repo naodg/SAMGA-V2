@@ -80,6 +80,7 @@ export default function Signin() {
 
   return (
     <div className="signup-page">
+         <div className="auth-image" />
       <div className="signup-wrapper">
         <div className="signup-text">로그인</div>
         <form onSubmit={handleLogin}>
