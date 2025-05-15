@@ -196,6 +196,7 @@ export default function MapGallery() {
             navigation={true}
             pagination={{ clickable: true }}
             autoplay={{ delay: 2000 }}
+            draggable={true}
             loop
           >
             {['대가1호점','대가식육식당','대가한우' ,'대산식육식당','대웅식육식당','미로식육식당','불난가한우','삼가명품한우' ,'상구한우','태영식육식당'].map((name, i) => (
