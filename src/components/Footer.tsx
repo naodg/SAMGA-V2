@@ -46,7 +46,7 @@ export default function Footer() {
 
     if (userData.role !== "owner" || userStoreId !== storeId) {
       alert("접근 권한이 없습니다!")
-      console.log(userStoreId , 'dfsdfd', storeId)
+      console.log(userStoreId, 'dfsdfd', storeId)
       return
     }
 
@@ -72,7 +72,7 @@ export default function Footer() {
           <ul className="footer-links">
             {/* <li><a>회사소개</a></li> */}
             <li><a>이용약관</a></li>
-             <li><a onClick={() => setShowPrivacy(true)} style={{ cursor: "pointer" }}>개인정보처리방침</a></li>
+            <li><a onClick={() => setShowPrivacy(true)} style={{ cursor: "pointer" }}>개인정보처리방침</a></li>
             {/* <li><a>이용안내</a></li> */}
           </ul>
           {/* <div className="footer-sns">
@@ -88,6 +88,7 @@ export default function Footer() {
 
         </div>
 
+        {showPrivacy && <PrivacyPolicyModal onClose={() => setShowPrivacy(false)} />}
 
 
 
