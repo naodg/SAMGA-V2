@@ -18,8 +18,7 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
         <button className="modal-close" onClick={onClose}>X</button>
         <h1>개인정보 처리방침</h1>
         <p>시행일자: {formattedDate}</p>
-        <div className="privacy-policy" style={{ padding: "40px", lineHeight: "1.7", fontSize: "16px" }}>
-          <h1>개인정보 처리방침</h1>
+        <div className="privacy-policy">
 
           <h2>1. 수집하는 개인정보 항목</h2>
           <p>
@@ -46,7 +45,7 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
             <br />
             - 단, 관련 법령에 따라 보관이 필요한 경우 일정 기간 동안 보관
           </p>
-          <table border={1} cellPadding={10} style={{ borderCollapse: "collapse", marginTop: "10px" }}>
+          <table border={1} cellPadding={10}>
             <thead>
               <tr>
                 <th>항목</th>
@@ -106,7 +105,6 @@ export default function PrivacyPolicyModal({ onClose }: Props) {
           <p>
             본 개인정보처리방침은 관련 법령 또는 내부 정책에 따라 변경될 수 있으며, 변경 시 웹사이트에 공지합니다.
             <br />
-            <strong>시행일자: {formattedDate}</strong>
           </p>
         </div>
       </div>
