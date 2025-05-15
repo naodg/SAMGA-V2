@@ -53,7 +53,12 @@ export default function MapGallery() {
         const loadKakaoMap = () => {
             if (window.kakao && window.kakao.maps) {
                 window.kakao.maps.load(() => {
-                    initializeMap();
+                    // 🔥 DOM이 완전히 렌더된 후 실행되도록 지연
+                    requestAnimationFrame(() => {
+                        setTimeout(() => {
+                            initializeMap();
+                        }, 50);
+                    });
                 });
             }
         };
