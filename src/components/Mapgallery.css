@@ -44,7 +44,11 @@
 }
 
 .swiper-pagination-bullet {
-  background: #ccc !important;
+  width: 12px !important;
+  height: 12px !important;
+  background: #999 !important;
+  margin: 0 6px !important; /* 간격도 살짝 조정 */
+  border-radius: 50%;
 }
 
 .swiper-pagination-bullet-active {
