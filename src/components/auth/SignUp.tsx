@@ -113,7 +113,7 @@ export default function SignUp() {
                             const uid = res.id.toString()
                             const email = kakao_account.email || ""
                             const nickname = kakao_account.profile.nickname || ""
-                            const phone =  ""
+                            const phone = ""
 
                             await setDoc(doc(db, "users", uid), {
                                 email,
@@ -145,6 +145,7 @@ export default function SignUp() {
     return (
         <div className="signup-page">
             <div className="signup-wrapper">
+                <div className="auth-image" />
                 <div className="signup-text">회원가입</div>
                 <form onSubmit={handleSignUp}>
                     <input
@@ -186,12 +187,15 @@ export default function SignUp() {
                     {phoneError && <p style={{ color: "red" }}>{phoneError}</p>}
 
                     <button type="submit" className="Buttons">회원가입</button>
+
+                    <button type="button" onClick={handleKakaoLogin} className="kakao">
+                        카카오로 회원가입
+                    </button>
+
                 </form>
 
 
-                <button type="button" onClick={handleKakaoLogin} className="kakao">
-                    카카오로 회원가입
-                </button>
+
 
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
