@@ -82,7 +82,7 @@ export default function SignUp() {
     };
     const handleKakaoLogin = () => {
         window.Kakao.Auth.login({
-            scope: "profile_nickname, account_email, phone_number",
+            scope: "profile_nickname, account_email, ",
             success: async (authObj) => {
                 try {
                     window.Kakao.API.request({
