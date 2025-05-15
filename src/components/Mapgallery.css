@@ -26,6 +26,7 @@
   width: 100%;
   height: 100%;
   pointer-events: auto;
+  z-index: 5;
 }
 
 .map-gallery-slide-img {
@@ -36,7 +37,7 @@
 }
 
 .swiper-pagination {
-  top: 16px !important;
+  top: 25px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 10;

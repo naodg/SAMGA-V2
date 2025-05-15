@@ -195,7 +195,7 @@ export default function MapGallery() {
             modules={[Navigation, Pagination, Autoplay]}
             navigation={true}
             pagination={{ clickable: true }}
-            autoplay={{ delay: 2000 }}
+            autoplay={{ delay: 2000 ,disableOnInteraction: false,  }}
             draggable={true}
             loop
           >
