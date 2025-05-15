@@ -73,7 +73,7 @@ export default function MapGallery() {
 
   useEffect(() => {
     if (!showMap) return;
-  
+
     const loadKakaoMap = () => {
       if (window.kakao && window.kakao.maps) {
         window.kakao.maps.load(() => {
@@ -81,33 +81,33 @@ export default function MapGallery() {
         });
       }
     };
-  
+
     const initializeMap = () => {
       const container = document.getElementById('map');
       if (!container) return;
-  
+
       const map = new window.kakao.maps.Map(container, {
         center: new window.kakao.maps.LatLng(35.413, 128.123),
         level: 4
       });
-  
+
       mapRef.current = map;
-  
+
       filteredStores.forEach((store) => {
         const position = new window.kakao.maps.LatLng(store.lat, store.lng);
-  
+
         const marker = new window.kakao.maps.Marker({
           position,
           map,
           title: store.name
         });
-  
+
         window.kakao.maps.event.addListener(marker, 'click', () => {
           setSelectedStore(store);
           map.setLevel(1);
           map.panTo(position);
         });
-  
+
         const overlayContent = document.createElement('div');
         overlayContent.id = `store-label-${store.name}`;
         overlayContent.innerText = store.name;
@@ -123,29 +123,29 @@ export default function MapGallery() {
           white-space: nowrap;
           border: 1px solid #ddd;
         `;
-  
+
         overlayContent.onclick = () => {
           setSelectedStore(store);
         };
-  
+
         const overlay = new window.kakao.maps.CustomOverlay({
           position,
           content: overlayContent,
           yAnchor: 1.5
         });
-  
+
         requestAnimationFrame(() => {
           overlay.setMap(map);
         });
       });
-  
+
       if (filteredStores.length === 1) {
         const target = filteredStores[0];
         map.setCenter(new window.kakao.maps.LatLng(target.lat, target.lng));
         map.setLevel(3);
       }
     };
-  
+
     // ✅ 스크립트 삽입 및 로딩
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement("script");
@@ -156,7 +156,7 @@ export default function MapGallery() {
       loadKakaoMap();
     }
   }, [showMap, filteredStores]);
-  
+
 
   // useEffect(() => {
   //   const handleClickOutside = (e: MouseEvent) => {
@@ -195,17 +195,20 @@ export default function MapGallery() {
             modules={[Navigation, Pagination, Autoplay]}
             navigation={true}
             pagination={{ clickable: true }}
-            autoplay={{ delay: 2000 ,disableOnInteraction: false,  }}
-            draggable={true}
-            grabCursor={true}   
+            autoplay={{ delay: 2000, disableOnInteraction: false, }}
             loop
+            grabCursor={true}
+            simulateTouch={true}         // 👈 이거 반드시 추가!!
+            touchRatio={1}               // 👈 기본값 1 (반응 감도 조절용)
+            allowTouchMove={true}       // 👈 혹시 어디서 false 된 거 있으면 override
           >
-            {['대가1호점','대가식육식당','대가한우' ,'대산식육식당','대웅식육식당','미로식육식당','불난가한우','삼가명품한우' ,'상구한우','태영식육식당'].map((name, i) => (
+            {['대가1호점', '대가식육식당', '대가한우', '대산식육식당', '대웅식육식당', '미로식육식당', '불난가한우', '삼가명품한우', '상구한우', '태영한우'].map((name, i) => (
               <SwiperSlide key={i}>
                 <img
                   src={`/SAMGA-V2/img/landing/${name}_1.jpg`}
                   alt={name}
                   className="map-gallery-slide-img"
+                  draggable={false}
                 />
               </SwiperSlide>
             ))}
