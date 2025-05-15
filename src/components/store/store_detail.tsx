@@ -205,7 +205,7 @@ export default function StoreDetail() {
 
             {/* 👇 가게 정보 카드 */}
             <div className="store-info-card">
-                <img src={selectedStore.logo} alt="로고" className="store-main-logo" />
+                {/* <img src={selectedStore.logo} alt="로고" className="store-main-logo" /> */}
                 <div className="store-name-stars">
                     <h2 className="store-name">{selectedStore.name}</h2>
                     <div className="star-icons">
