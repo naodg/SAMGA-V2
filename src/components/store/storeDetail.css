@@ -501,6 +501,41 @@
 }
 
 
+/* 대산식육식당 */
+
+.deasan1 {
+  top: 61%;
+  right: 22%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.deasan2 {
+  top: 6%;
+  left: 21%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+.deasan3 {
+  top: 11%;
+  right: 21.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
 /* 상구 */
 .sanggu1 {
   top: 37%;
