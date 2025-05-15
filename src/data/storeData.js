@@ -86,12 +86,12 @@ export const storeData = [
         hashtag: ['#한우맛집', '#가족과 함께', '#단체손님',],
         slogan: '엄마 손맛에\n 고기의 자부심을 \n더하다.',
         detailImagelist: [
-            '/SAMGA-V2/samga/store/deasan/대산식육식당_M_1.jpg',
-            '/SAMGA-V2/samga/store/deasan/대산식육식당_M_2.jpg',
-            '/SAMGA-V2/samga/store/deasan/대산식육식당_M_3.jpg',
-            '/SAMGA-V2/samga/store/deasan/대산식육식당_PC_1.jpg',
-            '/SAMGA-V2/samga/store/deasan/대산식육식당_PC_2.jpg',
-            '/SAMGA-V2/samga/store/deasan/대산식육식당_PC_3.jpg',
+            '/SAMGA-V2/samga/store/deasan/대산식육식당상세페이지_M_1.jpg',
+            '/SAMGA-V2/samga/store/deasan/대산식육식당상세페이지_M_2.jpg',
+            '/SAMGA-V2/samga/store/deasan/대산식육식당상세페이지_M_3.jpg',
+            '/SAMGA-V2/samga/store/deasan/대산식육식당상세페이지_PC_1.jpg',
+            '/SAMGA-V2/samga/store/deasan/대산식육식당상세페이지_PC_2.jpg',
+            '/SAMGA-V2/samga/store/deasan/대산식육식당상세페이지_PC_3.jpg',
         ],
     },
     {
