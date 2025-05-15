@@ -4,7 +4,7 @@ import { auth, db } from "../../firebase"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { doc, getDoc } from "firebase/firestore"
 import { useNavigate } from "react-router-dom"
-import "./SignUp.css"
+import "./SignIn.css"
 
 declare global {
     interface Window {
@@ -100,10 +100,10 @@ export default function Signin() {
                         required
                     />
                     <br />
-                    <button type="submit">로그인</button>
+                    <button type="submit" className="Buttons">로그인</button>
                 </form>
 
-                <button onClick={handleKakaoLogin} style={{ marginTop: "20px" }}>카카오로 로그인</button>
+                <button onClick={handleKakaoLogin} className="kakao">카카오로 로그인</button>
 
                 {error && <p style={{ color: "red" }}>{error}</p>}
             </div>

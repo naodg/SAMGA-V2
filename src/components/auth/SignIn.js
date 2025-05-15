@@ -5,7 +5,7 @@ import { auth, db } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import "./SignUp.css";
+import "./SignIn.css";
 export default function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -69,5 +69,5 @@ export default function Signin() {
             }
         });
     };
-    return (_jsx("div", { className: "signup-page", children: _jsxs("div", { className: "signup-wrapper", children: [_jsx("div", { className: "auth-image" }), _jsx("div", { className: "signup-text", children: "\uB85C\uADF8\uC778" }), _jsxs("form", { onSubmit: handleLogin, children: [_jsx("input", { type: "email", placeholder: "\uC774\uBA54\uC77C", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "password", placeholder: "\uBE44\uBC00\uBC88\uD638", value: password, onChange: (e) => setPassword(e.target.value), required: true }), _jsx("br", {}), _jsx("button", { type: "submit", children: "\uB85C\uADF8\uC778" })] }), _jsx("button", { onClick: handleKakaoLogin, style: { marginTop: "20px" }, children: "\uCE74\uCE74\uC624\uB85C \uB85C\uADF8\uC778" }), error && _jsx("p", { style: { color: "red" }, children: error })] }) }));
+    return (_jsx("div", { className: "signup-page", children: _jsxs("div", { className: "signup-wrapper", children: [_jsx("div", { className: "auth-image" }), _jsx("div", { className: "signup-text", children: "\uB85C\uADF8\uC778" }), _jsxs("form", { onSubmit: handleLogin, children: [_jsx("input", { type: "email", placeholder: "\uC774\uBA54\uC77C", value: email, onChange: (e) => setEmail(e.target.value), required: true }), _jsx("br", {}), _jsx("input", { type: "password", placeholder: "\uBE44\uBC00\uBC88\uD638", value: password, onChange: (e) => setPassword(e.target.value), required: true }), _jsx("br", {}), _jsx("button", { type: "submit", className: "Buttons", children: "\uB85C\uADF8\uC778" })] }), _jsx("button", { onClick: handleKakaoLogin, className: "kakao", children: "\uCE74\uCE74\uC624\uB85C \uB85C\uADF8\uC778" }), error && _jsx("p", { style: { color: "red" }, children: error })] }) }));
 }
