@@ -504,8 +504,8 @@
 /* 대산식육식당 */
 
 .deasan1 {
-  top: 61%;
-  right: 22%;
+  top: 45%;
+  right: 36.5%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: bold;
   text-align: left;
@@ -514,7 +514,7 @@
 }
 
 .deasan2 {
-  top: 6%;
+  top: 20%;
   left: 21%;
   transform: translateX(0);
   font-size: clamp(28px, 4vw, 60px);
@@ -526,8 +526,8 @@
 
 
 .deasan3 {
-  top: 11%;
-  right: 21.5%;
+  top: 9%;
+  right: 23.5%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
   text-align: start;

@@ -37,7 +37,7 @@ export default function SignUp() {
 
     useEffect(() => {
         if (!window.Kakao.isInitialized()) {
-            window.Kakao.init("d65716a4db9e8a93aaff1dfc09ee36b8"); // ← 실제 키 넣어줘
+            window.Kakao.init("d8e76007c8b0148a086c37901f73bd54"); // ← 실제 키 넣어줘
         }
     }, []);
 
