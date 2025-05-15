@@ -33,7 +33,8 @@ type StyleText = {
         className: 'deagaH3',
       },
     ],
-    '대산식육시당': [
+
+    '대산식육식당': [
       {
         text: '삼가에 뿌리내린 \n 어머니의 고깃집 \n‘대산 식육식당’은',
         className: 'deasan1',
@@ -47,6 +48,7 @@ type StyleText = {
         className: 'deasan3',
       },
     ],
+
     '도원식육식당': [
       {
         text: '‘도원 식육식당’은',
