@@ -1,37 +1,45 @@
 .signup-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .signup-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    min-height: 100vh;
-    background: #f3ece9;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 10;
+  min-height: 100vh;
+  background: #f3ece9;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
 }
 
 .auth-image {
-  flex: 1;
-  background-image: url("/SAMGA-V2/img/logo/짤린소탈이.svg");
-  background-size: cover;
+  position: absolute;
+  top: 493px;
+  width: 1600px;
+  height: 800px;
+  right: 20%;
+  background-image: url("/img/logo/짤린소탈이.svg");
+  z-index: 15;
   background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.15;
 }
 
-.signup-text{
+.signup-text {
   font-size: 36px;
   color: #896858;
   margin-bottom: 15px;
+  z-index: 20;
 }
 
-.signup-wrapper input{
+.signup-wrapper input {
   min-width: 400px;
   min-height: 35px;
   margin-bottom: 15px;
+  z-index: 20;
 }
