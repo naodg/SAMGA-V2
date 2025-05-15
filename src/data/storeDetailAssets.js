@@ -27,6 +27,20 @@ export const storeDetailAssets = {
             className: 'deagaH3',
         },
     ],
+    '대산식육시당': [
+        {
+            text: '삼가에 뿌리내린 \n 어머니의 고깃집 \n‘대산 식육식당’은',
+            className: 'deasan1',
+        },
+        {
+            text: '어머니의 고기에 대한\n애정과 정성이 맛으로\n전해지기를 바랍니다.',
+            className: 'deasan2',
+        },
+        {
+            text: '편안한 공간,\n 함께하기 좋은 식당',
+            className: 'deasan3',
+        },
+    ],
     '도원식육식당': [
         {
             text: '‘도원 식육식당’은',
