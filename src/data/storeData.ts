@@ -107,7 +107,7 @@ export interface Store {
       hours: '매일 10:30 - 19:30 / 매주 월요일 휴무',
       options: ['남여화장실구분', '단체이용예약가능', '예약가능', '주문배송', '무료wifi'],
       image: '/SAMGA-V2/samga/store/대산식육식당_디테일_1.png',
-      detailimage: '/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg',
+      detailimage: '/SAMGA-V2/samga/store/대산_landing_detail.jpg',
       filterimage: '/SAMGA-V2/img/landing/대산식육식당_1.jpg',
       description:'엄마 손맛에\n 고기의 자부심을 더하다.',
       story:'',
