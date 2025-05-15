@@ -198,7 +198,7 @@ export default function MapGallery() {
             autoplay={{ delay: 2000 }}
             loop
           >
-            {['대가1호점', '미로식육식당', '태영식육식당'].map((name, i) => (
+            {['대가1호점','대가식육식당','대가한우' ,'대산식육식당','대웅식육식당','미로식육식당','불난가한우','삼가명품한우' ,'상구한우','태영식육식당'].map((name, i) => (
               <SwiperSlide key={i}>
                 <img
                   src={`/SAMGA-V2/img/landing/${name}_1.jpg`}
