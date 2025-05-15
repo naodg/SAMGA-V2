@@ -11,6 +11,7 @@ import SignIn from './components/auth/SignIn'
 import AdminDashboard from './components/owner/AdminDashboard'
 import ReviewDetailPage from './components/review/ReviewDetailPage'
 import ScrollToTop from './components/ScrollTop'
+import PrivacyPolicy from './components/auth/Privacy'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path='/privacy' element={<PrivacyPolicy/>}/>
 
         <Route path="/" element={<Mainthing />} />
         <Route path="/store/:name" element={<StoreDetail />} />

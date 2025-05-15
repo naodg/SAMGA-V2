@@ -273,7 +273,7 @@
 }
 
 .extra-padding {
-  padding-top: 32px; /* 원하는 만큼 조절 */
+  padding-top: 3px; /* 원하는 만큼 조절 */
 }
 
 
@@ -1049,6 +1049,7 @@
   .store-info-card {
     position: absolute;
     left: 50%;
+    top: 320px;
     transform: translateX(-50%);
     width: 90%;
     max-width: 400px;
@@ -1064,7 +1065,7 @@
   }
 
   .store-slogan {
-    padding: 580px 20px 30px;
+    padding: 380px 20px 30px;
     font-size: 24px;
     line-height: 1.4;
     text-align: start;
@@ -1106,8 +1107,12 @@
     display: block;
   }
 
-
-
+.store-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 20px;
+}
   .store-review-wrapper {
     padding: 40px 20px;
     display: block;
