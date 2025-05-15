@@ -10,6 +10,7 @@ import SignUp from "./components/auth/SignUp"
 import SignIn from './components/auth/SignIn'
 import AdminDashboard from './components/owner/AdminDashboard'
 import ReviewDetailPage from './components/review/ReviewDetailPage'
+import ScrollToTop from './components/ScrollTop'
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       {/* ✅ Header는 Routes 바깥에 넣기 (공통 레이아웃 영역) */}
       <Header />
 
+      <ScrollToTop />
+      
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<SignIn />} />
