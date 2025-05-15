@@ -4,12 +4,14 @@ import { storeData } from "../data/storeData"
 import { useEffect, useState } from "react"
 import { doc, getDoc } from "firebase/firestore"
 import { auth, db } from "../firebase"
+import PrivacyPolicyModal from './auth/PrivacyPolicyModal';
 
 export default function Footer() {
 
   const navigate = useNavigate()
 
   const [userStoreId, setUserStoreId] = useState("")
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   useEffect(() => {
     const fetchUserStoreId = async () => {
@@ -68,16 +70,16 @@ export default function Footer() {
           </p>
 
           <ul className="footer-links">
-            <li><a>회사소개</a></li>
+            {/* <li><a>회사소개</a></li> */}
             <li><a>이용약관</a></li>
-            <li><a>개인정보처리방침</a></li>
-            <li><a>이용안내</a></li>
+             <li><a onClick={() => setShowPrivacy(true)} style={{ cursor: "pointer" }}>개인정보처리방침</a></li>
+            {/* <li><a>이용안내</a></li> */}
           </ul>
-          <div className="footer-sns">
+          {/* <div className="footer-sns">
             <a>f</a>
             <a>i</a>
             <a>k</a>
-          </div>
+          </div> */}
 
           <p className="copyright">
             Copyright © 우리마을삼가. All rights reserved.<br />
