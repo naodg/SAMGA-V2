@@ -185,11 +185,11 @@ export default function SignUp() {
                     <br />
                     {phoneError && <p style={{ color: "red" }}>{phoneError}</p>}
 
-                    <button type="submit">회원가입</button>
+                    <button type="submit" className="Buttons">회원가입</button>
                 </form>
 
 
-                <button type="button" onClick={handleKakaoLogin} className="kakao-btn">
+                <button type="button" onClick={handleKakaoLogin} className="kakao">
                     카카오로 회원가입
                 </button>
 
