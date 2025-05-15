@@ -80,8 +80,8 @@ export default function Signin() {
 
     return (
         <div className="signup-page">
-
             <div className="signup-wrapper">
+                <div className="auth-image" />
                 <div className="signup-text">로그인</div>
                 <form onSubmit={handleLogin}>
                     <input
@@ -102,8 +102,6 @@ export default function Signin() {
                     <br />
                     <button type="submit">로그인</button>
                 </form>
-
-                <div className="auth-image" />
 
                 <button onClick={handleKakaoLogin} style={{ marginTop: "20px" }}>카카오로 로그인</button>
 

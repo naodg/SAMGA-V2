@@ -30,6 +30,7 @@
   opacity: 0.15;
 }
 
+
 .signup-text {
   font-size: 36px;
   color: #896858;
@@ -38,6 +39,7 @@
 }
 
 .signup-wrapper input {
+  position: relative; 
   min-width: 400px;
   min-height: 35px;
   margin-bottom: 15px;
