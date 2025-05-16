@@ -132,6 +132,7 @@ export default function StoreDetail() {
         '무료wifi': '/SAMGA-V2/img/amenities/무료wifi.svg',
         '남여화장실구분': '/SAMGA-V2/img/amenities/남여화장실구분.svg',
         '단체이용예약가능': '/SAMGA-V2/img/amenities/단체이용예약가능.svg',
+        '예약가능': '/SAMGA-V2/img/amenities/예약가능.svg',
         '주차장': '/SAMGA-V2/img/amenities/주차장.svg',
         '제로페이': '/SAMGA-V2/img/amenities/제로페이.svg',
         '유아의자': '/SAMGA-V2/img/amenities/유아의자.svg',
