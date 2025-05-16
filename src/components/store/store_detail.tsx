@@ -351,7 +351,7 @@ export default function StoreDetail() {
                                 {titles[idx] && (
                                     <div className={`pc-image-text-overlay ${titles[idx].className}`}>
                                         {selectedStore.name === "대웅식육식당"
-                                            ? titles[idx].text.split("\n").map((line, i) => {
+                                            ? titles[idx].className === "deawoong2".text.split("\n").map((line, i) => {
                                                 if (i === 2) {
                                                     return <div key={i} className="highlight">{line}</div>
                                                 }
