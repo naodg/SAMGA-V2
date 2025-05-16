@@ -90,6 +90,7 @@ export default function StoreDetail() {
         '주차장': '/SAMGA-V2/img/amenities/주차장.svg',
         '제로페이': '/SAMGA-V2/img/amenities/제로페이.svg',
         '유아의자': '/SAMGA-V2/img/amenities/유아의자.svg',
+        '포장가능': '/SAMGA-V2/img/amenities/포장가능.svg',
     };
     const tabToFolderMap = {
         '가게메뉴': 'menu',
