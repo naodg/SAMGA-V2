@@ -37,8 +37,22 @@ export const storeDetailAssets = {
             className: 'deasan2',
         },
         {
-            text: '편안한 공간,\n 함께하기 좋은 식당',
+            text: '편안한 공간,\n함께하기 좋은 식당',
             className: 'deasan3',
+        },
+    ],
+    '대웅식육식당': [
+        {
+            text: '삼가로 시집와 문을 연 \n‘대웅 식육식당’은',
+            className: 'deawoong1',
+        },
+        {
+            text: '사장님의 인사가 있어야\n고기가 더 맛있다는\n손님의 말씀처럼.',
+            className: 'deawoong2',
+        },
+        {
+            text: '직접 농사지은\n건강한 식재료로 \n음식을 준비하고 있습니다.',
+            className: 'deawoong3',
         },
     ],
     '도원식육식당': [

@@ -574,6 +574,46 @@
   letter-spacing: -2px;
 }
 
+/* 대웅식육식당 */
+
+.deawoong1 {
+  top: 45%;
+  right: 36.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.deawoong2 {
+  top: 20%;
+  left: 21%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+.highlight {
+  color: #555;
+  /* font-weight: bold; */
+}
+
+
+.deawoong3 {
+  top: 9%;
+  right: 23.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
 
 /* 불난가 */
 

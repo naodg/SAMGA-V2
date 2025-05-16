@@ -350,10 +350,29 @@ export default function StoreDetail() {
                                 />
                                 {titles[idx] && (
                                     <div className={`pc-image-text-overlay ${titles[idx].className}`}>
-                                        {titles[idx].text.split("\n").map((line, i) => (
-                                            <div key={i}>{line}</div>
-                                        ))}
+                                        {selectedStore.name === "대웅식육식당"
+                                            ? titles[idx].text.split("\n").map((line, i) => {
+                                                if (i === 2) {
+                                                    return <div key={i} className="highlight">{line}</div>
+                                                }
+                                                if (i === 1) {
+                                                    const body = line.slice(0, -1)
+                                                    const last = line.slice(-1)
+                                                    return (
+                                                        <div key={i}>
+                                                            {body}
+                                                            <span className="highlight">{last}</span>
+                                                        </div>
+                                                    )
+                                                }
+                                                return <div key={i}>{line}</div>
+                                            })
+                                            : titles[idx].text.split("\n").map((line, i) => (
+                                                <div key={i}>{line}</div>
+                                            ))
+                                        }
                                     </div>
+
                                 )}
                             </div>
                         ))}
@@ -590,7 +609,7 @@ export default function StoreDetail() {
                         리뷰 더보기
                     </a>
 
-                    
+
                 </div>
 
 
