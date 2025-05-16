@@ -350,30 +350,36 @@ export default function StoreDetail() {
                                 />
                                 {titles[idx] && (
                                     <div className={`pc-image-text-overlay ${titles[idx].className}`}>
-                                        {selectedStore.name === "대웅식육식당"
-                                            ? titles[idx].className === "deawoong2".text.split("\n").map((line, i) => {
-                                                if (i === 2) {
-                                                    return <div key={i} className="highlight">{line}</div>
-                                                }
-                                                if (i === 1) {
-                                                    const body = line.slice(0, -1)
-                                                    const last = line.slice(-1)
-                                                    return (
-                                                        <div key={i}>
-                                                            {body}
-                                                            <span className="highlight">{last}</span>
-                                                        </div>
-                                                    )
-                                                }
-                                                return <div key={i}>{line}</div>
-                                            })
-                                            : titles[idx].text.split("\n").map((line, i) => (
-                                                <div key={i}>{line}</div>
-                                            ))
-                                        }
-                                    </div>
+                                        {titles[idx].text.split("\n").map((line, i) => {
+                                            const isDeawoong2 = titles[idx].className === "deawoong2";
 
+                                            // ✅ 두 번째 줄: '는'만 하이라이트
+                                            if (isDeawoong2 && i === 1) {
+                                                const body = line.slice(0, -1);
+                                                const last = line.slice(-1);
+                                                return (
+                                                    <div key={i}>
+                                                        {body}
+                                                        <span className="highlight">{last}</span>
+                                                    </div>
+                                                );
+                                            }
+
+                                            // ✅ 세 번째 줄: 전체 하이라이트
+                                            if (isDeawoong2 && i === 2) {
+                                                return (
+                                                    <div key={i} className="highlight">
+                                                        {line}
+                                                    </div>
+                                                );
+                                            }
+
+                                            return <div key={i}>{line}</div>;
+                                        })}
+                                    </div>
                                 )}
+
+
                             </div>
                         ))}
                 </div>
