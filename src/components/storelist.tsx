@@ -125,7 +125,7 @@ export default function StoreList() {
               >
                 <img src={store.image} alt={store.name} className="store-card-image" />
 
-                <div
+                {/* <div
                   className={`store-card-textbox ${store.name === '대가식육식당' ? 'center-text' : ''
                     }`}
                 >
@@ -136,7 +136,7 @@ export default function StoreList() {
                     </p>
                   )}
                   <button className="store-button">자세히 보기</button>
-                </div>
+                </div> */}
               </div>
             </div>
 

@@ -62,9 +62,9 @@ export default function StoreList() {
                                                 width: '18px',
                                                 height: '18px',
                                                 objectFit: 'contain'
-                                            } }), store.name] }), _jsxs("div", { className: "store-card", style: {
+                                            } }), store.name] }), _jsx("div", { className: "store-card", style: {
                                         transform: isMobile ? '' : `translateY(${offsetY}px)`
-                                    }, onClick: () => handleStoreClick(store.name), children: [_jsx("img", { src: store.image, alt: store.name, className: "store-card-image" }), _jsxs("div", { className: `store-card-textbox ${store.name === '대가식육식당' ? 'center-text' : ''}`, children: [_jsx("h3", { className: "store-desc", children: store.slogan }), store.slogan2 && (_jsx("p", { className: "store-subdesc", children: store.slogan2 })), _jsx("button", { className: "store-button", children: "\uC790\uC138\uD788 \uBCF4\uAE30" })] })] })] }));
+                                    }, onClick: () => handleStoreClick(store.name), children: _jsx("img", { src: store.image, alt: store.name, className: "store-card-image" }) })] }));
                     }), _jsxs("div", { className: "store-card-wrapper", children: [_jsxs("h3", { className: "store-title", style: {
                                     // transform: isMobile ? '' : `translateY(${offsetY}px)`,
                                     display: 'flex',
