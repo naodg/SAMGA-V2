@@ -71,21 +71,23 @@ export default function MapGallery() {
 
 
 
-  useEffect(() => {
-    if (!showMap) return;
+ // ✅ 맵 로딩 트리거
+useEffect(() => {
+  if (!showMap) return;
 
-    const loadKakaoMap = () => {
-      if (window.kakao && window.kakao.maps) {
-        window.kakao.maps.load(() => {
-          // 🔥 DOM이 완전히 렌더된 후 실행되도록 지연
-          requestAnimationFrame(() => {
-            setTimeout(() => {
-              initializeMap();
-            }, 50)
-          });
-        });
-      }
-    };
+  const interval = setInterval(() => {
+    const container = document.getElementById('map');
+    if (container && window.kakao && window.kakao.maps) {
+      clearInterval(interval);
+      window.kakao.maps.load(() => {
+        initializeMap();
+      });
+    }
+  }, 100); // 100ms 간격으로 map div가 생겼는지 체크
+
+  return () => clearInterval(interval);
+}, [showMap, filteredStores]);
+
 
 
     const initializeMap = () => {
