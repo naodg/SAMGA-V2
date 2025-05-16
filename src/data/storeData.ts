@@ -37,7 +37,7 @@ export interface Store {
       hours: '매일 11:00 - 18:00 / 매주 월요일 휴무',
       point: '고기 품절 시 조기 마감',
       options: ['주문배송', '무료wifi', '남여화장실구분', '단체이용예약가능', '주차장', '제로페이', '유아의자'],
-      image: '/SAMGA-V2/samga/store/대가1호점_디테일_1.png',
+      image: '/SAMGA-V2/samga/detail/대가1호점.jpg',
       detailimage: '/SAMGA-V2/samga/store/대가1호점_landing_detail.jpg',
       filterimage: '/SAMGA-V2/img/landing/대가1호점_1.jpg',
       description :'이름이 주는 전통,\n 대를 이어 맛을 지켜가겠습니다.',
