@@ -24,6 +24,8 @@ export default function MapGallery() {
   const [showMap, setShowMap] = useState(true)
   const [showStoreInfo, setShowStoreInfo] = useState(false)
   const mapRef = useRef(null);
+  const mapContainerRef = useRef<HTMLDivElement | null>(null)
+
 
   const navigate = useNavigate();
 
@@ -71,97 +73,85 @@ export default function MapGallery() {
 
 
 
-  useEffect(() => {
-    if (!showMap) return;
+ useEffect(() => {
+  if (!showMap || !mapContainerRef.current) return
 
-    const loadKakaoMap = () => {
-      if (window.kakao && window.kakao.maps) {
-        window.kakao.maps.load(() => {
-          // 🔥 DOM이 완전히 렌더된 후 실행되도록 지연
-          requestAnimationFrame(() => {
-            setTimeout(() => {
-              initializeMap();
-            }, 50)
-          });
-        });
-      }
-    };
+  const container = mapContainerRef.current
 
+  const initializeMap = () => {
+    const map = new window.kakao.maps.Map(container, {
+      center: new window.kakao.maps.LatLng(35.413, 128.123),
+      level: 4
+    });
 
-    const initializeMap = () => {
-      const container = document.getElementById('map');
-      if (!container) return;
+    mapRef.current = map;
 
-      const map = new window.kakao.maps.Map(container, {
-        center: new window.kakao.maps.LatLng(35.413, 128.123),
-        level: 4
+    setTimeout(() => {
+      window.kakao.maps.event.trigger(map, 'resize');
+    }, 200);
+
+    filteredStores.forEach((store) => {
+      const position = new window.kakao.maps.LatLng(store.lat, store.lng);
+
+      const marker = new window.kakao.maps.Marker({
+        position,
+        map,
+        title: store.name
       });
 
-      mapRef.current = map;
-
-      filteredStores.forEach((store) => {
-        const position = new window.kakao.maps.LatLng(store.lat, store.lng);
-
-        const marker = new window.kakao.maps.Marker({
-          position,
-          map,
-          title: store.name
-        });
-
-        window.kakao.maps.event.addListener(marker, 'click', () => {
-          setSelectedStore(store);
-          map.setLevel(1);
-          map.panTo(position);
-        });
-
-        const overlayContent = document.createElement('div');
-        overlayContent.id = `store-label-${store.name}`;
-        overlayContent.innerText = store.name;
-        overlayContent.style.cssText = `
-          cursor: pointer;
-          padding: 6px 14px;
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          font-size: 13px;
-          font-weight: 500;
-          color: #333;
-          white-space: nowrap;
-          border: 1px solid #ddd;
-        `;
-
-        overlayContent.onclick = () => {
-          setSelectedStore(store);
-        };
-
-        const overlay = new window.kakao.maps.CustomOverlay({
-          position,
-          content: overlayContent,
-          yAnchor: 1.5
-        });
-
-        requestAnimationFrame(() => {
-          overlay.setMap(map);
-        });
+      window.kakao.maps.event.addListener(marker, 'click', () => {
+        setSelectedStore(store);
+        map.setLevel(1);
+        map.panTo(position);
       });
 
-      if (filteredStores.length === 1) {
-        const target = filteredStores[0];
-        map.setCenter(new window.kakao.maps.LatLng(target.lat, target.lng));
-        map.setLevel(3);
-      }
-    };
+      const overlayContent = document.createElement('div');
+      overlayContent.innerText = store.name;
+      overlayContent.style.cssText = `
+        cursor: pointer;
+        padding: 6px 14px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        font-size: 13px;
+        font-weight: 500;
+        color: #333;
+        white-space: nowrap;
+        border: 1px solid #ddd;
+      `;
+      overlayContent.onclick = () => setSelectedStore(store);
 
-    // ✅ 스크립트 삽입 및 로딩
+      const overlay = new window.kakao.maps.CustomOverlay({
+        position,
+        content: overlayContent,
+        yAnchor: 1.5
+      });
+
+      overlay.setMap(map);
+    });
+
+    if (filteredStores.length === 1) {
+      const target = filteredStores[0];
+      map.setCenter(new window.kakao.maps.LatLng(target.lat, target.lng));
+      map.setLevel(3);
+    }
+  };
+
+  const loadKakaoMap = () => {
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement("script");
-      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d8e76007c8b0148a086c37901f73bd54`;
-      script.onload = loadKakaoMap;
+      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d65716a4db9e8a93aaff1dfc09ee36b8`;
+      script.onload = () => window.kakao.maps.load(initializeMap);
       document.head.appendChild(script);
     } else {
-      loadKakaoMap();
+      window.kakao.maps.load(initializeMap);
     }
-  }, [showMap, filteredStores]);
+  };
+
+  loadKakaoMap();
+}, [showMap, filteredStores]);
+
+
 
 
   // useEffect(() => {
@@ -365,7 +355,8 @@ export default function MapGallery() {
 
 
             {/* ✅ 실제 지도 div */}
-            <div id="map" />
+            <div id="map" ref={mapContainerRef} />
+
 
 
 

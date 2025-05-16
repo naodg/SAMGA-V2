@@ -17,6 +17,7 @@ export default function MapGallery() {
     const [showMap, setShowMap] = useState(true);
     const [showStoreInfo, setShowStoreInfo] = useState(false);
     const mapRef = useRef(null);
+    const mapContainerRef = useRef(null);
     const navigate = useNavigate();
     const handleMarkerClick = (store) => {
         setSelectedStore(store);
@@ -48,29 +49,18 @@ export default function MapGallery() {
         fetchAllRatings();
     }, []);
     useEffect(() => {
-        if (!showMap)
+        if (!showMap || !mapContainerRef.current)
             return;
-        const loadKakaoMap = () => {
-            if (window.kakao && window.kakao.maps) {
-                window.kakao.maps.load(() => {
-                    // 🔥 DOM이 완전히 렌더된 후 실행되도록 지연
-                    requestAnimationFrame(() => {
-                        setTimeout(() => {
-                            initializeMap();
-                        }, 50);
-                    });
-                });
-            }
-        };
+        const container = mapContainerRef.current;
         const initializeMap = () => {
-            const container = document.getElementById('map');
-            if (!container)
-                return;
             const map = new window.kakao.maps.Map(container, {
                 center: new window.kakao.maps.LatLng(35.413, 128.123),
                 level: 4
             });
             mapRef.current = map;
+            setTimeout(() => {
+                window.kakao.maps.event.trigger(map, 'resize');
+            }, 200);
             filteredStores.forEach((store) => {
                 const position = new window.kakao.maps.LatLng(store.lat, store.lng);
                 const marker = new window.kakao.maps.Marker({
@@ -84,31 +74,26 @@ export default function MapGallery() {
                     map.panTo(position);
                 });
                 const overlayContent = document.createElement('div');
-                overlayContent.id = `store-label-${store.name}`;
                 overlayContent.innerText = store.name;
                 overlayContent.style.cssText = `
-          cursor: pointer;
-          padding: 6px 14px;
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          font-size: 13px;
-          font-weight: 500;
-          color: #333;
-          white-space: nowrap;
-          border: 1px solid #ddd;
-        `;
-                overlayContent.onclick = () => {
-                    setSelectedStore(store);
-                };
+        cursor: pointer;
+        padding: 6px 14px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        font-size: 13px;
+        font-weight: 500;
+        color: #333;
+        white-space: nowrap;
+        border: 1px solid #ddd;
+      `;
+                overlayContent.onclick = () => setSelectedStore(store);
                 const overlay = new window.kakao.maps.CustomOverlay({
                     position,
                     content: overlayContent,
                     yAnchor: 1.5
                 });
-                requestAnimationFrame(() => {
-                    overlay.setMap(map);
-                });
+                overlay.setMap(map);
             });
             if (filteredStores.length === 1) {
                 const target = filteredStores[0];
@@ -116,16 +101,18 @@ export default function MapGallery() {
                 map.setLevel(3);
             }
         };
-        // ✅ 스크립트 삽입 및 로딩
-        if (!window.kakao || !window.kakao.maps) {
-            const script = document.createElement("script");
-            script.src = `https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d8e76007c8b0148a086c37901f73bd54`;
-            script.onload = loadKakaoMap;
-            document.head.appendChild(script);
-        }
-        else {
-            loadKakaoMap();
-        }
+        const loadKakaoMap = () => {
+            if (!window.kakao || !window.kakao.maps) {
+                const script = document.createElement("script");
+                script.src = `https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d65716a4db9e8a93aaff1dfc09ee36b8`;
+                script.onload = () => window.kakao.maps.load(initializeMap);
+                document.head.appendChild(script);
+            }
+            else {
+                window.kakao.maps.load(initializeMap);
+            }
+        };
+        loadKakaoMap();
     }, [showMap, filteredStores]);
     // useEffect(() => {
     //   const handleClickOutside = (e: MouseEvent) => {
@@ -195,5 +182,5 @@ export default function MapGallery() {
                                                                     }
                                                                     return (_jsx("img", { src: imgSrc, alt: "\uBCC4\uC810", className: "star-icon", style: { width: 16, height: 16 } }, i));
                                                                 }), _jsxs("span", { className: "review-score", children: [rating?.average?.toFixed(1) || "0.0", "\uC810"] }), _jsxs("span", { className: "review-count", children: ["(", rating?.count || 0, "\uAC1C \uB9AC\uBDF0)"] })] })] }), _jsxs("div", { className: "menu-links", children: [_jsx("span", { className: "link", onClick: () => navigate("/review"), children: "Review" }), _jsx("span", { className: "divider", children: "|" }), _jsx("a", { href: "#", className: "link", children: "\uBA54\uB274\uBCF4\uAE30" })] })] }), _jsxs("p", { className: "store-detail", children: [_jsx("span", { className: "label", children: "\uC8FC\uC18C :" }), " ", selectedStore.address, " T. ", _jsx("b", { children: selectedStore.phone })] }), _jsxs("p", { className: "store-detail", children: [_jsx("span", { className: "label", children: "\uC601\uC5C5\uC2DC\uAC04 :" }), " ", selectedStore.hours.split('/')[0], selectedStore.point && (_jsxs("span", { className: "point", children: [" \u203B ", selectedStore.point] }))] }), _jsxs("p", { className: "store-detail", children: [_jsx("span", { className: "label", children: "\uD734\uBB34 :" }), " ", selectedStore.hours.split('/')[1].replace('휴무', '')] }), _jsxs("div", { className: "map-footer-links", children: [_jsx("a", { href: `https://map.kakao.com/link/to/${selectedStore.name},${selectedStore.lat},${selectedStore.lng}`, target: "_blank", rel: "noopener noreferrer", className: "map-link", children: "\uAE38\uCC3E\uAE30" }), _jsx("span", { className: "divider", children: "/" }), _jsx("button", { className: "map-link", onClick: () => navigate(`/store/${encodeURIComponent(selectedStore.name)}`), children: "\uC0C1\uC138\uD398\uC774\uC9C0\uB85C \uAC00\uAE30" })] })] }));
-                            })(), _jsx("div", { id: "map" })] }))] }), _jsx("div", { className: "map-gallery-pattern" }), _jsx("div", { className: "map-gallery-bottom" })] }));
+                            })(), _jsx("div", { id: "map", ref: mapContainerRef })] }))] }), _jsx("div", { className: "map-gallery-pattern" }), _jsx("div", { className: "map-gallery-bottom" })] }));
 }
