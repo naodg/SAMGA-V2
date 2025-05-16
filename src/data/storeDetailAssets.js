@@ -55,6 +55,20 @@ export const storeDetailAssets = {
             className: 'dowon3',
         },
     ],
+    '불난가 한우': [
+        {
+            text: '찾아주시는 손님들에게도 \n불같이 복이 솟아나기를 바라는 \n진심을 담아 지은 이름입니다.',
+            className: 'Fire1',
+        },
+        {
+            text: '살짝만 구워도\n육즙이 살아나는 \n질 좋은 한우',
+            className: 'Fire2',
+        },
+        {
+            text: '불이 붙을 만한 이유,\n소고기양념구이',
+            className: 'Fire3',
+        },
+    ],
     '상구한우': [
         {
             text: '삼가시장 한가운데 \n 자리한 ‘상구한우’는 ',

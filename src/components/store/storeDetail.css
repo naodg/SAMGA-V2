@@ -17,7 +17,8 @@
   position: absolute;
   top: 500px;
   left: 50%;
-  transform: translateX(160px); /* → 기준점에서 오른쪽으로 이동 */
+  transform: translateX(160px);
+  /* → 기준점에서 오른쪽으로 이동 */
   width: 400px;
   background: rgba(255, 255, 255, 0.85);
   padding: 10px;
@@ -120,16 +121,16 @@
   gap: 10px;
 }
 
-.action-item a{
+.action-item a {
   text-decoration: none;
-  color:#555;
+  color: #555;
   align-items: center;
   justify-items: center;
 }
 
-.action-item a span{
+.action-item a span {
   text-decoration: none;
-  color:#555;
+  color: #555;
   margin-left: 10px;
 }
 
@@ -169,7 +170,7 @@
   align-items: center;
   padding: 10px 0;
   /* border: 1px solid #9e9c9c; */
-  background-color: rgba(173, 84, 87,0.1);
+  background-color: rgba(173, 84, 87, 0.1);
 }
 
 /* 편의시설 개별 아이템 */
@@ -206,7 +207,8 @@
 }
 
 .wifi-padding img {
-  padding: 3px; /* 예시로 3px, 원하는 값 넣기 */
+  padding: 3px;
+  /* 예시로 3px, 원하는 값 넣기 */
 }
 
 
@@ -250,7 +252,7 @@
   text-align: start;
   padding: 0 20px;
   /* background-color: #f3ece9; */
-  
+
 }
 
 .store-slogan {
@@ -273,7 +275,8 @@
 }
 
 .extra-padding {
-  padding-top: 3px; /* 원하는 만큼 조절 */
+  padding-top: 3px;
+  /* 원하는 만큼 조절 */
 }
 
 
@@ -396,8 +399,8 @@
 
 /* 대가 1호점 */
 .deaga1-1 {
-  top: 9.5%;
-  right: 35%;
+  top: 7.5%;
+  right: 24%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: bold;
   text-align: left;
@@ -406,7 +409,7 @@
 }
 
 .deaga1-2 {
-  top: 16%;
+  top: 14%;
   left: 21%;
   transform: translateX(0);
   font-size: clamp(28px, 4vw, 60px);
@@ -465,6 +468,42 @@
   letter-spacing: -2px;
 
 }
+
+/* 대가식육식당 */
+
+.deagaB1 {
+  top: 5%;
+  right: 30%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.deagaB2 {
+  top: 6%;
+  left: 41.5%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+.deagaB3 {
+  top: 2%;
+  left: 21%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
 
 /* 대가한우 */
 
@@ -528,6 +567,41 @@
 .deasan3 {
   top: 9%;
   right: 23.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+/* 불난가 */
+
+.Fire1 {
+  top: 64%;
+  right: 21%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.Fire2 {
+  top: 5.5%;
+  left: 21%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+.Fire3 {
+  top: 8%;
+  right: 21.5%;
   font-size: clamp(28px, 4vw, 60px);
   font-weight: 700;
   text-align: start;
@@ -620,8 +694,10 @@
   margin-bottom: 24px;
   color: #333;
 }
+
 .dowon-product-title .highlight {
-  color: #AD5457; /* 포인트 컬러 */
+  color: #AD5457;
+  /* 포인트 컬러 */
   margin-left: 6px;
 }
 
@@ -694,7 +770,7 @@
 
   .dowon-product-item {
     width: 47%;
-  
+
     text-align: center;
   }
 
@@ -733,7 +809,8 @@
 
 .idius-all a {
   font-size: 14px;
-  color: #AD5457; /* 포인트 컬러 */
+  color: #AD5457;
+  /* 포인트 컬러 */
   text-decoration: none;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -833,7 +910,7 @@
   background-color: #fff;
 }
 
-.review-titles{
+.review-titles {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -972,7 +1049,7 @@
   gap: 10px;
 }
 
-.review-more-link{
+.review-more-link {
   display: inline-block;
   margin-top: 16px;
   background-color: #AD5457;
@@ -1014,9 +1091,9 @@
     font-size: clamp(28px, 4vw, 60px);
     font-weight: bold;
     text-align: left;
-  
+
   }
-  
+
   .deaga1-2 {
     top: 10%;
     left: 16.5%;
@@ -1026,11 +1103,11 @@
     text-align: start;
     line-height: 1.2;
   }
-  
+
   /* .deaga1-2 div:last-child {
     padding-left: 4em;
   } */
-  
+
   .deaga1-3 {
     top: 6.5%;
     right: 26.5%;
@@ -1107,12 +1184,13 @@
     display: block;
   }
 
-.store-review-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-top: 20px;
-}
+  .store-review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+  }
+
   .store-review-wrapper {
     padding: 40px 20px;
     display: block;
