@@ -136,6 +136,7 @@ export default function StoreDetail() {
         '제로페이': '/SAMGA-V2/img/amenities/제로페이.svg',
         '유아의자': '/SAMGA-V2/img/amenities/유아의자.svg',
         '포장가능': '/SAMGA-V2/img/amenities/포장가능.svg',
+        '일반식사메뉴': '/SAMGA-V2/img/amenities/일반식사메뉴.svg',
     }
 
 
