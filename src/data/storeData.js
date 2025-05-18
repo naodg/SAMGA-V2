@@ -169,6 +169,14 @@ export const storeData = [
         logo: '/SAMGA-V2/samga/logo/미로식육식당_logo.png',
         hashtag: ['#한우맛집', '#가족과 함께', '#단체손님',],
         slogan: '미로 속,\n  오직 맛으로\n 찾는 곳.',
+        detailImagelist: [
+            '/SAMGA-V2/samga/store/miro/미로식육식당상세페이지_M_1.jpg',
+            '/SAMGA-V2/samga/store/miro/미로식육식당상세페이지_M_2.jpg',
+            '/SAMGA-V2/samga/store/miro/미로식육식당상세페이지_M_3.jpg',
+            '/SAMGA-V2/samga/store/miro/미로식육식당상세페이지_PC_1.jpg',
+            '/SAMGA-V2/samga/store/miro/미로식육식당상세페이지_PC_2.jpg',
+            '/SAMGA-V2/samga/store/miro/미로식육식당상세페이지_PC_3.jpg',
+        ],
     },
     {
         name: '불난가 한우',
@@ -212,6 +220,14 @@ export const storeData = [
         logo: '/SAMGA-V2/samga/logo/삼가명품한우_logo.png',
         hashtag: ['#한우맛집', '#가족과 함께', '#단체손님',],
         slogan: '최고가 아니면\n 판매하지 않습니다.',
+        detailImagelist: [
+            '/SAMGA-V2/samga/store/samga/삼가명품한우상세페이지_M_1.jpg',
+            '/SAMGA-V2/samga/store/samga/삼가명품한우상세페이지_M_2.jpg',
+            '/SAMGA-V2/samga/store/samga/삼가명품한우상세페이지_M_3.jpg',
+            '/SAMGA-V2/samga/store/samga/삼가명품한우상세페이지_PC_1.jpg',
+            '/SAMGA-V2/samga/store/samga/삼가명품한우상세페이지_PC_2.jpg',
+            '/SAMGA-V2/samga/store/samga/삼가명품한우상세페이지_PC_3.jpg',
+        ],
     },
     {
         name: '상구한우',
@@ -254,5 +270,13 @@ export const storeData = [
         logo: '/SAMGA-V2/samga/logo/태영한우_logo.png',
         hashtag: ['#한우맛집', '#가족과 함께', '#단체손님',],
         slogan: '깔끔한 공간,\n 신선한 고기,\n젊은 입맛 사로잡다.',
+        detailImagelist: [
+            '/SAMGA-V2/samga/store/teyoung/태영한우상세페이지_M_1.jpg',
+            '/SAMGA-V2/samga/store/teyoung/태영한우상세페이지_M_2.jpg',
+            '/SAMGA-V2/samga/store/teyoung/태영한우상세페이지_M_3.jpg',
+            '/SAMGA-V2/samga/store/teyoung/태영한우상세페이지_PC_1.jpg',
+            '/SAMGA-V2/samga/store/teyoung/태영한우상세페이지_PC_2.jpg',
+            '/SAMGA-V2/samga/store/teyoung/태영한우상세페이지_PC_3.jpg',
+        ],
     }
 ];
