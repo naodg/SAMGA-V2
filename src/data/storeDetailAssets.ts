@@ -72,15 +72,15 @@ export const storeDetailAssets = {
     '미로식육식당': [
         {
             text: '삼가에서 40년 동안 \n 한우의 참맛을 지켜온 \n‘미로 식육식당’은',
-            className: 'dowon1',
+            className: 'miro1',
         },
         {
             text: '고기의 맛은\n굽는 사람의\n손끝에서 완성됩니다.',
-            className: 'dowon2',
+            className: 'miro2',
         },
         {
             text: '고기는 곧 정성입니다.',
-            className: 'dowon3',
+            className: 'miro3',
         },
     ],
      '불난가 한우': [
@@ -114,29 +114,29 @@ export const storeDetailAssets = {
     '삼가명품한우': [
         {
             text: '고기를 대하는 태도가 \n삼가 한우의 참맛입니다.',
-            className: 'sanggu1',
+            className: 'samga1',
         },
         {
             text: '고기의 맛은 물론,\n드시는 분의 건강 까지 \n생각합니다.',
-            className: 'sanggu2',
+            className: 'samga2',
         },
         {
             text: '풍경까지\n맛있는 식당',
-            className: 'sanggu3',
+            className: 'samga3',
         },
     ],
     '태영한우': [
         {
             text: '고기 맛을 알아보는 자부심으로\n손님의 입맛을 사로잡겠습니다.',
-            className: 'sanggu1',
+            className: 'teyoung1',
         },
         {
             text: '정직한 고기는 신뢰에서,\n시작된다고 생각합니다.',
-            className: 'sanggu2',
+            className: 'teyoung2',
         },
         {
             text: '맛과 분위기,\n그리고 서비스까지 \n식사의 모든 경험을 \n중요하게 여깁니다.',
-            className: 'sanggu3',
+            className: 'teyoung3',
         },
     ],
     // 다른 가게도 동일하게 정의
