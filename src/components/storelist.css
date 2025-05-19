@@ -119,6 +119,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.3s ease;
 }
 
 .store-card :hover .store-card-image {
@@ -296,5 +297,6 @@
     margin: auto;
     padding: 100px 0 0;
   }
+  
 
 }

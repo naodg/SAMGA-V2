@@ -194,7 +194,7 @@ export default function StoreList() {
           slidesPerView={2}
           breakpoints={{
             768: {
-              slidesPerView: 4,
+              slidesPerView: 1,
             },
           }}
           className="banner-swiper"
