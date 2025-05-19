@@ -614,6 +614,39 @@
 }
 
 
+/* 미로식육식당 */
+.miro1 {
+  top: 3%;
+  right: 27.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.miro2 {
+  top: 17%;
+  left: 21.5%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+.miro3 {
+  top: 2%;
+  right: 29.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
 
 /* 불난가 */
 
@@ -682,6 +715,76 @@
   line-height: 1.2;
   letter-spacing: -2px;
 }
+
+/* 삼가명품한우 */
+.samga1 {
+  top: 15%;
+  right: 24.3%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.samga2 {
+  top: 14%;
+  left: 21%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+.samga3 {
+  top: 41%;
+  right: 36.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+/* 태영한우 */
+.teyoung1 {
+  top: 11%;
+  right: 24%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: -2px;
+
+}
+
+.teyoung2 {
+  top: 54%;
+  left: 21.5%;
+  transform: translateX(0);
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+.teyoung3 {
+  top: 8%;
+  right: 30.5%;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: 700;
+  text-align: start;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+
+
+
 
 
 
