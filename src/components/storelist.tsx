@@ -1,4 +1,4 @@
-import { useMemo }  from 'react'
+import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { storeData, Store } from '../data/storeData'
 import './storelist.css'
@@ -65,14 +65,14 @@ export default function StoreList() {
         <img src="/SAMGA-V2/img/logo/videologo.svg" alt="삼가한우로고" className="landing-logo" />
 
         <iframe
-            src="https://drive.google.com/file/d/1WF-K2Nu6Jer87imLhWAyKXeWraxIkvVP/preview"
-            width="85%"
-            height="400px"
-            frameBorder="0"
-            style={{ borderRadius: '12px', padding: '110px 0 0' }}
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-          ></iframe>
+          src="https://drive.google.com/file/d/1WF-K2Nu6Jer87imLhWAyKXeWraxIkvVP/preview"
+          width="85%"
+          height="400px"
+          frameBorder="0"
+          style={{ borderRadius: '12px', padding: '110px 0 0' }}
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        ></iframe>
 
       </div>
 
@@ -145,29 +145,29 @@ export default function StoreList() {
 
 
         <div className="store-card-wrapper">
-        <h3
-                className="store-title"
-                style={{
-                  // transform: isMobile ? '' : `translateY(${offsetY}px)`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px' // 텍스트랑 아이콘 사이 여백
-                }}
-              >
-                <img
-                  src="/SAMGA-V2/img/logo/제목옆아이콘.svg"
-                  alt="아이콘"
-                  style={{
-                    width: '18px',
-                    height: '18px',
-                    objectFit: 'contain'
-                  }}
-                />
-                牛리마을
-              </h3>
-              <div className="store-card">
-              <img src={"/SAMGA-V2/samga/store/소탈이.jpg"} alt={"소탈이"} className="store-card-image" />
-              </div>
+          <h3
+            className="store-title"
+            style={{
+              // transform: isMobile ? '' : `translateY(${offsetY}px)`,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px' // 텍스트랑 아이콘 사이 여백
+            }}
+          >
+            <img
+              src="/SAMGA-V2/img/logo/제목옆아이콘.svg"
+              alt="아이콘"
+              style={{
+                width: '18px',
+                height: '18px',
+                objectFit: 'contain'
+              }}
+            />
+            牛리마을
+          </h3>
+          <div className="store-card">
+            <img src={"/SAMGA-V2/samga/store/소탈이.jpg"} alt={"소탈이"} className="store-card-image" />
+          </div>
         </div>
       </div>
 
@@ -193,8 +193,11 @@ export default function StoreList() {
           spaceBetween={20}
           slidesPerView={2}
           breakpoints={{
+            0: {
+              slidesPerView: 1, // ✅ 모바일 (0px 이상)에서는 1장씩
+            },
             768: {
-              slidesPerView: 1,
+              slidesPerView: 2, // ✅ 태블릿 이상에서는 2장씩
             },
           }}
           className="banner-swiper"

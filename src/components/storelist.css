@@ -298,5 +298,8 @@
     padding: 100px 0 0;
   }
   
+   .banner-hover-caption {
+    opacity: 1 !important;
+  }
 
 }
