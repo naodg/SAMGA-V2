@@ -290,7 +290,7 @@ export interface Store {
       address: '경남 합천군 삼가면 일부5길 11',
       phone: '0507-1384-9399',
       hours: '매일 10:30 - 19:30 / 매주 월요일 휴무',
-      options: [''],
+      options: ['무료wifi','주차장', '남여화장실구분','제로페이', '유아의자', '단체이용예약가능','예약가능'],
       image: '/SAMGA-V2/samga/detail/태영한우.jpg',
       detailimage: '/SAMGA-V2/samga/store/태영한우_landing_detail.jpg',
       filterimage: '/SAMGA-V2/img/landing/태영한우_1.jpg',
