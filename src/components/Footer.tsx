@@ -63,10 +63,10 @@ export default function Footer() {
           <img src="/SAMGA-V2/img/logo/logo.svg" alt="우리마을삼가 로고" className="footer-logo" />
           <p>
             대표 : 합천군 도시재생지원 센터<br />
-            사업자 등록번호 : -<br />
+            사업자 등록번호 : 611-83-01516<br />
             주소 : 50223 경상남도 합천군 삼가면 삼가1로 100<br />
-            팩스 : -<br />
-            이메일 : 000@gmail.com<br />
+            팩스 : 055-930-3111<br />
+            대표전화번호 : 055-930-3114<br />
           </p>
 
           <ul className="footer-links">
