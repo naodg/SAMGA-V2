@@ -121,6 +121,10 @@
   display: block;
 }
 
+.store-card :hover .store-card-image {
+  transform: scale(1.05);
+}
+
 .store-card-textbox {
   position: absolute;
   bottom: 0;
