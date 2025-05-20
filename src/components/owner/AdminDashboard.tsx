@@ -61,8 +61,9 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-wrapper">
+      <AdminImageUploader storeId={storeId!} />
+      
       <div className="admin-header">
-        <AdminImageUploader storeId={storeId!} />
         <div className="admin-title">
           <img src="/SAMGA-V2//img/icon/수퍼히어로랜딩.svg" alt="캐릭터" className="admin-icon" />
           <span>{storeName} 단골 리스트</span>
