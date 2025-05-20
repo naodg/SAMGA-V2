@@ -203,12 +203,7 @@ export default function ReviewDetailPage() {
 
         {editMode ? (
           <div className="edit-form">
-            <textarea
-              value={editedContent}
-              onChange={(e) => setEditedContent(e.target.value)}
-              className="edit-textarea"
-              placeholder="리뷰 내용을 수정하세요"
-            />
+
             <div className="star-edit">
               {[...Array(5)].map((_, i) => (
                 <img
@@ -225,6 +220,15 @@ export default function ReviewDetailPage() {
               ))}
               <span>{editedStar}점</span>
             </div>
+
+            
+            <textarea
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+              className="edit-textarea"
+              placeholder="리뷰 내용을 수정하세요"
+            />
+            
             <div className="edit-buttons">
               <button onClick={handleUpdate}>저장</button>
               <button onClick={() => setEditMode(false)}>취소</button>
