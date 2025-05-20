@@ -34,7 +34,7 @@ export default function AdminImageUploader({ storeId }) {
             return alert("파일 또는 가게 정보가 없습니다.");
         setUploading(true);
         try {
-            const storageRef = ref(storage, `storeImages/${storeId}/${tab}/${file.name}`);
+            const storageRef = ref(storage, `stores/${storeId}/${tab}/${file.name}`);
             await uploadBytes(storageRef, file);
             const url = await getDownloadURL(storageRef);
             await addDoc(collection(db, "stores", storeId, tab), {

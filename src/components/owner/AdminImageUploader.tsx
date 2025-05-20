@@ -53,7 +53,7 @@ export default function AdminImageUploader({ storeId }: Props) {
     setUploading(true);
 
     try {
-      const storageRef = ref(storage, `storeImages/${storeId}/${tab}/${file.name}`);
+      const storageRef = ref(storage, `stores/${storeId}/${tab}/${file.name}`);
       await uploadBytes(storageRef, file);
 
       const url = await getDownloadURL(storageRef);
