@@ -24,7 +24,7 @@ export default function ReviewListPage() {
     const [likeMap, setLikeMap] = useState({});
     const [likeCountMap, setLikeCountMap] = useState({});
     const fetchReviews = async (initial = false) => {
-        let q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(20));
+        let q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(12));
         let storeId = selectedStoreId;
         if (selectedStoreId !== "all") {
             const matchedIndex = storeData.findIndex(s => s.name === selectedStoreId);
@@ -35,7 +35,7 @@ export default function ReviewListPage() {
                 console.error("해당 가게 이름이 storeData에 없습니다.");
                 return;
             }
-            q = query(collection(db, "reviews"), where("storeId", "==", storeId), orderBy("createdAt", "desc"), limit(20));
+            q = query(collection(db, "reviews"), where("storeId", "==", storeId), orderBy("createdAt", "desc"), limit(12));
         }
         if (!initial && lastDoc) {
             q = query(q, startAfter(lastDoc));
@@ -54,7 +54,7 @@ export default function ReviewListPage() {
         newReviews.forEach(review => {
             fetchCommentsForReview(review.id);
         });
-        if (snapshot.docs.length < 20) {
+        if (snapshot.docs.length < 12) {
             setIsEnd(true);
         }
         const lastVisible = snapshot.docs[snapshot.docs.length - 1];

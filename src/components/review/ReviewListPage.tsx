@@ -63,7 +63,7 @@ export default function ReviewListPage() {
     let q = query(
       collection(db, "reviews"),
       orderBy("createdAt", "desc"),
-      limit(20)
+      limit(12)
     )
 
     let storeId = selectedStoreId;
@@ -81,7 +81,7 @@ export default function ReviewListPage() {
         collection(db, "reviews"),
         where("storeId", "==", storeId),
         orderBy("createdAt", "desc"),
-        limit(20)
+        limit(12)
       );
     }
 
@@ -105,7 +105,7 @@ export default function ReviewListPage() {
       fetchCommentsForReview(review.id)
     })
 
-    if (snapshot.docs.length < 20) {
+    if (snapshot.docs.length < 12) {
       setIsEnd(true)
     }
 
