@@ -8,6 +8,9 @@ export default function AdminImageUploader({ storeId }) {
     const [file, setFile] = useState(null);
     const [uploading, setUploading] = useState(false);
     //   const [storeId, setStoreId] = useState<string | null>(null);
+    const sanitizedName = file.name.replaceAll("/", "_").replaceAll(" ", "_");
+    const storageRef = ref(storage, `stores/${storeId}/${tab}/${sanitizedName}`);
+    console.log("업로드 대상 경로:", `stores/${storeId}/${tab}/${file.name}`);
     useEffect(() => {
         const fetchStoreId = async () => {
             const user = auth.currentUser;
