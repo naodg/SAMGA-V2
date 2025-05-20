@@ -37,7 +37,7 @@ function App() {
 
 
         <Route path="/admin/:storeId" element={<AdminDashboard />} />
-        <Route path="/admin/setup" element={<AdminSetup />} />
+        {/* <Route path="/admin/setup" element={<AdminSetup />} /> */}
       </Routes>
 
 
