@@ -294,7 +294,7 @@ export default function StoreFilterPage() {
                 >
                   <div className="store-item-header">
                     <img
-                      src={store.image || '/SAMGA-V2/img/default.jpg'}
+                      src={store.filterimage || '/SAMGA-V2/img/default.jpg'}
                       alt={store.name}
                       className="store-thumbnail"
                     />
@@ -334,6 +334,9 @@ export default function StoreFilterPage() {
 
                       <p className="store-address">{store.address}</p>
                       <p className="store-phone">{store.phone}</p>
+                      {activeFilters.includes('예약가능') && store.options?.includes('예약가능') && (
+                        <div className="reservation-tag">📌 예약</div>
+                      )}
                     </div>
                   </div>
 
@@ -521,6 +524,9 @@ export default function StoreFilterPage() {
 
                           <p className="store-address"><strong>주소:</strong> {store.address}</p>
                           <p className="store-phone"><strong>T.</strong> {store.phone}</p>
+                          {activeFilters.includes('예약가능') && store.options?.includes('예약가능') && (
+                            <div className="reservation-tag">📌 예약</div>
+                          )}
                         </div>
                       </div>
 
