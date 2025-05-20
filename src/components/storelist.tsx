@@ -155,7 +155,7 @@ export default function StoreList() {
             }}
           >
             <img
-              src="/SAMGA-V3/img/logo/제목옆아이콘.svg"
+              src="/SAMGA-V2/img/logo/제목옆아이콘.svg"
               alt="아이콘"
               style={{
                 width: '18px',

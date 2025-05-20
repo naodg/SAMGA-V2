@@ -70,7 +70,7 @@ export default function StoreList() {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '8px' // 텍스트랑 아이콘 사이 여백
-                                }, children: [_jsx("img", { src: "/SAMGA-V3/img/logo/\uC81C\uBAA9\uC606\uC544\uC774\uCF58.svg", alt: "\uC544\uC774\uCF58", style: {
+                                }, children: [_jsx("img", { src: "/SAMGA-V2/img/logo/\uC81C\uBAA9\uC606\uC544\uC774\uCF58.svg", alt: "\uC544\uC774\uCF58", style: {
                                             width: '18px',
                                             height: '18px',
                                             objectFit: 'contain'
