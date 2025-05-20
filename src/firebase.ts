@@ -4,13 +4,15 @@ import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCvNmPkmwMeq7LMbiTkUKpXDn6tXO_GcVQ",
-  authDomain: "samga-2ba55.firebaseapp.com",
-  projectId: "samga-2ba55",
-  storageBucket: "samga-2ba55.appspot.com",
-  messagingSenderId: "650876987710",
-  appId: "1:650876987710:web:xxxxx"
-}
+  apiKey: "AIzaSyD14pfYMFzHtSZpo4K6j-uzv9H9SbqMbLg",
+  authDomain: "samgabeef.firebaseapp.com",
+  projectId: "samgabeef",
+  storageBucket: "samgabeef.firebasestorage.app",
+  messagingSenderId: "211043237282",
+  appId: "1:211043237282:web:50294933424dcba04e86fb",
+  measurementId: "G-JNZJXH570Z"
+};
+
 
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
