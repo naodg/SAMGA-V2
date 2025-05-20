@@ -13,6 +13,7 @@ import ReviewDetailPage from './components/review/ReviewDetailPage'
 import ScrollToTop from './components/ScrollTop'
 import PrivacyPolicy from './components/auth/Privacy'
 import Floating from './components/Floating'
+import AdminSetup from './components/AdminSetup'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
 
 
         <Route path="/admin/:storeId" element={<AdminDashboard />} />
+        <Route path="/admin/setup" element={<AdminSetup />} />
       </Routes>
 
 
