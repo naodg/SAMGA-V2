@@ -12,6 +12,7 @@ import AdminDashboard from './components/owner/AdminDashboard'
 import ReviewDetailPage from './components/review/ReviewDetailPage'
 import ScrollToTop from './components/ScrollTop'
 import PrivacyPolicy from './components/auth/Privacy'
+import Floating from './components/Floating'
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
         <Route path="/admin/:storeId" element={<AdminDashboard />} />
       </Routes>
 
+
+      <Floating/>
       {/* ❓ Footer도 모든 페이지에 나오게 하려면 여기에 둬도 됨 */}
       <Footer />
     </Router>
