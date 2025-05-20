@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage, auth } from "../../firebase";
 import { doc, getDoc, collection, addDoc, serverTimestamp, } from "firebase/firestore";
-export default function AdminImageUploader() {
+export default function AdminImageUploader({ storeId }) {
     const [tab, setTab] = useState("menu");
     const [file, setFile] = useState(null);
     const [uploading, setUploading] = useState(false);
-    const [storeId, setStoreId] = useState(null);
+    //   const [storeId, setStoreId] = useState<string | null>(null);
     useEffect(() => {
         const fetchStoreId = async () => {
             const user = auth.currentUser;
@@ -25,7 +25,7 @@ export default function AdminImageUploader() {
                 alert("사장님 계정만 업로드할 수 있습니다.");
                 return;
             }
-            setStoreId(data.storeId);
+            //   setStoreId(data.storeId);
         };
         fetchStoreId();
     }, []);

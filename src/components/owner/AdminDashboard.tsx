@@ -7,6 +7,7 @@ import './AdminDashboard.css'
 import { storeData } from "../../data/storeData"
 import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
+import AdminImageUploader from "./AdminImageUploader"
 
 export default function AdminDashboard() {
   const { storeId } = useParams() // store1 등
@@ -61,6 +62,7 @@ export default function AdminDashboard() {
   return (
     <div className="admin-wrapper">
       <div className="admin-header">
+        <AdminImageUploader storeId={storeId!} />
         <div className="admin-title">
           <img src="/SAMGA-V2//img/icon/수퍼히어로랜딩.svg" alt="캐릭터" className="admin-icon" />
           <span>{storeName} 단골 리스트</span>

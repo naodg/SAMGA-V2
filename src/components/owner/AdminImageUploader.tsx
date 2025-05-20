@@ -9,11 +9,17 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-export default function AdminImageUploader() {
+
+interface Props {
+  storeId: string
+}
+
+
+export default function AdminImageUploader({ storeId }: Props) {
   const [tab, setTab] = useState("menu");
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [storeId, setStoreId] = useState<string | null>(null);
+//   const [storeId, setStoreId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStoreId = async () => {
@@ -35,7 +41,7 @@ export default function AdminImageUploader() {
         return;
       }
 
-      setStoreId(data.storeId);
+    //   setStoreId(data.storeId);
     };
 
     fetchStoreId();
