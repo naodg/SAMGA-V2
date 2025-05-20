@@ -296,7 +296,7 @@ export default function StoreFilterPage() {
                     <img
                       src={store.filterimage || '/SAMGA-V2/img/default.jpg'}
                       alt={store.name}
-                      className="store-thumbnail"
+                      className="tq"
                     />
                     <div className="store-info-text">
                       <h3 className="store-name">{store.name}</h3>
