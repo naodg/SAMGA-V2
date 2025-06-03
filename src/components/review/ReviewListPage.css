@@ -264,7 +264,7 @@
 /* 리뷰 쓰기 버튼 */
 .write-review-fixed {
   position: fixed;
-  bottom: 30px;
+  bottom: 300px;
   right: 200px;
   padding: 12px 24px;
   background-color: #AD5457;
@@ -278,6 +278,25 @@
 }
 
 .write-review-fixed:hover {
+  background-color: #9c3e41;
+}
+
+.reservation {
+  position: fixed;
+  bottom: 400px;
+  right: 200px;
+  padding: 12px 24px;
+  background-color: #AD5457;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reservation:hover {
   background-color: #9c3e41;
 }
 
